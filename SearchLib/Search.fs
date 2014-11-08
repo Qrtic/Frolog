@@ -44,6 +44,15 @@ module Search =
         else
             None
             
+    let asIntList (p: argument): option<list<int>> =
+        if isVar p then None
+        else
+            let l = p.Split([|' '|], System.StringSplitOptions.RemoveEmptyEntries)
+            if Array.exists(fun x -> not (fst (System.Int32.TryParse x))) l then
+               None
+            else
+                Some(Array.map(fun x -> System.Int32.Parse x) l |> Array.toList)
+
     let convert_to_arg(c: context) (p: parameter): argument = 
         if isVar p then 
             let res = c.TryFind(p) // Think that we always have this p
@@ -91,8 +100,19 @@ module Search =
             | (None, Some(val2), Some(val3)) -> True([to_arg(val3-val2);p2;p3])
             | _ -> False
 
+    let divisors(p1: argument) (p2: argument): result =
+        let v1 = asInt p1
+        let v2 = asIntList p2
+        let getdivs x = {1..x} |> Seq.filter(fun i -> x % i = 0) |> Set.ofSeq
+        match (v1, v2) with
+        | (Some(val1), Some(val2)) -> if Set.isEmpty(Set.difference (getdivs val1) (Set.ofList val2)) then True([p1; p2]) else False
+        | (Some(val1), None) -> True([p1; getdivs val1 |> Set.toList |> List.fold(fun acc x -> acc + x.ToString() + " ") ""])
+        | (None, Some(val2)) -> False
+        | _ -> False
+
     let IncR: rule = Rule(("inc", ["A";"B"]), F2(inc))
     let SumR: rule = Rule(("sum", ["A";"B";"C"]), F3(sum))
+    let DivsR:rule = Rule(("divs", ["A";"B"]), F2(divisors))
     
     let process_predicate(c: context) (s: signature) (comp: predicate): bool * context =
         let check_parameters_count(s: signature) (comp: predicate): bool = 
@@ -138,6 +158,6 @@ module Search =
         let res = find d start s
         printfn "Result: %b. New context = %s" (fst res) ((snd res).ToString())
 
-    let testkb = [Fact("f", ["1"]); Fact("f", ["2"]); IncR; SumR]
+    let testkb = [Fact("f", ["1"]); Fact("f", ["2"]); IncR; SumR; DivsR]
     let textcontext = Map.empty.Add("A", "1").Add("B", "3").Add("C", "4")
-    let test = exec testkb textcontext ("sum", ["A"; "B"; "C"])
+    let test = exec testkb textcontext ("divs", ["15"; "1 3 5 15"])
