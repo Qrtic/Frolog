@@ -10,20 +10,6 @@ module Search =
     type context = Map<parameter, value>
     type result = True of parameters | False
 
-    type predicate = F0 of result | F1 of ((argument) -> result) | F2 of (argument -> argument -> result) | F3 of (argument -> argument -> argument -> result)
-    type rule = Rule of signature * f: predicate | ConcatenatedRule of signature * predicate * rule
-    let Fact(s: signature) = match (snd s) with
-                                | [] -> Rule(s, F0(True([])))
-                                | h::[] -> Rule(s, F1(fun arg -> if arg = h then True([arg]) else False))
-                                | h1::h2::[] -> Rule(s, F2(fun arg1 -> fun arg2 -> if arg1 = h1 && arg2 = h2 then True([h1;h2]) else False))
-                                | h1::h2::h3::[] -> Rule(s, F3(fun arg1 -> fun arg2 -> fun arg3 -> if arg1 = h1 && arg2 = h2 && arg3 = h3 then True([h1;h2;h3]) else False))
-
-    type rulelist = list<rule>
-    type knowledgebase = rulelist
-
-    let toStr (s: signature): string =
-        fst s + ((snd s).ToString())
-
     let (?=) (p1: argument) (p2: argument): bool =
         let isUp1 = System.Char.IsUpper (p1.Chars 0)
         let isUp2 = System.Char.IsUpper (p2.Chars 0)
@@ -68,6 +54,19 @@ module Search =
         if v1 || v2 then true
         else v1 = v2 // All non vars are constants that are defined as name that also can be used as value
 
+    type predicate = F0 of result | F1 of ((argument) -> result) | F2 of (argument -> argument -> result) | F3 of (argument -> argument -> argument -> result)
+    type rule = Rule of signature * f: predicate | ConcatenatedRule of signature * predicate * rule
+    let Fact(s: signature) = match (snd s) with
+                                | [] -> Rule(s, F0(True([])))
+                                | h::[] -> Rule(s, F1(fun arg -> if compare arg h then True([h]) else False))
+                                | h1::h2::[] -> Rule(s, F2(fun arg1 -> fun arg2 -> if compare arg1 h1 && compare arg2 h2 then True([h1;h2]) else False))
+                                | h1::h2::h3::[] -> Rule(s, F3(fun arg1 -> fun arg2 -> fun arg3 -> if compare arg1 h1 && compare arg2 h2 && compare arg3 h3 then True([h1;h2;h3]) else False))
+
+    type rulelist = list<rule>
+    type knowledgebase = rulelist
+
+    let toStr (s: signature): string =
+        fst s + ((snd s).ToString())
     let signatureEq (s1 : signature) (s2 : signature): bool =
         if fst s1 = fst s2 then
             let p1 = snd s1
@@ -138,26 +137,38 @@ module Search =
         | True(parameters) -> true, process_result c (snd s) parameters
         | False -> false, c
 
-    let rec find (d: knowledgebase) (c: context) (s: signature) : bool*context = 
-        let res = d
-                |> List.filter(fun r -> r |> get_signature |> signatureEq s)
-                |> List.map(fun r -> match r with
-                                            | Rule(_, p) -> process_predicate c s p
-                                            | ConcatenatedRule(_, p, next_r) -> 
-                                                let res = process_predicate c s p
-                                                if fst res then find d (snd res) (get_signature next_r)
-                                                else false, c)
-                |> List.toSeq
-                |> Seq.tryFind(fun r -> fst r)
-        match res with
-        | Some(r) -> fst r, snd r
-        | None -> false, c
+    /// Returns sequence of answers
+    /// If result is empty
+    /// Then predicate equals false
+    let rec find (d: knowledgebase) (c: context) (s: signature) : seq<context> = 
+        let rules = d |> List.toSeq
+        let acceptedRules = rules |> Seq.filter(fun r -> r |> get_signature |> signatureEq s)
+        seq {
+            for r in acceptedRules do
+                match r with
+                    | Rule(_, p) -> 
+                        let proc = process_predicate c s p
+                        if fst proc then
+                            yield snd proc
+                    | ConcatenatedRule(_, p, next_r) -> 
+                        let proc = process_predicate c s p
+                        if fst proc then
+                            let next = find d (snd proc) (get_signature next_r)
+                            for proced in next do
+                                yield proced
+        }
 
     let exec (d: knowledgebase) (start: context) (s: signature): unit =
         printfn "Execute: %s. Context = %s" (toStr s) (start.ToString())
         let res = find d start s
-        printfn "Result: %b. New context = %s" (fst res) ((snd res).ToString())
+        if Seq.isEmpty res then
+            printfn "Result: %b." false
+        else
+            for r in res do
+                printfn "Result: %b. New context = %s" (true) ((r).ToString())
+
+    let append (d: knowledgebase) (r: rule): knowledgebase = r::d
 
     let testkb = [Fact("f", ["1"]); Fact("f", ["2"]); IncR; SumR; DivsR]
     let textcontext = Map.empty.Add("A", "1").Add("B", "3").Add("C", "4")
-    let test = exec testkb textcontext ("divs", ["15"; "1 3 5 15"])
+    let test = exec testkb Map.empty ("f", ["D"])
