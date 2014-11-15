@@ -1,8 +1,5 @@
-﻿// Дополнительные сведения о F# см. по адресу http://fsharp.net. Для получения дополнительных рекомендаций по программированию на языке F# см. проект
-// "F# Tutorial".
+﻿#load "Common.fs" "Argument.fs" "Signature.fs" "Rule.fs" "Context.fs" "Search.fs"
 
-#load "Library1.fs"
-open SearchLib
+namespace SearchLib
 
 // Определите здесь код скрипта библиотеки
-

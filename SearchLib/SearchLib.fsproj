@@ -42,6 +42,11 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common.fs" />
+    <Compile Include="Argument.fs" />
+    <Compile Include="Signature.fs" />
+    <Compile Include="Rule.fs" />
+    <Compile Include="Context.fs" />
     <Compile Include="Search.fs" />
     <None Include="Script.fsx" />
   </ItemGroup>
