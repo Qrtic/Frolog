@@ -10,18 +10,11 @@ module Search =
     type context = Map<parameter, value>
     type result = True of parameters | False
 
-    let (?=) (p1: argument) (p2: argument): bool =
-        let isUp1 = System.Char.IsUpper (p1.Chars 0)
-        let isUp2 = System.Char.IsUpper (p2.Chars 0)
-        if isUp1 then
-            true
-        else
-            if isUp2 then
-                true
-            else
-                p1.CompareTo p2 = 0
-                
     let isVar (p: argument): bool = System.Char.IsUpper (p.Chars 0)
+
+    // All non vars are constants that are defined as name that also can be used as value
+    let (?=) (p1: argument) (p2: argument): bool = isVar p1 || isVar p2 || p1 = p2
+    // let (?=) (p1: parameter) (p2: parameter): bool = isVar p1 || isVar p2 || p1 = p2
 
     let asInt (p: argument): option<int> =
         let ok, value = System.Int32.TryParse p
@@ -47,20 +40,13 @@ module Search =
                 | None -> p
         else p
 
-    /// Check equals
-    let compare (p1: parameter) (p2: parameter): bool =
-        let v1 = isVar p1
-        let v2 = isVar p2
-        if v1 || v2 then true
-        else v1 = v2 // All non vars are constants that are defined as name that also can be used as value
-
     type predicate = F0 of result | F1 of ((argument) -> result) | F2 of (argument -> argument -> result) | F3 of (argument -> argument -> argument -> result)
     type rule = Rule of signature * f: predicate | ConcatenatedRule of signature * predicate * rule
     let Fact(s: signature) = match (snd s) with
                                 | [] -> Rule(s, F0(True([])))
-                                | h::[] -> Rule(s, F1(fun arg -> if compare arg h then True([h]) else False))
-                                | h1::h2::[] -> Rule(s, F2(fun arg1 -> fun arg2 -> if compare arg1 h1 && compare arg2 h2 then True([h1;h2]) else False))
-                                | h1::h2::h3::[] -> Rule(s, F3(fun arg1 -> fun arg2 -> fun arg3 -> if compare arg1 h1 && compare arg2 h2 && compare arg3 h3 then True([h1;h2;h3]) else False))
+                                | h::[] -> Rule(s, F1(fun arg -> if arg ?= h then True([h]) else False))
+                                | h1::h2::[] -> Rule(s, F2(fun arg1 -> fun arg2 -> if arg1 ?= h1 && arg2 ?= h2 then True([h1;h2]) else False))
+                                | h1::h2::h3::[] -> Rule(s, F3(fun arg1 -> fun arg2 -> fun arg3 -> if arg1 ?= h1 && arg2 ?= h2 && arg3 ?= h3 then True([h1;h2;h3]) else False))
 
     type rulelist = list<rule>
     type knowledgebase = rulelist
@@ -71,7 +57,7 @@ module Search =
         if fst s1 = fst s2 then
             let p1 = snd s1
             let p2 = snd s2
-            List.fold2(fun s t1 t2 -> s && compare t1 t2) true p1 p2
+            List.fold2(fun s t1 t2 -> s && t1 ?= t2) true p1 p2
         else
             false
 
