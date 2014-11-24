@@ -1,4 +1,4 @@
-﻿namespace SearchLib.RuleTypeProvider
+﻿module SearchLib.RuleTypeProvider
 
 open System.Reflection
 open System.IO
@@ -7,9 +7,26 @@ open Microsoft.FSharp.Core.CompilerServices
 open System.Text.RegularExpressions
 open System.Linq
 
-// Dummy
-type RulesFile() =
-    member __.Rules = ["a"]
+open SearchLib.Rule
+open SearchLib.Signature
+
+let extractRules (lines: string array) =
+            let cnt = Array.length lines
+            let parseRule (line: string): option<rule> = 
+                let (|Regex|_|) pattern input =
+                    let m = Regex.Match(input, pattern)
+                    if m.Success then Some(List.tail [ for g in m.Groups -> g.Value ])
+                    else None
+                match line with
+                | Regex "([a-z0-9]+)\(([a-z0-9]*)\)\." [name; parameters] -> Some(Fact name [])
+                | _ -> None
+            lines |> Array.map parseRule |> Array.choose(fun s -> s) |> Array.toList
+
+type RulesFile(file: string) =
+    new() = RulesFile("")
+    member __.Rules : rule list = 
+        if not (File.Exists file) then []
+        else File.ReadAllLines file |> Seq.filter(fun s -> not (s.Length = 0)) |> Seq.toArray |> extractRules
 
 type MyRule = {name: string}
 
@@ -38,27 +55,22 @@ type public RulesTypeProvider(cfg:TypeProviderConfig) as this =
         // define the provided type, erasing to CsvFile
         let ty = ProvidedTypeDefinition(asm, ns, tyName, Some(typeof<RulesFile>))
         
-        let rowTy = ProvidedTypeDefinition("Row", Some(typeof<string[]>))
-
-        // add a parameterless constructor which loads the file that was used to define the schema
-        ty.AddMember(ProvidedConstructor([], InvokeCode = fun [] -> <@@ RulesFile() @@>))
+        let rowTy = ProvidedTypeDefinition("Row", Some(typeof<rule>))
         
-        for i in 0..(lines.Length - 1) do
-            let l = lines.[i]
-            let name, rest = 
-                let i = l.IndexOf('(')
-                if i < 0 then failwith("there is no ( in line " + l)
-                else l.Substring(0, i), l.Substring(i, l.Length - i)
+        let rules = extractRules lines
 
-            let prop = ProvidedProperty(name, typeof<string>, GetterCode = fun [] -> <@@ name @@>)
-            prop.AddDefinitionLocation(1, i, filename)
+        for i in 0..(rules.Length-1) do
+            let r = rules.[i]
+            let prop = ProvidedProperty(r.Name, typeof<rule>, GetterCode = fun [] -> <@@ r @@>)
+            prop.AddDefinitionLocation(i, 1, filename) // 1 or 0
             ty.AddMember prop
             
-        // add a new, more strongly typed Data property (which uses the existing property at runtime)
-        ty.AddMember(ProvidedProperty("Data", typedefof<seq<_>>.MakeGenericType(rowTy), GetterCode = fun [file] -> <@@ (%%file:RulesFile).Rules @@>))
+        // add a parameterless constructor which loads the file that was used to define the schema
+        ty.AddMember(ProvidedConstructor([], InvokeCode = fun [] -> <@@ RulesFile(resolvedFilename) @@>))
         
-        ty.AddMember(ProvidedProperty("RRRow", typedefof<seq<_>>.MakeGenericType(rowTy), GetterCode = fun [file] -> <@@ (%%file:RulesFile).Rules @@>))
-
+        // add a new, more strongly typed Data property (which uses the existing property at runtime)
+        // ty.AddMember(ProvidedProperty("Data", typedefof<seq<_>>.MakeGenericType(rowTy), GetterCode = fun [file] -> <@@ (%%file:RulesFile).Rules @@>))
+        
         ty.AddMember rowTy
         ty)
 
