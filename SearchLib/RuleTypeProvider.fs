@@ -77,5 +77,7 @@ type public RulesTypeProvider(cfg:TypeProviderConfig) as this =
     // add the type to the namespace
     do this.AddNamespace(ns, [ruleTy])
 
+#if RELEASE
 [<TypeProviderAssembly>]
 do()
+#endif

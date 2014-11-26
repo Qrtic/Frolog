@@ -5,13 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>2318a313-429b-4bb3-909b-0a4ea7fb2c9a</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>SearchLib</RootNamespace>
-    <AssemblyName>SearchLib</AssemblyName>
+    <ProjectGuid>98eab99e-61f6-4df4-87ff-892228e46e91</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>SearchLibTests</RootNamespace>
+    <AssemblyName>SearchLibTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
-    <Name>SearchLib</Name>
+    <Name>SearchLibTests</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -21,7 +22,9 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\SearchLib.XML</DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>bin\Debug\SearchLibTests.XML</DocumentationFile>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,7 +33,9 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\SearchLib.XML</DocumentationFile>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>bin\Release\SearchLibTests.XML</DocumentationFile>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -42,18 +47,15 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common.fs" />
-    <Compile Include="Argument.fs" />
-    <Compile Include="Signature.fs" />
-    <Compile Include="Rule.fs" />
-    <Compile Include="Context.fs" />
-    <Compile Include="SpecRules.fs" />
-    <Compile Include="Knowledgebase.fs" />
-    <Compile Include="SearchMachine.fs" />
-    <None Include="Script.fsx" />
-    <Compile Include="ProvidedTypes-0.2.fs" />
-    <Compile Include="RuleTypeProvider.fs" />
-    <None Include="test.fsx" />
+    <None Include="App.config" />
+    <Compile Include="Main.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SearchLib\SearchLib.fsproj">
+      <Name>SearchLib</Name>
+      <Project>{2318a313-429b-4bb3-909b-0a4ea7fb2c9a}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>

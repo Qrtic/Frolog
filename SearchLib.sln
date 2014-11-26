@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SearchLib", "SearchLib\SearchLib.fsproj", "{2318A313-429B-4BB3-909B-0A4EA7FB2C9A}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "SearchLibTests", "SearchLibTests\SearchLibTests.fsproj", "{98EAB99E-61F6-4DF4-87FF-892228E46E91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{2318A313-429B-4BB3-909B-0A4EA7FB2C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2318A313-429B-4BB3-909B-0A4EA7FB2C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2318A313-429B-4BB3-909B-0A4EA7FB2C9A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98EAB99E-61F6-4DF4-87FF-892228E46E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98EAB99E-61F6-4DF4-87FF-892228E46E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98EAB99E-61F6-4DF4-87FF-892228E46E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98EAB99E-61F6-4DF4-87FF-892228E46E91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

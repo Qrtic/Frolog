@@ -5,20 +5,20 @@ open SearchLib.Signature
 
 module Rule =
     type predicate = F0 of result | F1 of ((argument) -> result) | F2 of (argument -> argument -> result) | F3 of (argument -> argument -> argument -> result)
-    type rule = Rule of signature * f: predicate | ConcatenatedRule of signature * predicate * rule
+    type rule = Rule of signature * f: predicate | ConcatenatedRule of signature * signature list
         with
         member r.Name = 
             match r with
             | Rule(s, b) -> s.name
-            | ConcatenatedRule(s, b, nb) -> s.name
+            | ConcatenatedRule(s, calls) -> s.name
         member r.Parameters = 
             match r with
             | Rule(s, b) -> s.parameters
-            | ConcatenatedRule(s, b, nb) -> s.parameters
+            | ConcatenatedRule(s, calls) -> s.parameters
         member r.Signature = 
             match r with
             | Rule(s, b) -> s
-            | ConcatenatedRule(s, b, nb) -> s
+            | ConcatenatedRule(s, calls) -> s
         static member fact(s: signature) = 
             match s.parameters with
             | [] -> Rule(s, F0(Accepted([])))
@@ -32,7 +32,9 @@ module Rule =
     let Fact(name: string) (prms: parameter list) = rule.fact {name = name; parameters = prms}
     
     let Rule(name: string) (prms: parameter list) (p: predicate) = rule.create name prms p
-        
+    
+    let ConRule(name: string) (prms: parameter list) (calls: signature list) = rule.ConcatenatedRule(call name prms, calls)
+
     let IncR: rule = 
         let inc(p1: argument) (p2: argument):result =
             let v1 = asInt p1

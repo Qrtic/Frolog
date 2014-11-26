@@ -7,7 +7,8 @@ module Signature =
     type result = Accepted of parameters | Rejected
     type signature = {name: string; parameters: argument list}
         with
-        member s.ToStr = s.name + s.parameters.ToString()
+        override s.ToString() = s.AsString
+        member s.AsString = s.name + s.parameters.ToString()
         member s1.signatureEq s2 = 
             if s1.name = s2.name then
                 let p1 = s1.parameters
@@ -18,3 +19,4 @@ module Signature =
 
     let signatureEq (s1 : signature) (s2 : signature): bool =
         s1.signatureEq s2
+    let call name parameters = {name = name; parameters = parameters}
