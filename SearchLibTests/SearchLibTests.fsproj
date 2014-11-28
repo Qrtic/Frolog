@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Compile Include="TestSearchMachine.fs" />
     <Compile Include="Main.fs" />
   </ItemGroup>
   <ItemGroup>

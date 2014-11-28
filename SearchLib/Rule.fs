@@ -5,6 +5,7 @@ open SearchLib.Signature
 
 module Rule =
     type predicate = F0 of result | F1 of ((argument) -> result) | F2 of (argument -> argument -> result) | F3 of (argument -> argument -> argument -> result)
+    [<CustomComparison; CustomEquality>]
     type rule = Rule of signature * f: predicate | ConcatenatedRule of signature * signature list
         with
         member r.Name = 
@@ -27,6 +28,20 @@ module Rule =
             | h1::h2::h3::[] -> Rule(s, F3(fun arg1 -> fun arg2 -> fun arg3 -> if arg1 ?= h1 && arg2 ?= h2 && arg3 ?= h3 then Accepted([h1;h2;h3]) else Rejected))
             | _ -> failwith("Too many arguments for instantiating a fact.")
         static member create(name: string) (prms: parameter list) (p: predicate) = Rule({name = name; parameters = prms}, p)
+        member r.haveSameSignature (o: rule) = r.Signature.signatureEq o.Signature
+        interface System.IComparable<rule> with
+            member r.CompareTo (o: rule) = compare r.Signature o.Signature
+        interface System.IComparable with
+            member r.CompareTo (o: System.Object) = 
+                match o with
+                | :? rule as r1 -> compare r.Signature r1.Signature
+                | _ -> invalidArg "o" "cannot compare values of different types"
+        interface System.IEquatable<rule> with
+            member r.Equals(o) =
+                match r, o with
+                | Rule(s,f), Rule(s1,f1) when s = s1 -> true // TOOD check predicates && f = f1 -> true
+                | ConcatenatedRule(s, ss), ConcatenatedRule(s1, ss1) when s = s1 && ss = ss1 -> true
+                | _ -> false
     type rulelist = list<rule>
     
     let Fact(name: string) (prms: parameter list) = rule.fact {name = name; parameters = prms}

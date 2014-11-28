@@ -6,7 +6,9 @@ open SearchLib.Signature
 open SearchLib.Rule
 open SearchLib.Context
 
-type knowledgebase = rulelist
+// type knowledgebase = rulelist
+let EmptyKB = Set.empty<rule>
+type knowledgebase = Set<rule>
     
 let process_predicate(c: context) (s: signature) (comp: predicate): bool * context =
     let check_parameters_count(s: signature) (comp: predicate): bool = 
@@ -39,7 +41,7 @@ let process_predicate(c: context) (s: signature) (comp: predicate): bool * conte
 let rec find (d: knowledgebase) (c: context) (s: signature) : seq<context> = 
     let s = replaceVars c s // replace vars!
     debug (sprintf "Called rule %s with args = %A" s.name s.parameters)
-    let rules = d |> List.toSeq
+    let rules = d |> Set.toSeq
     let acceptedRules = rules |> Seq.filter(fun r -> r.Signature |> signatureEq s)
     seq {
         for r in acceptedRules do
@@ -79,4 +81,4 @@ let exec (d: knowledgebase) (start: context) (s: signature): unit =
         for r in res do
             printfn "Result: %b. New context = %s" (true) ((r).ToString())
 
-let append (d: knowledgebase) (r: rule): knowledgebase = r::d
+let append (d: knowledgebase) (r: rule): knowledgebase = d.Add r

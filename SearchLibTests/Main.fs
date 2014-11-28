@@ -5,7 +5,7 @@ open SearchLib.Rule
 
 // is parent to children
 // let isparent = Rule "isparent" ["P"; "C"] (F2(fun p c -> Signature.Rejected))
-
+(*
 let parent p c = Fact "parent" [p; c]
 let isgrandparent: rule =
     let calls = [call "parent" ["G"; "P"]; call "parent" ["P"; "C"]]
@@ -17,4 +17,7 @@ let textcontext = Map.empty.Add("Alesha", "alesha").Add("Sasha", "sasha")
 let testmachine = SearchMachine(testkb, textcontext)
 let test = testmachine.PrintAll({name = "grandparent"; parameters = ["Alesha"; "Sasha"]})
 
+*)
+
+TestSearchMachine.starttest 1000 10
 System.Console.ReadKey() |> ignore
