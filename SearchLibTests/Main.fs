@@ -19,5 +19,6 @@ let test = testmachine.PrintAll({name = "grandparent"; parameters = ["Alesha"; "
 
 *)
 
-TestSearchMachine.starttest 1000 10
+TestSearchMachine.starttest 1000 3 5
+TestSearchMachine.starttest 1000 3 3
 System.Console.ReadKey() |> ignore
