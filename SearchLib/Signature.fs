@@ -1,12 +1,10 @@
 ﻿namespace SearchLib
 
-open SearchLib.Argument
 open SearchLib.Common
 
 module Signature =
-    type result = Accepted of parameters | Rejected
     [<StructuralComparison>][<StructuralEqualityAttribute>]
-    type signature = {name: string; parameters: argument list}
+    type signature = {name: string; parameters: parameters}
         with
         override s.ToString() = s.AsString
         member s.AsString = s.name + s.parameters.ToString()

@@ -1,9 +1,9 @@
 ﻿namespace SearchLib
 
-open SearchLib.Argument
 open SearchLib.Signature
 
 module Rule =
+    type result = Accepted of arguments | Rejected
     type predicate = F0 of result | F1 of ((argument) -> result) | F2 of (argument -> argument -> result) | F3 of (argument -> argument -> argument -> result)
     [<CustomComparison; CustomEquality>]
     type rule = Rule of signature * f: predicate | ConcatenatedRule of signature * signature list
@@ -27,7 +27,7 @@ module Rule =
             | h1::h2::[] -> Rule(s, F2(fun arg1 -> fun arg2 -> if arg1 ?= h1 && arg2 ?= h2 then Accepted([h1;h2]) else Rejected))
             | h1::h2::h3::[] -> Rule(s, F3(fun arg1 -> fun arg2 -> fun arg3 -> if arg1 ?= h1 && arg2 ?= h2 && arg3 ?= h3 then Accepted([h1;h2;h3]) else Rejected))
             | _ -> failwith("Too many arguments for instantiating a fact.")
-        static member create(name: string) (prms: parameter list) (p: predicate) = Rule({name = name; parameters = prms}, p)
+        static member create(name: string) (prms: parameters) (p: predicate) = Rule({name = name; parameters = prms}, p)
         member r.haveSameSignature (o: rule) = r.Signature.signatureEq o.Signature
         interface System.IComparable<rule> with
             member r.CompareTo (o: rule) = compare r.Signature o.Signature
@@ -44,11 +44,11 @@ module Rule =
                 | _ -> false
     type rulelist = list<rule>
     
-    let Fact(name: string) (prms: parameter list) = rule.fact {name = name; parameters = prms}
+    let Fact(name: string) (prms: parameters) = rule.fact {name = name; parameters = prms}
     
-    let Rule(name: string) (prms: parameter list) (p: predicate) = rule.create name prms p
+    let Rule(name: string) (prms: parameters) (p: predicate) = rule.create name prms p
     
-    let ConRule(name: string) (prms: parameter list) (calls: signature list) = rule.ConcatenatedRule(call name prms, calls)
+    let ConRule(name: string) (prms: parameters) (calls: signature list) = rule.ConcatenatedRule(call name prms, calls)
 
     let IncR: rule = 
         let inc(p1: argument) (p2: argument):result =
@@ -61,23 +61,18 @@ module Rule =
 
     let SumR: rule = 
         let sum(p1: argument) (p2: argument) (p3: argument):result =
-            let v1 = asInt p1
-            let v2 = asInt p2
-            let v3 = asInt p3
-            match (v1, v2, v3) with
+            match (p1.AsInt, p2.AsInt, p3.AsInt) with
                 | (Some(val1), Some(val2), Some(val3)) -> if val1 + val2 = val3 then Accepted([p1;p2;p3]) else Rejected
-                | (Some(val1), Some(val2), None) -> Accepted([p1;p2;to_arg(val1 + val2)])
-                | (Some(val1), None, Some(val3)) -> Accepted([p1;to_arg(val3 - val1);p3])
-                | (None, Some(val2), Some(val3)) -> Accepted([to_arg(val3 - val2);p2;p3])
+                | (Some(val1), Some(val2), None) -> Accepted([p1;p2;toArgument(val1 + val2)])
+                | (Some(val1), None, Some(val3)) -> Accepted([p1;toArgument(val3 - val1);p3])
+                | (None, Some(val2), Some(val3)) -> Accepted([toArgument(val3 - val2);p2;p3])
                 | _ -> Rejected
         Rule "sum" ["A";"B";"C"] (F3 sum)
 
     let DivsR:rule = 
         let divisors(p1: argument) (p2: argument): result =
-            let v1 = asInt p1
-            let v2 = asIntList p2
             let getdivs x = {1..x} |> Seq.filter(fun i -> x % i = 0) |> Set.ofSeq
-            match (v1, v2) with
+            match (p1.AsInt, p2.AsIntList) with
             | (Some(val1), Some(val2)) -> if Set.isEmpty(Set.difference (getdivs val1) (Set.ofList val2)) then Accepted([p1; p2]) else Rejected
             | (Some(val1), None) -> Accepted([p1; getdivs val1 |> Set.toList |> List.fold(fun acc x -> acc + x.ToString() + " ") ""])
             | (None, Some(val2)) -> Rejected

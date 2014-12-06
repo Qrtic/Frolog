@@ -10,4 +10,3 @@ module Common =
         x.Equals(y)
 
     let compareOpt (x : #System.IComparable<'T>) (y : #System.IComparable<'T>) = x.CompareTo(y)
-    // let compareOpt<'T when 'T :> System.IComparable<'T>> (x : 'T) (y : 'T) = x.CompareTo(y)

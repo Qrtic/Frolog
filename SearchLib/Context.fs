@@ -1,13 +1,12 @@
 ﻿namespace SearchLib
 
 open SearchLib.Common
-open SearchLib.Argument
 open SearchLib.Signature
 
 module Context =
-    type context = Map<parameter, value>
+    type context = Map<Parameter, value>
     
-    let convert_to_arg(c: context) (p: parameter): argument = 
+    let convert_to_arg(c: context) (p: Parameter): argument = 
         if isVar p then 
             let res = c.TryFind(p) // Think that we always have this p
             match res with
@@ -26,4 +25,4 @@ module Context =
     /// <param name="cur">New context</param>
     let reduce(init: context) (cur: context) = Map.map (fun k v -> Map.find k cur) init
 
-    let supply(init: context) (supp: (parameter*value) list) = List.fold(fun (s: context) (k, v) -> s.Add(k, v)) init supp
+    let supply(init: context) (supp: (Parameter*value) list) = List.fold(fun (s: context) (k, v) -> s.Add(k, v)) init supp

@@ -1,32 +1,47 @@
 ﻿namespace SearchLib
 
+open System
 open SearchLib.Common
 
+(*
+signature("Abs", ["A","B"])
+A and B are parameters
+
+call("Abs", ["a", "B"])
+a and B are arguments
+*)
+
+/// Parameter is a name of argument in predicate
+exception ArgumentCastException of string
+
+type parameter = {name : string}
+
+type argument = 
+    internal Value of value: string | Variable of name: string
+    with
+    member a.IsVar = match a with
+                        | Value(_)    -> false
+                        | Variable(_) -> true
+    member a.AsInt = match a with
+                        | Value(i)    -> 
+                            let ok, value = Int32.TryParse i
+                            if ok then Some(value) else None
+                        | Variable(_) -> None
+    member a.AsIntList = match a with
+                            | Value(p) -> 
+                                let l = p.Split([|' '|], System.StringSplitOptions.RemoveEmptyEntries)
+                                let ia = Array.map(fun x -> System.Int32.TryParse x) l
+                                if (Array.exists(fun (ok, _) -> not ok)) ia then None
+                                else Array.map(fun (_, v) -> v) ia |> Array.toList |> Option.Some
+                            | Variable(_) -> None
+    static member (?=) (a1: argument, a2: argument) = a1.IsVar && a2.IsVar || a1.Equals(a2)
+
+// type parameter = name
+type parameters = list<parameter>
+type arguments = list<argument>
+
+[<RequireQualifiedAccessAttribute>]
 module Argument =
-    type parameter = name
-    type argument = value
-    type parameters = list<parameter>
-    
-    let to_arg (a: 'a): argument = a.ToString()
-
-    let isVar (p: argument): bool = System.Char.IsUpper (p.Chars 0)
-
-    // All non vars are constants that are defined as name that also can be used as value
-    let (?=) (p1: argument) (p2: argument): bool = isVar p1 || isVar p2 || p1 = p2
-    // let (?=) (p1: parameter) (p2: parameter): bool = isVar p1 || isVar p2 || p1 = p2
-
-    let asInt (p: argument): option<int> =
-        let ok, value = System.Int32.TryParse p
-        if ok then
-            Some value
-        else
-            None
-            
-    let asIntList (p: argument): option<list<int>> =
-        if isVar p then None
-        else
-            let l = p.Split([|' '|], System.StringSplitOptions.RemoveEmptyEntries)
-            if Array.exists(fun x -> not (fst (System.Int32.TryParse x))) l then
-               None
-            else
-                Some(Array.map(fun x -> System.Int32.Parse x) l |> Array.toList)
+    let toArgument (a: 'a): argument =
+        let c = a.ToString()
+        if System.Char.IsUpper (c.Chars 0) then Variable(c) else Value(c)
