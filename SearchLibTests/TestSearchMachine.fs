@@ -1,5 +1,7 @@
 ﻿module TestSearchMachine
 
+open SearchLib
+
 open SearchLib.Rule
 open SearchLib.Signature
 open SearchLib.SearchMachine
@@ -9,8 +11,17 @@ let createRandomFacts size: rule list =
     let rec create i l =
         if i >= size then l
         else
-            let prms = [r.Next(size).ToString()]
+            let prms = [Parameter.create(r.Next(size))]
             create (i+1) ((Fact "b" prms)::l)
+    create 1 []
+    
+let createRandomQuries size: Call list =
+    let r = System.Random()
+    let rec create i l =
+        if i >= size then l
+        else
+            let args = [Argument.create(r.Next(size))]
+            create (i+1) (Signature.call "b" args::l)
     create 1 []
     
 /// creates with "b"(int, int) facts
@@ -32,18 +43,21 @@ let createLIFOCacheTest size prms =
     let addrule (s: ISearchMachine) r = s.AddRule r
     createRandomFacts size |> List.iter(fun r -> machine.AddRule r)
     machine
-
+    
 let createSigTest size = 
     createRandomFacts size |> List.map(fun f -> f.Signature)
 
-let test (m: ISearchMachine) (s: signature list) =
+let createSigTestQueries size = 
+    createRandomQuries size
+
+let test (m: ISearchMachine) (s: Call list) =
     let sw = System.Diagnostics.Stopwatch.StartNew()
     for sign in s do
         m.Execute sign |> ignore
     sw.ElapsedMilliseconds
 
 let starttest size times sizek =
-    let queries = [1..times] |> List.map(fun i -> createSigTest size)
+    let queries = [1..times] |> List.map(fun i -> createSigTestQueries size)
 
     let simpleIter (f: unit -> SearchMachines.Simple) queries =
         let simple = f()
