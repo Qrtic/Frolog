@@ -6,6 +6,7 @@ open SearchLib.Knowledgebase
 open SearchLib.Rule
 
 open NUnit.Framework
+open FsUnit
 
 // is parent to children
 // let isparent = Rule "isparent" ["P"; "C"] (F2(fun p c -> Signature.Rejected))
@@ -23,27 +24,46 @@ let test = testmachine.PrintAll({name = "grandparent"; parameters = ["Alesha"; "
 
 *)
 
-[<Test>]
-let ``Add fact, check it``() =
-    let def = Signature.define("b") [Parameter.create 1]
-    let fact = rule.fact(def)
-    let kb = EmptyKB.Add(fact)
+[<TestFixture>]
+module SimpleTest =
+    let dtype = dataType.Integer
+    let name = "b"
+    let kb (i: int) = EmptyKB.Add(rule.fact(Signature.define name [Parameter.create i]))
+    let varkb (n) = EmptyKB.Add(rule.fact(Signature.define name [Parameter.create(n, dtype)]))
     let c = Context.EmptyContext
-    let call = Signature.call "b" [Argument.create 1]
-    let res = find kb c call
-    Assert.AreEqual(Seq.length res, 1)
+    let vc k (v: int) = Map.empty.Add(Variable.intVar k, Value.create v)
+    let call (i: int) = Signature.call name [Argument.create i]
+    let varcall n = Signature.call name [Argument.create(n, dtype)]
+    
+    [<Test>]
+    let ``Add fact, check it``() =
+        let kb = kb 1
+        let call = call 1
+        let res = find kb c call |> Seq.length
+        res |> should equal 1
+    
+    [<Test>]
+    let ``Add fact, check another``() =
+        let kb = kb 1
+        let call = call 2
+        let res = find kb c call |> Seq.length
+        res |> should not' (equal 1)
+        
+    [<Test>]
+    let ``Call fact with variable argument``() =
+        let kb = kb 1
+        let c = vc "C" 1
+        let call = varcall "C"
+        let res = find kb c call |> Seq.length
+        res |> should equal 1
 
-[<Test>]
-let ``Add fact, check another``() =
-    let def = Signature.define("b") [Parameter.create 1]
-    let fact = rule.fact(def)
-    let kb = EmptyKB.Add(fact)
-    let c = Context.EmptyContext
-    let call = Signature.call "b" [Argument.create 2]
-    let res = find kb c call
-    Assert.AreNotEqual(Seq.length res, 1)
+    [<Test>]
+    let ``Call var fact with argument``() =
+        let kb = varkb "A"
+        let call = call 1
+        let res = find kb c call |> Seq.length
+        res |> should equal 1
 
-``Add fact, check it``() |> ignore
 TestSearchMachine.starttest 1000 3 5
 TestSearchMachine.starttest 1000 3 3
 System.Console.ReadKey() |> ignore
