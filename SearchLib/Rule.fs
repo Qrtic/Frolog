@@ -26,12 +26,13 @@ module Rule =
             | Rule(s, b) -> s
             | ConcatenatedRule(s, calls) -> s
         static member fact(s: Definition) = 
-            let (?=) = Unify.unify
+            let (?=) = Unify.canUnify
+            let (?>) p a = Unify.tryUnify p a |> Option.get // Always cause already unified
             match s.prms with
             | [] -> Rule(s, F0(Accepted([])))
-            | h::[] -> Rule(s, F1(fun arg -> if h ?= arg then Accepted([arg]) else Rejected))
-            | h1::h2::[] -> Rule(s, F2(fun arg1 -> fun arg2 -> if h1 ?= arg1 && h2 ?= arg2 then Accepted([arg1;arg2]) else Rejected))
-            | h1::h2::h3::[] -> Rule(s, F3(fun arg1 -> fun arg2 -> fun arg3 -> if h1 ?= arg1 && h2 ?= arg2 && h3 ?= arg3 then Accepted([arg1;arg2;arg3]) else Rejected))
+            | h::[] -> Rule(s, F1(fun arg -> if h ?= arg then Accepted([h ?> arg]) else Rejected))
+            | h1::h2::[] -> Rule(s, F2(fun arg1 arg2 -> if h1 ?= arg1 && h2 ?= arg2 then Accepted([h1 ?> arg1; h2 ?> arg2]) else Rejected))
+            | h1::h2::h3::[] -> Rule(s, F3(fun arg1 arg2 arg3 -> if h1 ?= arg1 && h2 ?= arg2 && h3 ?= arg3 then Accepted([h1 ?> arg1; h2 ?> arg2; h3 ?> arg3]) else Rejected))
             | _ -> failwith("Too many arguments for instantiating a fact.")
         static member create(name: string) (prms: parameters) (p: predicate) = Rule({name = name; prms = prms}, p)
         member r.haveSameSignature (o: rule) = r.Signature.Equals(o.Signature)

@@ -108,8 +108,15 @@ type parameters = parameter list
 type arguments = argument list
 
 module Unify =
-    let unify (Parameter p) (Argument a) =
+    let canUnify (Parameter p) (Argument a) =
         p.IsVariable || a.IsVariable || p.AsString = a.AsString
+    let tryUnify (Parameter p) (Argument a): argument option =
+        match p, a with
+        | Var(vp), Var(va) -> Argument(a) |> Some
+        | Var(vp), Val(va) -> Argument(a) |> Some
+        | Val(vp), Var(va) -> Argument(p) |> Some
+        | Val(vp), Val(va) when vp.AsString = va.AsString -> Argument(p) |> Some
+        | _ -> None
     let convert (Parameter p): argument =
         Argument(p)
 

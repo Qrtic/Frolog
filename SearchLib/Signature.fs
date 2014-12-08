@@ -57,7 +57,7 @@ type Call = {name: string; args: arguments}
 module Signature =
     let compatible(d: Definition, c: Call) =
         let cnames = d.name = c.name
-        let cprms = lazy List.fold2(fun s t1 t2 -> s && Unify.unify t1 t2) true d.prms c.args
+        let cprms = lazy List.fold2(fun s t1 t2 -> s && Unify.canUnify t1 t2) true d.prms c.args
         cnames && cprms.Force()
 
     let define name parameters = {name = name; prms = parameters}
