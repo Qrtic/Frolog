@@ -1,7 +1,6 @@
 ﻿module SearchLib.Knowledgebase
 
 open SearchLib.Common
-open SearchLib.Argument
 open SearchLib.Signature
 open SearchLib.Rule
 open SearchLib.Context
@@ -10,39 +9,44 @@ open SearchLib.Context
 let EmptyKB = Set.empty<rule>
 type knowledgebase = Set<rule>
     
-let process_predicate(c: context) (s: signature) (comp: predicate): bool * context =
-    let check_parameters_count(s: signature) (comp: predicate): bool = 
+let process_predicate(c: context) (s: Call) (comp: predicate): bool * context =
+    let check_parameters_count(s: Call) (comp: predicate): bool = 
         let n = s.name
-        let prms = s.parameters
+        let args = s.args
         match comp with
-            | F0(_) -> prms.Length = 0
-            | F1(_) -> prms.Length = 1
-            | F2(_) -> prms.Length = 2
-            | F3(_) -> prms.Length = 3
+            | F0(_) -> args.Length = 0
+            | F1(_) -> args.Length = 1
+            | F2(_) -> args.Length = 2
+            | F3(_) -> args.Length = 3
     let res: result =
         if not (check_parameters_count s comp) then Rejected
         else
-            let prms = s.parameters |> List.map (convert_to_arg c) // TODO delete this, converted at find func
+            let args = s.args
             match comp with
                 | F0(f0) -> f0
-                | F1(f1) -> f1 prms.Head
-                | F2(f2) -> f2 prms.Head prms.Tail.Head
-                | F3(f3) -> f3 prms.Head prms.Tail.Head prms.Tail.Tail.Head
-    let process_result(c: context) (inits: parameters) (ress: parameters):context =
-        let proc (acc: context) = fun p1 -> fun p2 -> if isVar p1 then acc.Add(p1, p2) else acc
+                | F1(f1) -> f1 args.Head
+                | F2(f2) -> f2 args.Head args.Tail.Head
+                | F3(f3) -> f3 args.Head args.Tail.Head args.Tail.Tail.Head
+    let process_result(c: context) (inits: arguments) (ress: arguments):context =
+        let proc (acc: context) (p: argument) (a: argument) =
+            let av = Argument.asVariable p
+            if av.IsNone then
+                acc
+            else
+                let v = av.Value
+                acc.Add(v, Argument.asValue a |> Option.get)
         List.fold2 proc c inits ress
     match res with
-    | Accepted(parameters) -> true, process_result c s.parameters parameters
+    | Accepted(arguments) -> true, process_result c s.args arguments
     | Rejected -> false, c
 
-/// Returns sequence of answers
-/// If result is empty
-/// Then predicate equals false
-let rec find (d: knowledgebase) (c: context) (s: signature) : seq<context> = 
+/// Returns sequence of answers.
+/// If result is empty,
+/// then predicate equals false.
+let rec find (d: knowledgebase) (c: context) (s: Call) : seq<context> = 
     let s = replaceVars c s // replace vars!
-    debug (sprintf "Called rule %s with args = %A" s.name s.parameters)
-    let rules = d |> Set.toSeq
-    let acceptedRules = rules |> Seq.filter(fun r -> r.Signature |> signatureEq s)
+    debug (sprintf "Called rule %s with args = %A" s.name s.args)
+    let acceptedRules = d |> Set.filter(fun r -> Signature.compatible(r.Signature, s))
     seq {
         for r in acceptedRules do
             match r with
@@ -50,9 +54,10 @@ let rec find (d: knowledgebase) (c: context) (s: signature) : seq<context> =
                     let proc = process_predicate c s p
                     if fst proc then
                         yield snd proc
+                (* TODO:
                 | ConcatenatedRule(conrulesignature, calls) ->
-                    let addToContext = List.map2(fun k v -> (k, v)) conrulesignature.parameters s.parameters
-                    let rec reducecall (contexts: context seq) (calls: signature list): context seq =
+                    let addToContext = List.map2(fun k v -> (k, v)) conrulesignature.prms s.args
+                    let rec reducecall (contexts: context seq) (calls: Call list): context seq =
                         match calls with
                         | call::restcalls ->
                             seq {
@@ -69,10 +74,11 @@ let rec find (d: knowledgebase) (c: context) (s: signature) : seq<context> =
                     let supplementedContext = supply c addToContext
                     for co in reducecall [supplementedContext] calls do
                         let replaced = s.parameters |> List.filter(fun p -> isVar p) |> List.map(fun p -> p, Map.find p co)
-                        yield supply (reduce c co) replaced
+                        yield supply (reduce c co) replaced*)
+                | _ -> ()
     }
 
-let exec (d: knowledgebase) (start: context) (s: signature): unit =
+let exec (d: knowledgebase) (start: context) (s: Call): unit =
     printfn "Execute: %s. Context = %s" s.AsString (start.ToString())
     let res = find d start s
     if Seq.isEmpty res then

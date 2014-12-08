@@ -1,7 +1,6 @@
 ﻿module SearchLib.SearchMachine
 
 open SearchLib.Common
-open SearchLib.Argument
 open SearchLib.Signature
 open SearchLib.Rule
 open SearchLib.Context
@@ -12,9 +11,9 @@ open SearchLib.Knowledgebase
 type CacheParameters = { maxPrecedences : int }
 
 type ISearchMachine = 
-    abstract member Execute: signature -> context seq
+    abstract member Execute: Call -> context seq
     abstract member AddRule: rule -> unit
-    abstract member PrintAll: signature -> unit
+    abstract member PrintAll: Call -> unit
 
 module SearchMachines =
     type Simple =
@@ -24,14 +23,14 @@ module SearchMachines =
         val mutable c: context
         
         member this.AddRule(r: rule) = this.kb <- append this.kb r
-        member this.Execute(s: signature) = find this.kb this.c s
-        member this.PrintAll(s: signature) =
-            printfn "Call %s(%A)" s.name s.parameters
+        member this.Execute(s: Call) = find this.kb this.c s
+        member this.PrintAll(s: Call) =
+            printfn "Call %s(%A)" s.name s.args
             let contexts = this.Execute s
 
             if Seq.isEmpty contexts then
                 printfn "false"
-            elif not (List.exists(fun p -> isVar p) s.parameters) then
+            elif not (List.exists(fun p -> Argument.isVariable p) s.args) then
                     printfn "true"
             else
                 for c in contexts do printfn "%A" c
@@ -40,12 +39,12 @@ module SearchMachines =
             member t.Execute s = t.Execute s
             member t.PrintAll s = t.PrintAll s
     
-    type Custom(pre: signature -> unit, query: signature -> context seq option, post: signature*context seq -> unit) =
+    type Custom(pre: Call -> unit, query: Call -> context seq option, post: Call*context seq -> unit) =
         let mutable simple = Simple.Empty()
         let mutable hits = 0
         member this.AddRule(r: rule) = simple.AddRule r
-        member this.PrintAll(s: signature) = simple.PrintAll s
-        member this.Execute(s: signature) = 
+        member this.PrintAll(s: Call) = simple.PrintAll s
+        member this.Execute(s: Call) = 
             pre s |> ignore
             let prequery = query s
             match prequery with
@@ -71,9 +70,9 @@ module SearchMachines =
             new Custom(none, query, post)
     
         static member CacheLastMachine cacheParameters =
-            let cache = new System.Collections.Generic.Queue<signature*(context seq)>()
-            let rec tryfind (s: signature) =
-                match Seq.tryFind(fun t -> s.signatureEq (fst t)) cache with
+            let cache = new System.Collections.Generic.Queue<Call*(context seq)>()
+            let rec tryfind (s: Call) =
+                match Seq.tryFind(fun t -> Call.Equals(s, (fst t))) cache with
                 | Some(_, cs) -> Some(cs)
                 | None -> None
             let insertnew(s, cs) =

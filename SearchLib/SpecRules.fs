@@ -39,3 +39,4 @@ let rec lex (s: string) state =
             match state with
                 | WhiteSpace -> Functor(this)::(lex rest WhiteSpace)
                 |IntSpace(n) -> Functor(this)::Int(n)::(lex rest WhiteSpace)
+        | _ -> failwith "incorrect token"
