@@ -7,6 +7,7 @@ open SearchLib.Context
 
 // type knowledgebase = rulelist
 let EmptyKB = Set.empty<rule>
+let DefaultKB = defaultRules |> Set.ofList
 type knowledgebase = Set<rule>
     
 let process_predicate(c: context) (s: Call) (comp: predicate): bool * context =
@@ -54,28 +55,24 @@ let rec find (d: knowledgebase) (c: context) (s: Call) : seq<context> =
                     let proc = process_predicate c s p
                     if fst proc then
                         yield snd proc
-                (* TODO:
                 | ConcatenatedRule(conrulesignature, calls) ->
-                    let addToContext = List.map2(fun k v -> (k, v)) conrulesignature.prms s.args
-                    let rec reducecall (contexts: context seq) (calls: Call list): context seq =
-                        match calls with
-                        | call::restcalls ->
-                            seq {
-                                for c in contexts do
-                                    let newcontexts = find d c call
-                                    let restcontexts = reducecall newcontexts restcalls
-                                    for c in restcontexts do
-                                        yield c}
-                        | [] -> contexts
+                    let psl = conrulesignature.prms
+                    let asl = s.args
+
+                    let proc(contexts: context seq) (calls: Call seq) : context seq =
+                        calls |> Seq.fold(fun (s: context seq) call -> s |> Seq.collect(fun c -> find d c call)) contexts
+                        
                     // substitute parameters
-                    // it looks like there is no situation when values can change
-                    // let supplementedContext = List.fold(fun (s: context) (k, v) -> s.Add(k, v)) c addToContext
-                    // let newcontexts = find d supplementedContext (replaceVars c call)
-                    let supplementedContext = supply c addToContext
-                    for co in reducecall [supplementedContext] calls do
-                        let replaced = s.parameters |> List.filter(fun p -> isVar p) |> List.map(fun p -> p, Map.find p co)
-                        yield supply (reduce c co) replaced*)
-                | _ -> ()
+                    let presupplied = supply c psl asl
+                    let proced = proc [presupplied] calls
+                    // substitute parameters
+                    let postsupplied = proced |> Seq.map(fun c -> supply c psl asl)
+                    // return previous context parameters
+
+                    let returned = postsupplied |> Seq.map(fun ps -> Context.replace ps c)
+                    let reduced = returned |> Seq.map(fun rs -> Context.reduce rs c)
+
+                    yield! reduced
     }
 
 let exec (d: knowledgebase) (start: context) (s: Call): unit =

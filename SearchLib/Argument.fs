@@ -16,7 +16,17 @@ exception ArgumentCastException of string
 
 type dataType = Integer | String | List of dataType
 type variable = {Name: string; Type: dataType}
+    with
+    override v.ToString() = v.Name + " : " + v.Type.ToString()
 type value = Integer of int | String of string | IntList of int list | StrList of string list
+    with
+    member v.AsString = 
+        match v with
+        | Integer(i) -> i.ToString()
+        | String(s) -> s
+        | IntList(l) -> l.ToString()
+        | StrList(l) -> l.ToString()
+    override v.ToString() = v.AsString
 
 type variable
     with
@@ -25,15 +35,6 @@ type variable
         | String(s) -> v.Type = dataType.String
         | IntList(l) -> v.Type = dataType.List(dataType.Integer)
         | StrList(l) -> v.Type = dataType.List(dataType.String)
-    
-type value
-    with
-    member v.AsString = 
-        match v with
-        | Integer(i) -> i.ToString()
-        | String(s) -> s
-        | IntList(l) -> l.ToString()
-        | StrList(l) -> l.ToString()
 
 type Variable() =
     static member intVar name = {Name = name; Type = dataType.Integer}
@@ -88,6 +89,9 @@ type VarOrValue = Var of variable | Val of value
 
 type parameter = Parameter of VarOrValue
     with
+    override p.ToString() = 
+        let (Parameter prm) = p
+        prm.AsString
     static member (?=) (p1: parameter, p2: parameter) =
         let (parameter.Parameter p1, parameter.Parameter p2) = (p1, p2)
         match p1, p2 with
@@ -97,6 +101,9 @@ type parameter = Parameter of VarOrValue
 
 type argument = Argument of VarOrValue
     with
+    override a.ToString() = 
+        let (Argument arg) = a
+        arg.AsString
     static member (?=) (a1: argument, a2: argument) =
         let (argument.Argument a1, argument.Argument a2) = (a1, a2)
         match a1, a2 with
@@ -124,6 +131,7 @@ type Parameter() =
     static member asString(Parameter p) = p.AsString
     static member isVariable(Parameter p) = p.IsVariable
     static member asVariable(Parameter p) = p.asVariable
+    static member asValue(Parameter p) = p.asValue
     static member create i = parameter.Parameter(Val(Integer(i)))
     static member create s = if Common.isVariableName s then failwith "" else parameter.Parameter(Val(String(s)))
     static member create(name, dtype) = parameter.Parameter(Var({Name = name; Type = dtype}))
