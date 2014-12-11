@@ -11,32 +11,40 @@ module Rule =
         | F3 of (argument -> argument -> argument -> result)
     
     [<CustomComparison; CustomEquality>]
-    type rule = Rule of Definition * f: predicate | ConcatenatedRule of Definition * Call list
+    [<StructuredFormatDisplayAttribute("{Signature}")>]
+    /// Note that fact must be fully classified
+    type rule = Fact of Definition | Rule of Definition * f: predicate | ConcatenatedRule of Definition * Call list
         with
         member r.Name = 
             match r with
-            | Rule(s, _) -> s.name
-            | ConcatenatedRule(s, _) -> s.name
+            | Fact(def) -> def.name
+            | Rule(def, _) -> def.name
+            | ConcatenatedRule(def, _) -> def.name
         member r.Parameters = 
             match r with
-            | Rule(s, _) -> s.prms
-            | ConcatenatedRule(s, _) -> s.prms
+            | Fact(def) -> def.prms
+            | Rule(def, _) -> def.prms
+            | ConcatenatedRule(def, _) -> def.prms
         member r.Signature = 
             match r with
-            | Rule(s, b) -> s
-            | ConcatenatedRule(s, calls) -> s
-        static member fact(s: Definition) = 
-            let (?=) = Unify.canUnify
-            let (?>) p a = Unify.tryUnify p a |> Option.get // Always cause already unified
-            match s.prms with
-            | [] -> Rule(s, F0(Accepted([])))
-            | h::[] -> Rule(s, F1(fun arg -> if h ?= arg then Accepted([h ?> arg]) else Rejected))
-            | h1::h2::[] -> Rule(s, F2(fun arg1 arg2 -> if h1 ?= arg1 && h2 ?= arg2 then Accepted([h1 ?> arg1; h2 ?> arg2]) else Rejected))
-            | h1::h2::h3::[] -> Rule(s, F3(fun arg1 arg2 arg3 -> if h1 ?= arg1 && h2 ?= arg2 && h3 ?= arg3 then Accepted([h1 ?> arg1; h2 ?> arg2; h3 ?> arg3]) else Rejected))
-            | _ -> failwith("Too many arguments for instantiating a fact.")
+            | Fact(def) -> def
+            | Rule(def, b) -> def
+            | ConcatenatedRule(def, calls) -> def
+        static member fact(def: Definition) = Fact(def)
         static member create(name: string) (prms: parameters) (p: predicate) = Rule({name = name; prms = prms}, p)
         member r.haveSameSignature (o: rule) = r.Signature.Equals(o.Signature)
         static member CompareSignatures (r1: rule) (r2: rule) = Definition.CompareTo r1.Signature r2.Signature
+        member r.Equals(r1: rule) =
+            let signaturesEq = Definition.StrongEquals(r.Signature, r1.Signature)
+            match r, r1 with
+            | Fact(def), Fact(def1) -> Definition.StrongEquals(def, def1)
+            | Rule(d, p), Rule(d1, p1) -> false // TODO: how to define? p = p1
+            | ConcatenatedRule(d, p), ConcatenatedRule(d1, p1) -> signaturesEq && p = p1
+            | _ -> false
+        override r.Equals(o) = 
+            match o with
+            | :? rule as r1 -> r.Equals(r1)
+            | _ -> false
         interface System.IComparable<rule> with
             member r.CompareTo (o: rule) = rule.CompareSignatures r o
         interface System.IComparable with
@@ -44,14 +52,8 @@ module Rule =
                 match o with
                 | :? rule as r1 -> rule.CompareSignatures r r1
                 | _ -> failwith "cannot compare rule with any other types"
-        interface System.IEquatable<rule> with
-            member r.Equals(o) =
-                // TODO
-                false
-                (*match r, o with
-                | Rule(s,f), Rule(s1,f1) -> s = s1 // TOOD check predicates && f = f1 -> true
-                | ConcatenatedRule(s, ss), ConcatenatedRule(s1, ss1) when s = s1 && ss = ss1 -> true
-                | _ -> false*)
+        override r.GetHashCode() = System.Guid.NewGuid().GetHashCode() // r.Signature.AsString.GetHashCode()
+        override r.ToString() = r.Signature.ToString()
     type rulelist = list<rule>
     
     let Fact(name: string) (prms: parameters) = rule.fact {name = name; prms = prms}

@@ -15,6 +15,12 @@ a and B are arguments
 exception ArgumentCastException of string
 
 type dataType = Integer | String | List of dataType
+    with
+    override d.ToString() = 
+        match d with
+        | Integer -> "int"
+        | String -> "string"
+        | List(dt) -> "list of " + dt.ToString()
 type variable = {Name: string; Type: dataType}
     with
     override v.ToString() = v.Name + " : " + v.Type.ToString()
@@ -67,13 +73,13 @@ type Value() =
         match v with
         | StrList(l) -> Some(l)
         | _ -> None
-
+        
 type VarOrValue = Var of variable | Val of value
     with
     member v.AsString = 
         match v with
         | Val(v) -> v.AsString
-        | Var(v) -> v.Name
+        | Var(v) -> v.Name + ":" + v.Type.ToString()
     member v.IsVariable = 
         match v with
         | Val(_) -> false
@@ -86,9 +92,12 @@ type VarOrValue = Var of variable | Val of value
         match v with
         | Val(v) -> Some(v)
         | _ -> None
-
+    override v.ToString() = v.AsString
+    
+[<StructuredFormatDisplayAttribute("{AsString")>]
 type parameter = Parameter of VarOrValue
     with
+    member p.AsString = p.ToString()
     override p.ToString() = 
         let (Parameter prm) = p
         prm.AsString
@@ -134,7 +143,9 @@ type Parameter() =
     static member asValue(Parameter p) = p.asValue
     static member create i = parameter.Parameter(Val(Integer(i)))
     static member create s = if Common.isVariableName s then failwith "" else parameter.Parameter(Val(String(s)))
-    static member create(name, dtype) = parameter.Parameter(Var({Name = name; Type = dtype}))
+    static member create(name, dtype) = 
+        if isVariableName(name) then parameter.Parameter(Var({Name = name; Type = dtype}))
+        else failwith "Incorrect variable name"
 
 type Argument() =
     static member asString(Argument p) = p.AsString
@@ -145,7 +156,9 @@ type Argument() =
     static member create s = if Common.isVariableName s then failwith "" else argument.Argument(Val(String(s)))
     static member create il = argument.Argument(Val(IntList(il)))
     static member create sl = argument.Argument(Val(StrList(sl)))
-    static member create(name, dtype) = argument.Argument(Var({Name = name; Type = dtype}))
+    static member create(name, dtype) = 
+        if isVariableName(name) then argument.Argument(Var({Name = name; Type = dtype}))
+        else failwith "Incorrect variable name"
     static member create v = argument.Argument(Val(v))
     static member create v = argument.Argument(Var(v))
     static member value(Argument a) = 

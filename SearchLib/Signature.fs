@@ -3,18 +3,25 @@
 open SearchLib.Common
 
 [<CustomEquality>][<CustomComparison>]
+[<StructuredFormatDisplayAttribute("{AsString}")>]
 type Definition = {name: string; prms: parameters}
     with
-    member d.AsString = sprintf "%s(%A)" d.name d.prms
+    member d.AsString = 
+        let parameterString = ("", d.prms) ||> List.fold(fun acc p -> acc + p.AsString + ", ")
+        sprintf "%s(%s)" d.name parameterString
     override d.Equals(d1) = 
         match d1 with
-        | :? Definition as d1 -> Definition.Equals(d, d1)
+        | :? Definition as d1 -> Definition.StrongEquals(d, d1)
         | _ -> false
     override d.GetHashCode() =
         d.name.GetHashCode() + d.prms.GetHashCode()
-    static member Equals(d1: Definition, d2: Definition) =
+    static member Compatible(d1: Definition, d2: Definition) =
         let cnames = d1.name = d2.name
         let cprms = lazy List.fold2(fun s t1 t2 -> s && t1 ?= t2) true d1.prms d2.prms
+        cnames && cprms.Force()
+    static member StrongEquals(d1: Definition, d2: Definition) =
+        let cnames = d1.name = d2.name
+        let cprms = lazy ((d1.prms.Length = d2.prms.Length) && List.fold2(fun s t1 t2 -> s && t1 = t2) true d1.prms d2.prms)
         cnames && cprms.Force()
     static member CompareTo(d1: Definition) (d2: Definition) =
         let namec = d1.name.CompareTo(d2.name)
@@ -57,8 +64,9 @@ type Call = {name: string; args: arguments}
 module Signature =
     let compatible(d: Definition, c: Call) =
         let cnames = d.name = c.name
+        let cprmsLen = d.prms.Length = c.args.Length
         let cprms = lazy List.fold2(fun s t1 t2 -> s && Unify.canUnify t1 t2) true d.prms c.args
-        cnames && cprms.Force()
+        cnames && cprmsLen && cprms.Force()
 
     let define name parameters = {name = name; prms = parameters}
     let call name arguments = {name = name; args = arguments}

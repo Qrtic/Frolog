@@ -26,7 +26,7 @@ let createRandomQuries size: Call list =
     
 /// creates with "b"(int, int) facts
 let createSimpleTest size =
-    let machine = SearchMachines.Simple.Empty()
+    let machine = SearchMachines.Simple.Create()
     let addrule (s: ISearchMachine) r = s.AddRule r
     createRandomFacts size |> List.iter(fun r -> machine.AddRule r)
     machine
