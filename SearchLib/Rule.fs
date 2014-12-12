@@ -53,7 +53,8 @@ module Rule =
                 | :? rule as r1 -> rule.CompareSignatures r r1
                 | _ -> failwith "cannot compare rule with any other types"
         override r.GetHashCode() = System.Guid.NewGuid().GetHashCode() // r.Signature.AsString.GetHashCode()
-        override r.ToString() = r.Signature.ToString()
+        member r.AsString = r.ToString()
+        override r.ToString() = sprintf "Rule = %s" r.Signature.AsString
     type rulelist = list<rule>
     
     let Fact(name: string) (prms: parameters) = rule.fact {name = name; prms = prms}

@@ -24,9 +24,7 @@ module SimpleTest =
 
     [<Test>]
     let ``Add fact, check it``() =
-        let kb = kb 1
-        let call = call 1
-        let res = find kb Context.EmptyContext call |> Seq.length
+        let res = find (kb 1) Context.EmptyContext (call 1) |> Seq.length
         res |> should equal 1
     
     [<Test>]
@@ -126,29 +124,41 @@ module SimpleTest =
 
 [<TestFixture>]
 module CustomRulesTest =
+    let parent (machine: ISearchMachine) (p: string) (c: string) =
+        let def = Signature.define "parent" [Parameter.create(p); Parameter.create(c)]
+        let fact = rule.fact(def)
+        machine.AddRule fact
+        
+    let isgrandparent(): rule =
+        let def = Signature.define "grandparent" [Parameter.create("G", dataType.String); Parameter.create("C", dataType.String)]
+            
+        let calls = [Signature.call "parent" 
+                        [Argument.create("G", dataType.String); Argument.create("P", dataType.String)];
+                    Signature.call "parent" 
+                        [Argument.create("P", dataType.String); Argument.create("C", dataType.String)]]
+        rule.ConcatenatedRule(def, calls)
+
+    let parentcall (parent: string) (child: string) =
+        Signature.call "parent" [Argument.create(parent, dataType.String); Argument.create(child, dataType.String)]
+
+    [<Test>]
+    let ``Simulate grandparent by parents``() =
+        let machine = SearchMachines.Simple.Create()
+        parent machine "grandparent" "parent"
+        parent machine "parent" "child"
+        let context = Context.EmptyContext // .Add(Variable.strVar "G1", Value.create "grandparent")
+        let contexts = machine.Execute(parentcall "Parent" "Child", context)
+        Seq.length contexts |> should equal 2
+
     [<Test>]
     let ``Call custom parents and grandparents rule``() =
         let machine = SearchMachines.Simple.Create()
-        let parent (p: string) (c: string) =
-            let def = Signature.define "parent" [Parameter.create(p); Parameter.create(c)]
-            let fact = rule.fact(def)
-            machine.AddRule fact
+        parent machine "andrew" "pasha"
+        parent machine "alesha" "misha"
+        parent machine "misha" "sasha"
+        parent machine "misha" "yura"
 
-        let isgrandparent: rule =
-            let def = Signature.define "grandparent" [Parameter.create("G", dataType.String); Parameter.create("C", dataType.String)]
-            
-            let calls = [Signature.call "parent" 
-                            [Argument.create("G", dataType.String); Argument.create("P", dataType.String)];
-                        Signature.call "parent" 
-                            [Argument.create("P", dataType.String); Argument.create("C", dataType.String)]]
-            rule.ConcatenatedRule(def, calls)
-
-        parent "andrew" "pasha"
-        parent "alesha" "misha"
-        parent "misha" "sasha"
-        parent "misha" "yura"
-
-        machine.AddRule(isgrandparent)
+        machine.AddRule(isgrandparent())
         let context = Context.EmptyContext.Add(Variable.strVar "Alesha", Value.create "alesha").Add(Variable.strVar "Sasha", Value.create "sasha")
 
         let call = Signature.call "grandparent" [Argument.create("Alesha", dataType.String); Argument.create("Sasha", dataType.String)]

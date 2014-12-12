@@ -38,7 +38,9 @@ type Definition = {name: string; prms: parameters}
 [<CustomEquality>][<CustomComparison>]
 type Call = {name: string; args: arguments}
     with
-    member c.AsString = sprintf "%s(%A)" c.name c.args
+    member c.AsString = 
+        let parameterString = ("", c.args) ||> List.fold(fun acc arg -> acc + arg.AsString + ", ")
+        sprintf "%s(%s)" c.name parameterString
     override c.Equals(d1) = 
         match d1 with
         | :? Call as c1 -> Call.Equals(c, c1)

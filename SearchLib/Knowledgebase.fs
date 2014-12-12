@@ -53,7 +53,7 @@ module Find =
     let process_fact(c: context) (call: Call) (fact: Definition): bool * context =
         let (?=) = Unify.canUnify
         let (?>) p a = Unify.tryUnify p a
-        let res = ([], fact.prms, call.args) |||> List.fold2(fun s p a -> (p ?> a) :: s)
+        let res = ([], fact.prms, call.args) |||> List.fold2(fun s p a -> (p ?> a) :: s) |> List.rev
         
         let process_result(c: context) (inits: arguments) (ress: arguments):context =
             let proc (acc: context) (p: argument) (a: argument) =
@@ -77,25 +77,29 @@ module Find =
     /// then predicate equals false.
     let rec find (d: Knowledgebase) (c: context) (s: Call) : FindResult seq = 
         let s = replaceVars c s // replace vars!
-        debug (sprintf "Called rule %s with args = %A" s.name s.args)
+        debug (sprintf "Called rule %s" s.AsString)
         let acceptedRules = d.Rules |> List.filter(fun r -> Signature.compatible(r.Signature, s))
+
+        if (acceptedRules.Length = 0) then
+            debug "No rules match."
 
         seq {
             for r in acceptedRules do   
+                debug (sprintf "Found %s" <| r.ToString())
                 let suppliedContext = supply c r.Parameters s.args
                 match r with
                     | Rule(_, p) ->
-                        let proc = process_predicate suppliedContext s p
-                        let (success, contexts) = proc
-                        match success with
+                        let proced1 = process_predicate suppliedContext s p
+                        let (success1, contexts1) = proced1
+                        match success1 with
                         | false -> yield Failure
-                        | true -> yield Success(contexts)
+                        | true -> yield Success(contexts1)
                     | Fact(def) ->
-                        let proc = process_fact suppliedContext s def
-                        let (success, contexts) = proc
-                        match success with
+                        let proced2 = process_fact suppliedContext s def
+                        let (success2, contexts2) = proced2
+                        match success2 with
                         | false -> yield Failure
-                        | true -> yield Success(contexts)
+                        | true -> yield Success(contexts2)
                     | ConcatenatedRule(conrulesignature, calls) ->
                         if (calls.Length > 0) then
                             yield Continuation(suppliedContext, calls)

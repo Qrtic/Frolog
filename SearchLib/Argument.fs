@@ -110,6 +110,7 @@ type parameter = Parameter of VarOrValue
 
 type argument = Argument of VarOrValue
     with
+    member a.AsString = a.ToString()
     override a.ToString() = 
         let (Argument arg) = a
         arg.AsString
@@ -145,6 +146,8 @@ type Parameter() =
     static member create s = if Common.isVariableName s then failwith "" else parameter.Parameter(Val(String(s)))
     static member create(name, dtype) = 
         if isVariableName(name) then parameter.Parameter(Var({Name = name; Type = dtype}))
+        elif dtype = dataType.String then
+            parameter.Parameter(Val(value.String(name)))
         else failwith "Incorrect variable name"
 
 type Argument() =
@@ -158,7 +161,10 @@ type Argument() =
     static member create sl = argument.Argument(Val(StrList(sl)))
     static member create(name, dtype) = 
         if isVariableName(name) then argument.Argument(Var({Name = name; Type = dtype}))
-        else failwith "Incorrect variable name"
+        elif dtype = dataType.String then
+            argument.Argument(Val(value.String(name)))
+        else
+            failwith "Incorrect variable name"
     static member create v = argument.Argument(Val(v))
     static member create v = argument.Argument(Var(v))
     static member value(Argument a) = 

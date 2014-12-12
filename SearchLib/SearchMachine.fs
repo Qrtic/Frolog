@@ -30,19 +30,16 @@ module SearchMachines =
                 for res in findres do
                     match res with
                     | Failure -> ()
-                    | Success(context) -> yield context
-                    | Continuation(context, calls) ->
+                    | Success(resContext) -> yield resContext
+                    | Continuation(resContext1, calls) ->
                         //let proc(contexts: context seq) (calls: Call seq) : context seq =
                         //    calls |> Seq.fold(fun (s: context seq) call -> s |> Seq.collect(fun c -> find d c call)) contexts
-                        let first = calls.Head
-                        let procFirst = this.Execute(first, context)
-
                         let proc(contexts: context seq) (calls: Call seq): context seq =
                             calls |> Seq.fold(fun (s: context seq) call ->
                                 s |> Seq.collect(fun c -> this.Execute(call, c))) contexts
-
-                        let proced = proc [context] calls
-                        let postsupplied = proced
+                                
+                        let proced = proc [resContext1] calls
+                        let postsupplied = proced |> Seq.toList
                         let returned = postsupplied |> Seq.map(fun ps -> Context.replace ps c)
                         let reduced = returned |> Seq.map(fun rs -> Context.reduce rs c)
 
