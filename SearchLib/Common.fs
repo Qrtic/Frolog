@@ -9,3 +9,6 @@ module Common =
     let compareOpt (x : #System.IComparable<'T>) (y : #System.IComparable<'T>) = x.CompareTo(y)
     
     let isVariableName (s : string) = System.Char.IsUpper (s.Chars 0)
+
+    let contains (container) (what) =
+        Set.ofSeq(container) |> Set.intersect(Set.ofSeq(what)) |> Set.isEmpty |> not

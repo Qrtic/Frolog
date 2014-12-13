@@ -65,10 +65,10 @@ module Rule =
 
     let IncR: rule = 
         let p: parameters =
-            [Parameter.create("A", dataType.Integer); Parameter.create("B", dataType.Integer)]
+            [Parameter.create "A"; Parameter.create "B"]
         let inc(p1: argument) (p2: argument):result =
-            let v1 = Argument.value p1 |> Option.bind Value.int
-            let v2 = Argument.value p2 |> Option.bind Value.int
+            let v1 = Argument.getValue p1 |> Option.bind Value.int
+            let v2 = Argument.getValue p2 |> Option.bind Value.int
             match (v1, v2) with
                 | (Some(val1), Some(val2)) -> if val1 + 1 = val2 then Accepted([p1;p2]) else Rejected
                 | _ -> Rejected
@@ -76,11 +76,11 @@ module Rule =
 
     let SumR: rule = 
         let p: parameters =
-            [Parameter.create("A", dataType.Integer); Parameter.create("B", dataType.Integer); Parameter.create("C", dataType.Integer)]
+            [Parameter.create "A"; Parameter.create "B"; Parameter.create "C"]
         let sum(p1: argument) (p2: argument) (p3: argument):result =
-            let v1 = Argument.value p1 |> Option.bind Value.int
-            let v2 = Argument.value p2 |> Option.bind Value.int
-            let v3 = Argument.value p3 |> Option.bind Value.int
+            let v1 = Argument.getValue p1 |> Option.bind Value.int
+            let v2 = Argument.getValue p2 |> Option.bind Value.int
+            let v3 = Argument.getValue p3 |> Option.bind Value.int
             match (v1, v2, v3) with
                 | (Some(val1), Some(val2), Some(val3)) -> if val1 + val2 = val3 then Accepted([p1;p2;p3]) else Rejected
                 | (Some(val1), Some(val2), None) -> Accepted([p1;p2;Argument.create(val1 + val2)])
@@ -91,10 +91,10 @@ module Rule =
 
     let DivsR:rule = 
         let p: parameters =
-            [Parameter.create("A", dataType.Integer); Parameter.create("B", dataType.Integer)]
+            [Parameter.create "A"; Parameter.create "B"]
         let divisors(p1: argument) (p2: argument): result =
-            let v1 = Argument.value p1 |> Option.bind Value.int
-            let v2 = Argument.value p2 |> Option.bind Value.intlist
+            let v1 = Argument.getValue p1 |> Option.bind Value.int
+            let v2 = Argument.getValue p2 |> Option.bind Value.intList
             let getdivs x = {1..x} |> Seq.filter(fun i -> x % i = 0) |> Set.ofSeq
             let seteq val1 val2 = Set.isEmpty(Set.difference (getdivs val1) (Set.ofList val2))
             match (v1, v2) with

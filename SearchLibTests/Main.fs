@@ -12,10 +12,10 @@ module SimpleTest =
     let dtype = dataType.Integer
     let name = "b"
     let kb (i: int) = Knowledgebase.Empty.Append <| rule.fact(Signature.define name [Parameter.create i])
-    let varkb (n) = Knowledgebase.Empty.Append <| rule.fact(Signature.define name [Parameter.create(n, dtype)])
-    let vc k (v: int) = Map.empty.Add(Variable.intVar k, Value.create v)
+    let varkb (n: string) = Knowledgebase.Empty.Append <| rule.fact(Signature.define name [Parameter.create n])
+    let vc k (v: int) = Map.empty.Add(Variable.create k, Value.create v)
     let call (i: int) = Signature.call name [Argument.create i]
-    let varcall n = Signature.call name [Argument.create(n, dtype)]
+    let varcall (n: string) = Signature.call name [Argument.create n]
     
     let find kb c call =
         let sm = SearchMachine.SearchMachines.Simple.Create()
@@ -29,8 +29,8 @@ module SimpleTest =
     
     [<Test>]
     let ``Add fact, check it with context``() =
-        let call = Signature.call name [Argument.create("C", dataType.Integer)]
-        let context = Context.EmptyContext.Add(Variable.intVar "C", Value.create 1)
+        let call = Signature.call name [Argument.create "C"]
+        let context = Context.EmptyContext.Add(Variable.create "C", Value.create 1)
         let rest = find (kb 1) context call |> Seq.length
         let resf = find (kb 2) context call |> Seq.length
         rest |> should equal 1
@@ -71,8 +71,8 @@ module SimpleTest =
 
     [<Test>]
     let ``Call complicated(d = 1) rule``() =
-        let prm = [Parameter.create("X", dataType.Integer); Parameter.create("Y", dataType.Integer)]
-        let cls = [Signature.call "sum" [Argument.create("X", dataType.Integer); Argument.create("X", dataType.Integer); Argument.create("Y", dataType.Integer)]]
+        let prm = [Parameter.create("X"); Parameter.create("Y")]
+        let cls = [Signature.call "sum" [Argument.create("X"); Argument.create("X"); Argument.create("Y")]]
         let r = ConRule "2x" prm cls
         let kb = Knowledgebase.Default.Append r
         let tcall = Signature.call "2x" [Argument.create 3; Argument.create 6]
@@ -85,10 +85,10 @@ module SimpleTest =
     
     [<Test>]
     let ``Call complicated(d = 2) rule``() =
-        let prm = [Parameter.create("X", dataType.Integer); Parameter.create("Y", dataType.Integer)]
+        let prm = [Parameter.create("X"); Parameter.create("Y")]
         let cls = [
-            Signature.call "sum" [Argument.create("X", dataType.Integer); Argument.create("X", dataType.Integer); Argument.create("Y1", dataType.Integer)];
-            Signature.call "sum" [Argument.create("X", dataType.Integer); Argument.create("Y1", dataType.Integer); Argument.create("Y", dataType.Integer);]
+            Signature.call "sum" [Argument.create("X"); Argument.create("X"); Argument.create("Y1")];
+            Signature.call "sum" [Argument.create("X"); Argument.create("Y1"); Argument.create("Y");]
             ]
         let r = ConRule "3x" prm cls
         let kb = Knowledgebase.Default.Append r
@@ -102,16 +102,16 @@ module SimpleTest =
 
     [<Test>]
     let ``Call complicated(d = 2) with context rule``() =
-        let prm = [Parameter.create("X", dataType.Integer); Parameter.create("Y", dataType.Integer)]
+        let prm = [Parameter.create("X"); Parameter.create("Y")]
         let cls = [
-            Signature.call "sum" [Argument.create("X", dataType.Integer); Argument.create("X", dataType.Integer); Argument.create("Y1", dataType.Integer)];
-            Signature.call "sum" [Argument.create("X", dataType.Integer); Argument.create("Y1", dataType.Integer); Argument.create("Y", dataType.Integer);]
+            Signature.call "sum" [Argument.create("X"); Argument.create("X"); Argument.create("Y1")];
+            Signature.call "sum" [Argument.create("X"); Argument.create("Y1"); Argument.create("Y");]
             ]
         let r = ConRule "3x" prm cls
         let kb = Knowledgebase.Default.Append r
         let tcall = Signature.call "3x" [Argument.create 3; Argument.create 9]
         let fcall = Signature.call "3x" [Argument.create 3; Argument.create 10]
-        let context = Context.singleton (Variable.intVar "X") (Value.create(1))
+        let context = Context.singleton (Variable.create "X") (Value.create(1))
 
         let res call = find kb context call
         let tcall' = res tcall
@@ -130,16 +130,16 @@ module CustomRulesTest =
         machine.AddRule fact
         
     let isgrandparent(): rule =
-        let def = Signature.define "grandparent" [Parameter.create("G", dataType.String); Parameter.create("C", dataType.String)]
+        let def = Signature.define "grandparent" [Parameter.create("G"); Parameter.create("C")]
             
         let calls = [Signature.call "parent" 
-                        [Argument.create("G", dataType.String); Argument.create("P", dataType.String)];
+                        [Argument.create("G"); Argument.create("P")];
                     Signature.call "parent" 
-                        [Argument.create("P", dataType.String); Argument.create("C", dataType.String)]]
+                        [Argument.create("P"); Argument.create("C")]]
         rule.ConcatenatedRule(def, calls)
 
     let parentcall (parent: string) (child: string) =
-        Signature.call "parent" [Argument.create(parent, dataType.String); Argument.create(child, dataType.String)]
+        Signature.call "parent" [Argument.create(parent); Argument.create(child)]
 
     [<Test>]
     let ``Simulate grandparent by parents``() =
@@ -159,9 +159,9 @@ module CustomRulesTest =
         parent machine "misha" "yura"
 
         machine.AddRule(isgrandparent())
-        let context = Context.EmptyContext.Add(Variable.strVar "Alesha", Value.create "alesha").Add(Variable.strVar "Sasha", Value.create "sasha")
+        let context = Context.EmptyContext.Add(Variable.create "Alesha", Value.create "alesha").Add(Variable.create "Sasha", Value.create "sasha")
 
-        let call = Signature.call "grandparent" [Argument.create("Alesha", dataType.String); Argument.create("Sasha", dataType.String)]
+        let call = Signature.call "grandparent" [Argument.create "Alesha"; Argument.create "Sasha"]
         let res = machine.Execute(call, context)
         printfn "%d" (Seq.length res)
         for r in res do

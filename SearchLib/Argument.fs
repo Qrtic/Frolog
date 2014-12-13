@@ -14,72 +14,87 @@ a and B are arguments
 /// Parameter is a name of argument in predicate
 exception ArgumentCastException of string
 
-type dataType = Integer | String | List of dataType
+type dataType = Undefined | Integer | String | List of dataType
     with
     override d.ToString() = 
         match d with
+        | Undefined -> "undefined"
         | Integer -> "int"
         | String -> "string"
         | List(dt) -> "list of " + dt.ToString()
-type variable = {Name: string; Type: dataType}
-    with
-    override v.ToString() = v.Name + " : " + v.Type.ToString()
-type value = Integer of int | String of string | IntList of int list | StrList of string list
-    with
-    member v.AsString = 
-        match v with
-        | Integer(i) -> i.ToString()
-        | String(s) -> s
-        | IntList(l) -> l.ToString()
-        | StrList(l) -> l.ToString()
-    override v.ToString() = v.AsString
 
-type variable
-    with
-    member v.Compatible = function
-        | Integer(i) -> v.Type = dataType.Integer
-        | String(s) -> v.Type = dataType.String
-        | IntList(l) -> v.Type = dataType.List(dataType.Integer)
-        | StrList(l) -> v.Type = dataType.List(dataType.String)
+type variable = string
+type value = string
 
 type Variable() =
-    static member intVar name = {Name = name; Type = dataType.Integer}
-    static member strVar name = {Name = name; Type = dataType.String}
-    static member intlistVar name = {Name = name; Type = dataType.List(dataType.Integer)}
-    static member strlistVar name = {Name = name; Type = dataType.List(dataType.String)}
-    static member accept(v, i: int) = v.Type = dataType.Integer
-    static member accept(v, s: string) = v.Type = dataType.String
-    static member accept(v, s: int list) = v.Type = dataType.List(dataType.Integer)
-    static member accept(v, s: string list) = v.Type = dataType.List(dataType.String)
-
+    static member tryCreate name =
+        if isVariableName name then
+            Some(name)
+        else
+            None
+    static member create name =
+        if isVariableName name then
+            name
+        else
+            failwith "Cant create variable with value name"
+    static member accept name = isVariableName name
+    
 type Value() =
-    static member create i = Integer(i)
-    static member create s = String(s)
-    static member create l = IntList(l)
-    static member create l = StrList(l)
-    static member int v = 
-        match v with
-        | Integer(v) -> Some(v)
+    static member tryCreate name =
+        if isVariableName name then
+            None
+        else
+            Some(name)
+    static member canCreate name =
+        if isVariableName name then
+            false
+        elif Value.getType(name) = dataType.Undefined then
+            false
+        else
+            true
+    static member create name =
+        if Value.canCreate name then
+            name
+        else
+            failwith "Cant create value with variable name"
+    static member create (i: int) = i.ToString()
+    static member create (il: int list) = 
+        let start = List.fold(fun s i -> s + i.ToString() + ";") "[" il
+        start.Trim(';') + "]"
+    static member getType (value: value) =
+        match value with
+        | i when fst(Int32.TryParse(i)) -> dataType.Integer
+        | list when contains list "[]" ->
+            let anyentry = list.Trim([|'['; ']'|]).Split(';')
+            let innertype = if anyentry.Length = 0 then dataType.Undefined else Value.getType(anyentry.[0])
+            dataType.List(innertype)
+        | str when not <| contains str "[]\\' ,." -> dataType.String
+        | _ -> failwith "Cant define type"
+    static member int = function
+        | v when Value.getType(v) = dataType.Integer -> Some(Int32.Parse v)
         | _ -> None
-    static member string v = 
-        match v with
-        | String(s) -> Some(s)
+    static member string = function
+        | v when Value.getType(v) = dataType.String -> Some(v)
         | _ -> None
-    static member intlist v = 
-        match v with
-        | IntList(l) -> Some(l)
+    static member intList = function
+        | v when Value.getType(v) = dataType.List(dataType.Integer) -> 
+            let entries = v.Trim([|'['; ']'|]).Split(';')
+            Some(Array.map Int32.Parse entries |> Array.toList)
         | _ -> None
-    static member strlist v = 
-        match v with
-        | StrList(l) -> Some(l)
-        | _ -> None
-        
-type VarOrValue = Var of variable | Val of value
+
+// Var is uppercase
+// Val is integer or downcase
+// TODO Var with types and anytypes
+type VarOrValue = Var of string | Val of string
     with
+    member v.Type =
+        match v with
+        | Var(name) -> dataType.Undefined
+        | Val(v) -> dataType.String // TODO
     member v.AsString = 
         match v with
-        | Val(v) -> v.AsString
-        | Var(v) -> v.Name + ":" + v.Type.ToString()
+        | Val(v) -> v
+        | Var(v) -> v
     member v.IsVariable = 
         match v with
         | Val(_) -> false
@@ -93,7 +108,7 @@ type VarOrValue = Var of variable | Val of value
         | Val(v) -> Some(v)
         | _ -> None
     override v.ToString() = v.AsString
-    
+        
 [<StructuredFormatDisplayAttribute("{AsString")>]
 type parameter = Parameter of VarOrValue
     with
@@ -126,13 +141,17 @@ type arguments = argument list
 
 module Unify =
     let canUnify (Parameter p) (Argument a) =
-        p.IsVariable || a.IsVariable || p.AsString = a.AsString
+        let isanyvar = p.IsVariable || a.IsVariable
+        if isanyvar then
+            true
+        else
+            p.AsString = a.AsString
     let tryUnify (Parameter p) (Argument a): argument option =
         match p, a with
         | Var(vp), Var(va) -> Argument(a) |> Some
         | Var(vp), Val(va) -> Argument(a) |> Some
         | Val(vp), Var(va) -> Argument(p) |> Some
-        | Val(vp), Val(va) when vp.AsString = va.AsString -> Argument(p) |> Some
+        | Val(vp), Val(va) when vp = va -> Argument(p) |> Some
         | _ -> None
     let convert (Parameter p): argument =
         Argument(p)
@@ -142,32 +161,27 @@ type Parameter() =
     static member isVariable(Parameter p) = p.IsVariable
     static member asVariable(Parameter p) = p.asVariable
     static member asValue(Parameter p) = p.asValue
-    static member create i = parameter.Parameter(Val(Integer(i)))
-    static member create s = if Common.isVariableName s then failwith "" else parameter.Parameter(Val(String(s)))
-    static member create(name, dtype) = 
-        if isVariableName(name) then parameter.Parameter(Var({Name = name; Type = dtype}))
-        elif dtype = dataType.String then
-            parameter.Parameter(Val(value.String(name)))
-        else failwith "Incorrect variable name"
+    static member create (i: int) = parameter.Parameter(Val(Value.create(i)))
+    static member create (il: int list) = parameter.Parameter(Val(Value.create il))
+    static member create (s: string) = 
+        if isVariableName s then
+            parameter.Parameter(Var(s))
+        else
+            parameter.Parameter(Val(s))
 
 type Argument() =
     static member asString(Argument p) = p.AsString
     static member isVariable(Argument p) = p.IsVariable
     static member asVariable(Argument p) = p.asVariable
     static member asValue(Argument p) = p.asValue
-    static member create i = argument.Argument(Val(Integer(i)))
-    static member create s = if Common.isVariableName s then failwith "" else argument.Argument(Val(String(s)))
-    static member create il = argument.Argument(Val(IntList(il)))
-    static member create sl = argument.Argument(Val(StrList(sl)))
-    static member create(name, dtype) = 
-        if isVariableName(name) then argument.Argument(Var({Name = name; Type = dtype}))
-        elif dtype = dataType.String then
-            argument.Argument(Val(value.String(name)))
+    static member create (i: int) = argument.Argument(Val(Value.create(i)))
+    static member create (il: int list) = argument.Argument(Val(Value.create il))
+    static member create (s: string) = 
+        if isVariableName s then
+            argument.Argument(Var(s))
         else
-            failwith "Incorrect variable name"
-    static member create v = argument.Argument(Val(v))
-    static member create v = argument.Argument(Var(v))
-    static member value(Argument a) = 
+            argument.Argument(Val(s))
+    static member getValue(Argument a) = 
         match a with
         | Var(_) -> None
         | Val(v) -> Some(v)
