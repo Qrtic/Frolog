@@ -1,7 +1,5 @@
 ﻿namespace SearchLib
 
-open SearchLib.Signature
-
 module Rule =
     type result = Accepted of arguments | Rejected
     type predicate = 
@@ -61,8 +59,8 @@ module Rule =
     
     let Rule(name: string) (prms: parameters) (p: predicate) = rule.create name prms p
     
-    let ConRule(name: string) (prms: parameters) (calls: Call list) = rule.ConcatenatedRule(Signature.define name prms, calls)
-
+    let ConRule(name: string) (prms: parameters) (calls: Call list) = rule.ConcatenatedRule(Signature.define(name, prms), calls)
+    
     let IncR: rule = 
         let p: parameters =
             [Parameter.create "A"; Parameter.create "B"]

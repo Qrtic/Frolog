@@ -1,7 +1,6 @@
 ﻿namespace SearchLib
 
 open SearchLib.Common
-open SearchLib.Signature
 
 module Context =
     type context = Map<variable, value>

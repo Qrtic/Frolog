@@ -3,7 +3,6 @@
 open SearchLib
 
 open SearchLib.Rule
-open SearchLib.Signature
 open SearchLib.SearchMachine
 
 let createRandomFacts size: rule list =
@@ -21,7 +20,7 @@ let createRandomQuries size: Call list =
         if i >= size then l
         else
             let args = [Argument.create(r.Next(size))]
-            create (i+1) (Signature.call "b" args::l)
+            create (i+1) ((Signature.call("b", args))::l)
     create 1 []
     
 /// creates with "b"(int, int) facts

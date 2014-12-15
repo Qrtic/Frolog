@@ -63,12 +63,22 @@ type Call = {name: string; args: arguments}
             | :? Call as c1 -> Call.CompareTo c c1
             | _ -> failwith "Cant compare definition with any other type"
 
-module Signature =
-    let compatible(d: Definition, c: Call) =
+type Signature() =
+    static member compatible(d: Definition, c: Call) =
         let cnames = d.name = c.name
         let cprmsLen = d.prms.Length = c.args.Length
         let cprms = lazy List.fold2(fun s t1 t2 -> s && Unify.canUnify t1 t2) true d.prms c.args
         cnames && cprmsLen && cprms.Force()
+        
+    static member define(name, parameters) = {name = name; prms = parameters}
+    static member define(name, prms : string list) =
+        let parameters = prms |> List.map(fun p -> Parameter.create p)
+        {name = name; prms = parameters}
 
-    let define name parameters = {name = name; prms = parameters}
-    let call name arguments = {name = name; args = arguments}
+    static member call(name, arguments) = {name = name; args = arguments}
+    static member call(name, args: string list) =
+        let arguments = args |> List.map(fun p -> Argument.create p)
+        {name = name; args = arguments}
+    static member call(name, args: int list) =
+        let arguments = args |> List.map(fun p -> Argument.create p)
+        {name = name; args = arguments}

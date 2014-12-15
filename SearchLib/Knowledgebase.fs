@@ -1,7 +1,6 @@
 ﻿namespace SearchLib
 
 open SearchLib.Common
-open SearchLib.Signature
 open SearchLib.Rule
 open SearchLib.Context
 
@@ -51,8 +50,7 @@ module Find =
         | Rejected -> false, c
 
     let process_fact(c: context) (call: Call) (fact: Definition): bool * context =
-        let (?=) = Unify.canUnify
-        let (?>) p a = Unify.tryUnify p a
+        let (?>) = Unify.tryUnify
         let res = ([], fact.prms, call.args) |||> List.fold2(fun s p a -> (p ?> a) :: s) |> List.rev
         
         let process_result(c: context) (inits: arguments) (ress: arguments):context =
@@ -62,7 +60,10 @@ module Find =
                     acc
                 else
                     let v = av.Value
-                    acc.Add(v, Argument.asValue a |> Option.get)
+                    let asVal = Argument.asValue a
+                    match asVal with
+                    | None -> acc // failwith "Cant determine value with variable parameter and argument"
+                    | Some(value) -> acc.Add(v, value)
             List.fold2 proc c inits ress
 
         if List.exists Option.isNone res then

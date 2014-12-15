@@ -8,7 +8,6 @@ open System.Text.RegularExpressions
 open System.Linq
 
 open SearchLib.Rule
-open SearchLib.Signature
 
 let extractRules (lines: string array) =
             let cnt = Array.length lines

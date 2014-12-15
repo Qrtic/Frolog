@@ -1,7 +1,6 @@
 ﻿module SearchLib.SearchMachine
 
 open SearchLib.Common
-open SearchLib.Signature
 open SearchLib.Rule
 open SearchLib.Context
 

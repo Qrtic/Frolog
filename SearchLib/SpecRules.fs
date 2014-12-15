@@ -1,7 +1,6 @@
 ﻿module SearchLib.SpecRules
 
 open Rule
-open Signature
 
 let specRules = new System.Collections.Generic.Dictionary<string, bool>()
 
