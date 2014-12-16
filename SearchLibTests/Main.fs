@@ -51,6 +51,15 @@ module SimpleTest =
     let check_eq factop contextop callop res =
         check factop contextop callop |> Set.ofList |> Set.difference(Set.ofSeq(res)) |> Set.isEmpty |> should equal true
 
+    // Check time for all iterations in ms
+    let check_time rules calls maxTime =
+        let sm = SearchMachine.SearchMachines.Simple.Create()
+        sm.kb <- Knowledgebase.Default
+        let sw = new System.Diagnostics.Stopwatch()
+        for c in calls do
+            sm.Execute(c) |> ignore
+        sw.ElapsedMilliseconds |> should lessThan maxTime
+
     [<Test>]
     let ``Call fact with it value``() =
         check_1 FactOptions.Variable ContextOptions.Empty CallOptions.FactValueCall
@@ -159,6 +168,30 @@ module SimpleTest =
             check_0 factopt (ContextOptions.Customized(context3)) (CallOptions.CustomCall(Signature.call("grandparent", ["andrew"; "pasha"])))
             check_0 factopt (ContextOptions.Customized(context4)) (CallOptions.CustomCall(Signature.call("grandparent", ["alesha"; "misha"])))
 
-TestSearchMachine.starttest 1000 3 5
-TestSearchMachine.starttest 1000 3 3
-System.Console.ReadKey() |> ignore
+    [<TestFixture>]
+    module TimeTest =
+        let r = new System.Random()
+        let person(max) = r.Next(max).ToString()
+
+        open CustomRulesTest
+        [<Test>]
+        let ``Call 100000 facts 100000 times in 10 sec``() =
+            let nFacts = 100000
+            let nTimes = 100000
+            let facts = [1..nFacts] |> List.map(fun x -> rule.fact(Signature.define("b", [person(nFacts)])))
+            let calls = [1..nTimes] |> List.map(fun x -> Signature.call("b", [person(nFacts)]))
+            check_time facts calls 10000
+        [<Test>]
+        let ``Call 100000 grandparents rules 10000 times in 10 sec``() =
+            let nFacts = 100000
+            let nTimes = 100000
+            let parents = [1..nFacts] |> List.map(fun x -> parent (person(nFacts)) (person(nFacts)))
+            let calls = [1..nTimes] |> List.map(fun x -> Signature.call("grandparent", [person(nFacts); person(nFacts)]))
+            check_time (isgrandparent()::parents) calls 10000
+     
+[<EntryPoint>]
+let main(args) =
+    TestSearchMachine.starttest 1000 3 5
+    TestSearchMachine.starttest 1000 3 3
+    System.Console.ReadKey() |> ignore
+    0

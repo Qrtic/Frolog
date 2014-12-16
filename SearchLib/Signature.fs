@@ -74,6 +74,9 @@ type Signature() =
     static member define(name, prms : string list) =
         let parameters = prms |> List.map(fun p -> Parameter.create p)
         {name = name; prms = parameters}
+    static member define(name, prms : int list) =
+        let parameters = prms |> List.map(fun p -> Parameter.create p)
+        {name = name; prms = parameters}
 
     static member call(name, arguments) = {name = name; args = arguments}
     static member call(name, args: string list) =

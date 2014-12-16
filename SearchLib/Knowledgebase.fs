@@ -11,6 +11,7 @@ type Knowledgebase =
     static member Empty = new Knowledgebase()
     static member Default = new Knowledgebase(defaultRules)
     member k.Append r = new Knowledgebase(r::k.Rules)
+    member k.AppendRange rs = (k, rs) ||> Seq.fold(fun kb r -> new Knowledgebase(r::kb.Rules))
 
 type FindResult = 
     | Failure
