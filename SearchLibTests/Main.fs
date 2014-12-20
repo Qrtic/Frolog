@@ -56,62 +56,64 @@ module SimpleTest =
         let sm = SearchMachine.SearchMachines.Simple.Create()
         sm.kb <- Knowledgebase.Default
         let sw = new System.Diagnostics.Stopwatch()
+        sw.Start()
         for c in calls do
             sm.Execute(c) |> ignore
+        sw.Stop()
         sw.ElapsedMilliseconds |> should lessThan maxTime
 
     [<Test>]
-    let ``Call fact with it value``() =
+    let ``Simple. Call fact with it value``() =
         check_1 FactOptions.Variable ContextOptions.Empty CallOptions.FactValueCall
     [<Test>]
-    let ``Call fact with another value``() =
+    let ``Simple. Call fact with another value``() =
         check_0 FactOptions.Defined ContextOptions.Empty CallOptions.AnotherValueCall
     [<Test>]
-    let ``Call fact with variable``() =
+    let ``Simple. Call fact with variable``() =
         check_1 FactOptions.Variable ContextOptions.Empty CallOptions.VarCall
         
     [<Test>]
-    let ``Call var fact with another value``() =
+    let ``Simple. Call var fact with another value``() =
         check_1 FactOptions.Variable ContextOptions.Empty CallOptions.FactValueCall
     [<Test>]
-    let ``Call var fact with it value``() =
+    let ``Simple. Call var fact with it value``() =
         check_1 FactOptions.Variable ContextOptions.Empty CallOptions.AnotherValueCall
     [<Test>]
-    let ``Call var fact with variable``() =
+    let ``Simple. Call var fact with variable``() =
         check_1 FactOptions.Variable ContextOptions.Empty CallOptions.VarCall
     
     [<Test>]
-    let ``Call fact with same context``() =
+    let ``Simple. Call fact with same context``() =
         check_1 FactOptions.Defined ContextOptions.WithFactValue CallOptions.VarCall
     [<Test>]
-    let ``Call fact with another context``() =
+    let ``Simple. Call fact with another context``() =
         check_0 FactOptions.Defined ContextOptions.WithAnotherValue CallOptions.VarCall
     [<Test>]
-    let ``Call fact with empty context``() =
+    let ``Simple. Call fact with empty context``() =
         check_1 FactOptions.Defined ContextOptions.Empty CallOptions.VarCall
         
     [<Test>]
-    let ``Check inc predicate``() =
+    let ``Simple. Check inc predicate``() =
         check_1 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("inc", [1; 2])))
         check_0 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("inc", [1; 3])))
     [<Test>]
-    let ``Check sum predicate``() =
+    let ``Simple. Check sum predicate``() =
         check_1 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("sum", [1; 2; 3])))
         check_0 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("sum", [1; 2; 4])))
     [<Test>]
-    let ``Check divs predicate``() =
+    let ``Simple. Check divs predicate``() =
         check_1 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("divs", [Argument.create 10; Argument.create [1;2;5;10]])))
         check_0 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("divs", [Argument.create 10; Argument.create [1;2;5]])))
 
     [<Test>]
-    let ``Call custom rule with d=1``() =
+    let ``Simple. Call custom rule with d=1``() =
         let cls = [Signature.call("sum", ["X"; "X"; "Y"])]
         let r = ConRule "2x" [Parameter.create "X"; Parameter.create "Y"] cls
         check_1 (FactOptions.Custom(r)) ContextOptions.Empty (CallOptions.CustomCall(Signature.call("2x", [3; 6])))
         check_0 (FactOptions.Custom(r)) ContextOptions.Empty (CallOptions.CustomCall(Signature.call("2x", [3; 7])))
     
     [<Test>]
-    let ``Call custom rule with d=2``() =
+    let ``Simple. Call custom rule with d=2``() =
         let prm = [Parameter.create("X"); Parameter.create("Y")]
         let cls = [
             Signature.call("sum", ["X"; "X"; "Y1"]);
@@ -122,7 +124,7 @@ module SimpleTest =
         check_0 (FactOptions.Custom(r)) ContextOptions.Empty (CallOptions.CustomCall(Signature.call("3x", [3; 10])))
 
     [<Test>]
-    let ``Check call custom rule(d=2) with context doesnt changes the context``() =
+    let ``Simple. Check call custom rule(d=2) with context doesnt changes the context``() =
         let prm = [Parameter.create("X"); Parameter.create("Y")]
         let cls = [
             Signature.call("sum", ["X"; "X"; "Y1"]);
@@ -149,7 +151,7 @@ module SimpleTest =
             Signature.call("parent", [parent; child])
             
         [<Test>]
-        let ``Call grandparents rule``() =
+        let ``Grandparent. Call grandparents rule``() =
             let factopt = FactOptions.Multiple([parent "andrew" "pasha"; parent "alesha" "misha"; parent "misha" "sasha"; parent "misha" "yura"; isgrandparent()])
             check_1 factopt ContextOptions.Empty (CallOptions.CustomCall(Signature.call("grandparent", ["alesha"; "sasha"])))
             check_1 factopt ContextOptions.Empty (CallOptions.CustomCall(Signature.call("grandparent", ["alesha"; "yura"])))
@@ -157,7 +159,7 @@ module SimpleTest =
             check_0 factopt ContextOptions.Empty (CallOptions.CustomCall(Signature.call("grandparent", ["alesha"; "misha"])))
 
         [<Test>]
-        let ``Call grandparents rule with context``() =
+        let ``Grandparent. Call grandparents rule with context``() =
             let factopt = FactOptions.Multiple([parent "andrew" "pasha"; parent "alesha" "misha"; parent "misha" "sasha"; parent "misha" "yura"; isgrandparent()])
             let context1 = Context.EmptyContext.Add(Variable.create "G", Value.create "alesha").Add(Variable.create "C", Value.create "sasha")
             let context2 = Context.EmptyContext.Add(Variable.create "G", Value.create "alesha").Add(Variable.create "C", Value.create "yura")
@@ -168,26 +170,24 @@ module SimpleTest =
             check_0 factopt (ContextOptions.Customized(context3)) (CallOptions.CustomCall(Signature.call("grandparent", ["andrew"; "pasha"])))
             check_0 factopt (ContextOptions.Customized(context4)) (CallOptions.CustomCall(Signature.call("grandparent", ["alesha"; "misha"])))
 
-    [<TestFixture>]
-    module TimeTest =
-        let r = new System.Random()
-        let person(max) = r.Next(max).ToString()
+        [<TestFixture>]
+        module TimeTest =
+            let r = new System.Random()
+            let person(max) = r.Next(max).ToString()
+            let nFacts = 1000 * 1000
+            let nCalls = 1000 * 1000
+            let maxTime = 10 * 1000
 
-        open CustomRulesTest
-        [<Test>]
-        let ``Call 100000 facts 100000 times in 10 sec``() =
-            let nFacts = 100000
-            let nTimes = 100000
-            let facts = [1..nFacts] |> List.map(fun x -> rule.fact(Signature.define("b", [person(nFacts)])))
-            let calls = [1..nTimes] |> List.map(fun x -> Signature.call("b", [person(nFacts)]))
-            check_time facts calls 10000
-        [<Test>]
-        let ``Call 100000 grandparents rules 10000 times in 10 sec``() =
-            let nFacts = 100000
-            let nTimes = 100000
-            let parents = [1..nFacts] |> List.map(fun x -> parent (person(nFacts)) (person(nFacts)))
-            let calls = [1..nTimes] |> List.map(fun x -> Signature.call("grandparent", [person(nFacts); person(nFacts)]))
-            check_time (isgrandparent()::parents) calls 10000
+            [<Test>]
+            let ``Performance. Call simple facts``() =   
+                let facts = [1..nFacts] |> List.map(fun x -> rule.fact(Signature.define("b", [person(nFacts)])))
+                let calls = [1..nCalls] |> List.map(fun x -> Signature.call("b", [person(nFacts)]))
+                check_time facts calls maxTime
+            [<Test>]
+            let ``Performance. Call 2d rules``() =
+                let parents = [1..nFacts] |> List.map(fun x -> parent (person(nFacts)) (person(nFacts)))
+                let calls = [1..nCalls] |> List.map(fun x -> Signature.call("grandparent", [person(nFacts); person(nFacts)]))
+                check_time (isgrandparent()::parents) calls maxTime
      
 [<EntryPoint>]
 let main(args) =
