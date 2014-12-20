@@ -8,7 +8,8 @@ type Definition = {name: string; prms: parameters}
     with
     member d.AsString = 
         let parameterString = ("", d.prms) ||> List.fold(fun acc p -> acc + p.AsString + ", ")
-        sprintf "%s(%s)" d.name parameterString
+        let trimmed = parameterString.Trim([|','; ' '|])
+        sprintf "%s(%s)" d.name trimmed
     override d.Equals(d1) = 
         match d1 with
         | :? Definition as d1 -> Definition.StrongEquals(d, d1)
@@ -36,11 +37,13 @@ type Definition = {name: string; prms: parameters}
             | _ -> failwith "Cant compare definition with any other type"
         
 [<CustomEquality>][<CustomComparison>]
+[<StructuredFormatDisplayAttribute("{AsString}")>]
 type Call = {name: string; args: arguments}
     with
     member c.AsString = 
         let parameterString = ("", c.args) ||> List.fold(fun acc arg -> acc + arg.AsString + ", ")
-        sprintf "%s(%s)" c.name parameterString
+        let trimmed = parameterString.Trim([|','; ' '|])
+        sprintf "%s(%s)" c.name trimmed
     override c.Equals(d1) = 
         match d1 with
         | :? Call as c1 -> Call.Equals(c, c1)
@@ -51,24 +54,24 @@ type Call = {name: string; args: arguments}
         let cnames = c1.name = c2.name
         let cprms = lazy List.fold2(fun s t1 t2 -> s && t1 ?= t2) true c1.args c2.args
         cnames && cprms.Force()
-    static member CompareTo(c1: Call) (c2: Call) =
-            let namec = c1.name.CompareTo(c2.name)
-            let argsc = c1.args.Length.CompareTo(c2.args.Length)
-            if namec = 0 then argsc else namec
+    static member Compare(c1: Call) (c2: Call) =
+            c1.AsString.CompareTo(c2.AsString)
     interface System.IComparable<Call> with
-        member c.CompareTo(c1) = Call.CompareTo c c1
+        member c.CompareTo(c1) = Call.Compare c c1
     interface System.IComparable with
         member c.CompareTo(o) = 
             match o with
-            | :? Call as c1 -> Call.CompareTo c c1
+            | :? Call as c1 -> Call.Compare c c1
             | _ -> failwith "Cant compare definition with any other type"
 
 type Signature() =
     static member compatible(d: Definition, c: Call) =
         let cnames = d.name = c.name
         let cprmsLen = d.prms.Length = c.args.Length
-        let cprms = lazy List.fold2(fun s t1 t2 -> s && Unify.canUnify t1 t2) true d.prms c.args
-        cnames && cprmsLen && cprms.Force()
+        if cnames && cprmsLen then
+            List.forall2(fun t1 t2 -> Unify.canUnify t1 t2) d.prms c.args
+        else
+            false
         
     static member define(name, parameters) = {name = name; prms = parameters}
     static member define(name, prms : string list) =

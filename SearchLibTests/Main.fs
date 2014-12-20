@@ -9,8 +9,8 @@ open SearchLibTests.TestSearchMachine
 
 module Main =
     [<EntryPoint>]
-    let main args =        
-        SearchLibTests.TestSearchMachine.starttest 1000 3 5
-        SearchLibTests.TestSearchMachine.starttest 1000 3 3
+    let main args =
+        starttest createRandomFacts createRandomQueries 1000 1000 1 1
+        starttest createRandomFacts createRandomQueries 1000 1000 1 1
         System.Console.ReadKey() |> ignore
         0

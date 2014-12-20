@@ -7,7 +7,7 @@ open SearchLib.Context
 type Rulebase =
     abstract member Append: rule -> Rulebase
     abstract member AppendRange: rule seq -> Rulebase
-    abstract member Rules: rule seq with get
+    abstract member Rules: rule list with get
 
 type Knowledgebase(rules: rule list) =
     static member Empty = new Knowledgebase([])
@@ -17,7 +17,7 @@ type Knowledgebase(rules: rule list) =
     interface Rulebase with
         member k.Append r = new Knowledgebase(r::k.rules) :> Rulebase
         member k.AppendRange rs = (k, rs) ||> Seq.fold(fun kb r -> new Knowledgebase(r::kb.rules)) :> Rulebase
-        member k.Rules = k.rules |> List.toSeq
+        member k.Rules = k.rules
         
 type FindResult = 
     | Failure
@@ -85,7 +85,7 @@ module Find =
     /// then predicate equals false.
     let rec find (d: Rulebase) (c: context) (call: Call) : FindResult seq = 
         let s = replaceVars c call // replace vars!
-        let acceptedRules = d.Rules |> Seq.filter(fun r -> Signature.compatible(r.Signature, s)) |> Seq.toList
+        let acceptedRules = d.Rules |> List.filter(fun r -> Signature.compatible(r.Signature, s))
 
         seq {
             for r in acceptedRules do   

@@ -69,7 +69,7 @@ module SearchMachines =
         member this.PrintAll(s: Call) = simple.PrintAll s
         member this.Execute(s: Call) = 
             pre s |> ignore
-            let prequery = query s
+            let prequery = None // query s
             match prequery with
             | Some(contexts) -> 
                 hits <- hits + 1
@@ -87,23 +87,32 @@ module SearchMachines =
             member t.Clear() = t.Clear()
 
         static member CacheFirstMachine cacheParameters =
-            let cache = ref Map.empty
-            let none = fun s -> ()
-            let query = fun s -> (!cache).TryFind(s)
-            let post = fun (s, cs) -> if (!cache).Count < cacheParameters.maxPrecedences then cache := (!cache).Add(s, cs)
+            let cache = ref Map.empty<Call, context seq>
+            let none s = ()
+            let query s: (context seq) option = (!cache).TryFind(s)
+            let post(s, cs) = 
+                let overmax = (!cache).Count < cacheParameters.maxPrecedences
+                if overmax then
+                    cache := (!cache).Add(s, cs)
             new Custom(none, query, post)
     
         static member CacheLastMachine cacheParameters =
-            let cache = new System.Collections.Generic.Queue<Call*(context seq)>()
+            let chc = Array.create<(Call*(context seq)) option>(cacheParameters.maxPrecedences) Option.None
+            let chcPtr = ref 0
+            let lastCacheResult = ref false
+            
             let rec tryfind (s: Call) =
-                match Seq.tryFind(fun t -> Call.Equals(s, (fst t))) cache with
+                let foundres = chc |> Array.choose(fun x -> x) |> Array.tryFind(fun t -> Call.Equals(s, (fst t)))
+                lastCacheResult := foundres.IsSome
+                match foundres with
                 | Some(_, cs) -> Some(cs)
                 | None -> None
             let insertnew(s, cs) =
-                if (tryfind s).IsNone then
-                    if cache.Count > cacheParameters.maxPrecedences then
-                        cache.Dequeue() |> ignore
-                    cache.Enqueue(s, cs)
-
-            let none = fun s -> ()
+                if not !lastCacheResult then
+                    chc.[!chcPtr] <- Some((s, cs))
+                    incr chcPtr
+                    if (!chcPtr = cacheParameters.maxPrecedences) then
+                        chcPtr := 0
+                        
+            let none s = ()
             new Custom(none, tryfind, insertnew)
