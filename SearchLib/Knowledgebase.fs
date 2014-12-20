@@ -4,15 +4,21 @@ open SearchLib.Common
 open SearchLib.Rule
 open SearchLib.Context
 
-type Knowledgebase =
-    val Rules: list<rule>
-    private new() = { Rules = list.Empty }
-    private new(rules) = { Rules = rules }
-    static member Empty = new Knowledgebase()
-    static member Default = new Knowledgebase(defaultRules)
-    member k.Append r = new Knowledgebase(r::k.Rules)
-    member k.AppendRange rs = (k, rs) ||> Seq.fold(fun kb r -> new Knowledgebase(r::kb.Rules))
+type Rulebase =
+    abstract member Append: rule -> Rulebase
+    abstract member AppendRange: rule seq -> Rulebase
+    abstract member Rules: rule seq with get
 
+type Knowledgebase(rules: rule list) =
+    static member Empty = new Knowledgebase([])
+    static member Default = new Knowledgebase(defaultRules)
+
+    member k.rules = rules
+    interface Rulebase with
+        member k.Append r = new Knowledgebase(r::k.rules) :> Rulebase
+        member k.AppendRange rs = (k, rs) ||> Seq.fold(fun kb r -> new Knowledgebase(r::kb.rules)) :> Rulebase
+        member k.Rules = k.rules |> List.toSeq
+        
 type FindResult = 
     | Failure
     | Success of context
@@ -77,17 +83,12 @@ module Find =
     /// Returns sequence of answers.
     /// If result is empty,
     /// then predicate equals false.
-    let rec find (d: Knowledgebase) (c: context) (s: Call) : FindResult seq = 
-        let s = replaceVars c s // replace vars!
-        debug (sprintf "Called rule %s" s.AsString)
-        let acceptedRules = d.Rules |> List.filter(fun r -> Signature.compatible(r.Signature, s))
-
-        if (acceptedRules.Length = 0) then
-            debug "No rules match."
+    let rec find (d: Rulebase) (c: context) (call: Call) : FindResult seq = 
+        let s = replaceVars c call // replace vars!
+        let acceptedRules = d.Rules |> Seq.filter(fun r -> Signature.compatible(r.Signature, s)) |> Seq.toList
 
         seq {
             for r in acceptedRules do   
-                debug (sprintf "Found %s" <| r.ToString())
                 let suppliedContext = supply c r.Parameters s.args
                 match r with
                     | Rule(_, p) ->
@@ -109,13 +110,32 @@ module Find =
                             yield Success(suppliedContext)
         }
 
-    let exec (d: Knowledgebase) (start: context) (s: Call): unit =
+type Finder =
+    abstract Find: Rulebase -> context -> Call -> FindResult seq
+
+type SimpleFinder() =
+    interface Finder with
+        member f.Find rb c call = Find.find rb c call
+
+type DebugInfoFinder() =
+    interface Finder with
+        member f.Find rb c call = 
+            debug (sprintf "Called rule %s" call.AsString)
+            let found = (new SimpleFinder() :> Finder).Find rb c call
+            if (Seq.isEmpty found) then
+                debug "No rules match."
+            else
+                for r in found do
+                    debug (sprintf "Found %s" <| r.ToString())
+            found
+
+module Execute =
+    let exec (f: Finder) (d: Rulebase) (start: context) (s: Call): unit =
         printfn "Execute: %s. Context = %s" s.AsString (start.ToString())
-        let res = find d start s
+        let res = f.Find d start s
         if Seq.isEmpty res then
             printfn "Result: %b." false
         else
             for r in res do
                 printfn "Result: %b. New context = %s" (true) ((r).ToString())
-
-    let append (d: Knowledgebase) (r: rule): Knowledgebase = d.Append r
+                

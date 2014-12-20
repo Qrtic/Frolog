@@ -15,24 +15,24 @@ type ISearchMachine =
 
 module SearchMachines =
     type Simple =
-        private new() = {kb = Knowledgebase.Empty}
+        private new() = {kb = Knowledgebase.Empty; finder = new SimpleFinder()}
+        private new(finder) = {kb = Knowledgebase.Empty; finder = finder}
         static member Create() = Simple()
-        val mutable kb: Knowledgebase
+        val finder: Finder
+        val mutable kb: Rulebase
         member t.Clear() = t.kb <- Knowledgebase.Empty
         member this.AddRule(r: rule) = 
             let newk = this.kb.Append r
             this.kb <- newk
         member this.Execute(s: Call) = this.Execute(s, Context.EmptyContext)
         member this.Execute(s: Call, c: context): context seq =
-            let findres = SearchLib.Find.find this.kb c s
+            let findres = this.finder.Find this.kb c s
             seq {
                 for res in findres do
                     match res with
                     | Failure -> ()
                     | Success(resContext) -> yield resContext
                     | Continuation(resContext1, calls) ->
-                        //let proc(contexts: context seq) (calls: Call seq) : context seq =
-                        //    calls |> Seq.fold(fun (s: context seq) call -> s |> Seq.collect(fun c -> find d c call)) contexts
                         let proc(contexts: context seq) (calls: Call seq): context seq =
                             calls |> Seq.fold(fun (s: context seq) call ->
                                 s |> Seq.collect(fun c -> this.Execute(call, c))) contexts
@@ -43,27 +43,6 @@ module SearchMachines =
                         let reduced = returned |> Seq.map(fun rs -> Context.reduce rs c)
 
                         yield! reduced
-                    (*
-                    let psl = conrulesignature.prms
-                    let asl = s.args
-
-                    let currentCall = calls.Head
-                    let restCalls = calls.Tail
-                                        
-                    let proc(contexts: context seq) (calls: Call seq) : context seq =
-                        calls |> Seq.fold(fun (s: context seq) call -> s |> Seq.collect(fun c -> find d c call)) contexts
-                        
-                    // substitute parameters
-                    let presupplied = supply c psl asl
-                    let proced = proc [presupplied] calls
-                    // substitute parameters
-                    let postsupplied = proced |> Seq.map(fun c -> supply c psl asl)
-                    // return previous context parameters
-
-                    let returned = postsupplied |> Seq.map(fun ps -> Context.replace ps c)
-                    let reduced = returned |> Seq.map(fun rs -> Context.reduce rs c)
-
-                    yield! reduced*)
             }
         member this.PrintAll(s: Call) =
             printfn "Call %s(%A)" s.name s.args
