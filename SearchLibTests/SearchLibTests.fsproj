@@ -55,9 +55,10 @@
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
     <None Include="App.config" />
-    <Compile Include="TestSearchMachine.fs" />
-    <Compile Include="Main.fs" />
     <Content Include="packages.config" />
+    <Compile Include="TestSearchMachine.fs" />
+    <Compile Include="Tests.fs" />
+    <Compile Include="Main.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FsUnit.NUnit">
