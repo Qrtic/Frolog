@@ -11,38 +11,41 @@ type ISearchMachine =
     abstract member Execute: Call -> context seq
     abstract member AddRule: rule -> unit
     abstract member PrintAll: Call -> unit
-    abstract member Clear: unit -> unit
 
 module SearchMachines =
     type Simple =
-        private new() = {kb = Knowledgebase.Empty; finder = new SimpleFinder()}
-        private new(finder) = {kb = Knowledgebase.Empty; finder = finder}
+        private new() = {kb = Knowledgebase.Default; finder = new SimpleFinder()}
+        private new(finder) = {kb = Knowledgebase.Default; finder = finder}
         static member Create() = Simple()
         val finder: Finder
         val mutable kb: Rulebase
-        member t.Clear() = t.kb <- Knowledgebase.Empty
         member this.AddRule(r: rule) = 
             let newk = this.kb.Append r
             this.kb <- newk
         member this.Execute(s: Call) = this.Execute(s, Context.EmptyContext)
         member this.Execute(s: Call, c: context): context seq =
+            let vars = s.args |> List.choose Argument.asVariable
             let findres = this.finder.Find this.kb c s
             seq {
                 for res in findres do
                     match res with
                     | Failure -> ()
                     | Success(resContext) -> yield resContext
-                    | Continuation(resContext1, calls) ->
-                        let proc(contexts: context seq) (calls: Call seq): context seq =
-                            calls |> Seq.fold(fun (s: context seq) call ->
-                                s |> Seq.collect(fun c -> this.Execute(call, c))) contexts
-                                
-                        let proced = proc [resContext1] calls
-                        let postsupplied = proced |> Seq.toList
-                        let returned = postsupplied |> Seq.map(fun ps -> Context.replace ps c)
-                        let reduced = returned |> Seq.map(fun rs -> Context.reduce rs c)
+                    | Continuation(resContext, calls) ->
+                        let rec recproc(contexts: context seq) (calls: Call list) =
+                            if List.isEmpty calls || Seq.isEmpty contexts then
+                                contexts
+                            else
+                                let call = List.head calls
+                                let rescalls = List.tail calls
+                                let cntxs = contexts |> Seq.collect(fun c -> this.Execute(call, c)) |> Seq.toList
+                                recproc cntxs rescalls
 
-                        yield! reduced
+                        for proced in recproc [resContext] calls do
+                            let returned = Context.replace proced c
+                            let reduced = Context.reduce returned c
+                            let added = Context.add reduced returned vars
+                            yield added
             }
         member this.PrintAll(s: Call) =
             printfn "Call %s(%A)" s.name s.args
@@ -58,18 +61,15 @@ module SearchMachines =
             member t.AddRule r = t.AddRule r
             member t.Execute s = t.Execute s
             member t.PrintAll s = t.PrintAll s
-            member t.Clear() = t.Clear()
     
     type Custom(pre: Call -> unit, query: Call -> context seq option, post: Call*context seq -> unit) =
         let mutable simple = Simple.Create()
         let mutable hits = 0
-        // TODO: custom clear
-        member this.Clear() = simple.Clear()
         member this.AddRule(r: rule) = simple.AddRule r
         member this.PrintAll(s: Call) = simple.PrintAll s
         member this.Execute(s: Call) = 
             pre s |> ignore
-            let prequery = None // query s
+            let prequery = query s
             match prequery with
             | Some(contexts) -> 
                 hits <- hits + 1
@@ -84,12 +84,11 @@ module SearchMachines =
             member t.AddRule r = t.AddRule r
             member t.Execute s = t.Execute s
             member t.PrintAll s = t.PrintAll s
-            member t.Clear() = t.Clear()
 
         static member CacheFirstMachine cacheParameters =
             let cache = ref Map.empty<Call, context seq>
             let none s = ()
-            let query s: (context seq) option = (!cache).TryFind(s)
+            let query = (!cache).TryFind
             let post(s, cs) = 
                 let overmax = (!cache).Count < cacheParameters.maxPrecedences
                 if overmax then

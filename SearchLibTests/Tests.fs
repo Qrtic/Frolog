@@ -106,6 +106,15 @@ module SimpleTest =
     let ``Simple. Check divs predicate``() =
         check_1 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("divs", [Argument.create 10; Argument.create [1;2;5;10]])))
         check_0 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("divs", [Argument.create 10; Argument.create [1;2;5]])))
+    [<Test>]
+    let ``Simple. Check mul predicate``() =
+        check_1 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("mul", [2; 3; 6])))
+        check_0 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("mul", [2; 3; 10])))
+    [<Test>]
+    let ``Simple. Check greater predicate``() =
+        check_1 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("greater", [Argument.create 5; Argument.create 4])))
+        check_0 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("greater", [Argument.create 5; Argument.create 5])))
+        check_0 FactOptions.None ContextOptions.Empty (CallOptions.CustomCall(Signature.call("greater", [Argument.create 5; Argument.create 6])))
 
     [<Test>]
     let ``Simple. Call custom rule with d=1``() =
@@ -171,6 +180,14 @@ module SimpleTest =
             check_1 factopt (ContextOptions.Customized(context2)) (CallOptions.CustomCall(Signature.call("grandparent", ["alesha"; "yura"])))
             check_0 factopt (ContextOptions.Customized(context3)) (CallOptions.CustomCall(Signature.call("grandparent", ["andrew"; "pasha"])))
             check_0 factopt (ContextOptions.Customized(context4)) (CallOptions.CustomCall(Signature.call("grandparent", ["alesha"; "misha"])))
+            
+        [<Test>]
+        let ``Factorial. Call factorial``() =
+            let factorial = (FactOptions.Multiple([Factorial.FromZero; Factorial.FromN]))
+            check_1 factorial ContextOptions.Empty (CallOptions.CustomCall(Signature.call("factorial", ["0"; "1"])))
+            check_1 factorial ContextOptions.Empty (CallOptions.CustomCall(Signature.call("factorial", ["1"; "1"])))
+            check_1 factorial ContextOptions.Empty (CallOptions.CustomCall(Signature.call("factorial", ["2"; "2"])))
+            // check_1 factorial ContextOptions.Empty (CallOptions.CustomCall(Signature.call("factorial", ["3"; "6"])))
 
         [<TestFixture>]
         module TimeTest =

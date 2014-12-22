@@ -3,7 +3,7 @@
 open SearchLib.Common
 
 [<CustomEquality>][<CustomComparison>]
-[<StructuredFormatDisplayAttribute("{AsString}")>]
+[<StructuredFormatDisplay("{AsString}")>]
 type Definition = {name: string; prms: parameters}
     with
     member d.AsString = 
@@ -35,9 +35,10 @@ type Definition = {name: string; prms: parameters}
             match o with
             | :? Definition as d1 -> Definition.CompareTo d d1
             | _ -> failwith "Cant compare definition with any other type"
+    override d.ToString() = d.AsString
         
 [<CustomEquality>][<CustomComparison>]
-[<StructuredFormatDisplayAttribute("{AsString}")>]
+[<StructuredFormatDisplay("{AsString}")>]
 type Call = {name: string; args: arguments}
     with
     member c.AsString = 
@@ -63,6 +64,7 @@ type Call = {name: string; args: arguments}
             match o with
             | :? Call as c1 -> Call.Compare c c1
             | _ -> failwith "Cant compare definition with any other type"
+    override d.ToString() = d.AsString
 
 type Signature() =
     static member compatible(d: Definition, c: Call) =

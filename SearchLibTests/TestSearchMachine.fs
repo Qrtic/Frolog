@@ -5,28 +5,13 @@ open SearchLib.Context
 open SearchLib.Rule
 open SearchLib.SearchMachine
 
-module TestSearchMachine =
-    let predicateName = "b"
-    let createRandomFacts size: rule list =
-        let r = System.Random()
-        let rec create i l =
-            if i >= size then l
-            else
-                let prms = [Parameter.create(r.Next(size))]
-                create (i+1) ((Fact predicateName prms)::l)
-        create 1 []
-        
-    let createRandomQueries size = 
-        let createRandomQueries size: Call list =
-            let r = System.Random()
-            let rec create i l =
-                if i >= size then l
-                else
-                    let args = [Argument.create(r.Next(size))]
-                    create (i+1) ((Signature.call(predicateName, args))::l)
-            create 1 []
-        createRandomQueries size
+[<RequireQualifiedAccess>]
+module Distributions =
+    let random min max = 
+        let r = new System.Random()
+        fun x -> r.Next(min, max)
 
+module TestSearchMachine =
     let starttest (factsGet) (queriesGet) factsN queriesN times precedences =
         let test (m: ISearchMachine) (s: Call list): (int64 * context array array) =
             let res = Array.create s.Length [||]
@@ -36,37 +21,30 @@ module TestSearchMachine =
                 let contexts = m.Execute sign |> Seq.toArray
                 res.[i] <- contexts
             sw.ElapsedMilliseconds, res
-        let _iter (mGet: unit -> #ISearchMachine) queries ret =
-            let m = mGet()
-            ret(m, test m queries)
             
         let prms = {maxPrecedences = precedences }
+        let prepare m facts =
+            let addrule (s: #ISearchMachine) r = s.AddRule r
+            facts |> List.iter(fun r -> addrule m r)
+            Factorial.appendFactorial m
         let simpleGet(facts)() = 
-            /// creates with "b"(int, int) facts
-            let createSimpleTest =
-                let machine = SearchMachines.Simple.Create()
-                let addrule (s: ISearchMachine) r = s.AddRule r
-                facts |> List.iter(fun r -> machine.AddRule r)
-                machine
-            createSimpleTest :> SearchMachine.ISearchMachine
+            let machine = SearchMachines.Simple.Create()
+            prepare machine facts
+            machine :> SearchMachine.ISearchMachine
         let fifocacheGet(facts)() = 
-            /// creates with "b"(int, int) facts
-            let createFIFOCacheTest prms =
-                let machine = SearchMachines.Custom.CacheFirstMachine prms
-                let addrule (s: ISearchMachine) r = s.AddRule r
-                facts |> List.iter(fun r -> machine.AddRule r)
-                machine
-            createFIFOCacheTest prms :> SearchMachine.ISearchMachine
+            let machine = SearchMachines.Custom.CacheFirstMachine prms
+            prepare machine facts
+            machine :> SearchMachine.ISearchMachine
         let lifocacheGet(facts)() = 
-            let createLIFOCacheTest prms =
-                let machine = SearchMachines.Custom.CacheLastMachine prms
-                let addrule (s: ISearchMachine) r = s.AddRule r
-                facts |> List.iter(fun r -> machine.AddRule r)
-                machine
-            createLIFOCacheTest prms :> SearchMachine.ISearchMachine
+            let machine = SearchMachines.Custom.CacheLastMachine prms
+            prepare machine facts
+            machine :> SearchMachine.ISearchMachine
 
         /// Returns hits, ms, res
         let getIter getter qs =
+            let _iter (mGet: unit -> #ISearchMachine) queries ret =
+                let m = mGet()
+                ret(m, test m queries)
             _iter getter qs (fun (m: SearchMachine.ISearchMachine, r) -> 
                                             match m with
                                             | :? SearchMachines.Simple as simpl -> 0, fst r, snd r

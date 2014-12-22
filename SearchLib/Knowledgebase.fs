@@ -25,7 +25,7 @@ type FindResult =
     | Continuation of context * Call list
 
 module Find =
-    let process_predicate(c: context) (s: Call) (comp: predicate): bool * context =
+    let process_predicate(c: context) (s: Call) (comp: predicate): result =
         let check_parameters_count(s: Call) (comp: predicate): bool = 
             let n = s.name
             let args = s.args
@@ -43,66 +43,51 @@ module Find =
                     | F1(f1) -> f1 args.Head
                     | F2(f2) -> f2 args.Head args.Tail.Head
                     | F3(f3) -> f3 args.Head args.Tail.Head args.Tail.Tail.Head
-        let process_result(c: context) (inits: arguments) (ress: arguments):context =
-            let proc (acc: context) (p: argument) (a: argument) =
-                let av = Argument.asVariable p
-                if av.IsNone then
-                    acc
-                else
-                    let v = av.Value
-                    acc.Add(v, Argument.asValue a |> Option.get)
-            List.fold2 proc c inits ress
-        match res with
-        | Accepted(arguments) -> true, process_result c s.args arguments
-        | Rejected -> false, c
+        res
 
-    let process_fact(c: context) (call: Call) (fact: Definition): bool * context =
+    let process_fact(c: context) (call: Call) (fact: Definition): result =
         let (?>) = Unify.tryUnify
         let res = ([], fact.prms, call.args) |||> List.fold2(fun s p a -> (p ?> a) :: s) |> List.rev
-        
-        let process_result(c: context) (inits: arguments) (ress: arguments):context =
-            let proc (acc: context) (p: argument) (a: argument) =
-                let av = Argument.asVariable p
-                if av.IsNone then
-                    acc
-                else
-                    let v = av.Value
-                    let asVal = Argument.asValue a
-                    match asVal with
-                    | None -> acc // failwith "Cant determine value with variable parameter and argument"
-                    | Some(value) -> acc.Add(v, value)
-            List.fold2 proc c inits ress
-
         if List.exists Option.isNone res then
-            false, c
+            Rejected
         else
             let resargs = List.map Option.get res
-            let sres = true, (process_result c call.args resargs)
-            sres
+            Accepted(resargs)
+            
+    let process_result(c: context) (call: Call) (result: arguments):context =
+        let proc (acc: context) (p: argument) (a: argument) =
+            let av = Argument.asVariable p
+            if av.IsNone then
+                acc
+            else
+                let v = av.Value
+                let asVal = Argument.asValue a
+                match asVal with
+                | None -> acc // failwith "Cant determine value with variable parameter and argument"
+                | Some(value) -> acc.Add(v, value)
+        List.fold2 proc c (call.args) result
 
     /// Returns sequence of answers.
     /// If result is empty,
     /// then predicate equals false.
     let rec find (d: Rulebase) (c: context) (call: Call) : FindResult seq = 
-        let s = replaceVars c call // replace vars!
-        let acceptedRules = d.Rules |> List.filter(fun r -> Signature.compatible(r.Signature, s))
+        let call = replaceVars c call
+        let acceptedRules = d.Rules |> List.filter(fun r -> Signature.compatible(r.Signature, call))
 
         seq {
-            for r in acceptedRules do   
-                let suppliedContext = supply c r.Parameters s.args
+            for r in acceptedRules do
+                let suppliedContext = supply c r.Parameters call.args
                 match r with
                     | Rule(_, p) ->
-                        let proced1 = process_predicate suppliedContext s p
-                        let (success1, contexts1) = proced1
-                        match success1 with
-                        | false -> yield Failure
-                        | true -> yield Success(contexts1)
+                        let procedres = process_predicate suppliedContext call p
+                        match procedres with
+                        | Accepted(args) -> yield Success(process_result suppliedContext call args)
+                        | Rejected -> yield Failure
                     | Fact(def) ->
-                        let proced2 = process_fact suppliedContext s def
-                        let (success2, contexts2) = proced2
-                        match success2 with
-                        | false -> yield Failure
-                        | true -> yield Success(contexts2)
+                        let procedres = process_fact suppliedContext call def
+                        match procedres with
+                        | Accepted(args) -> yield Success(process_result suppliedContext call args)
+                        | Rejected -> yield Failure
                     | ConcatenatedRule(conrulesignature, calls) ->
                         if (calls.Length > 0) then
                             yield Continuation(suppliedContext, calls)

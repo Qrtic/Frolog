@@ -56,6 +56,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <Content Include="packages.config" />
+    <Compile Include="Factorial.fs" />
     <Compile Include="TestSearchMachine.fs" />
     <Compile Include="Tests.fs" />
     <Compile Include="Main.fs" />

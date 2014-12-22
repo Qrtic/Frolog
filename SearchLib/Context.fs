@@ -29,7 +29,16 @@ module Context =
     /// <param name="cur">New context</param>
     let reduce (cur: context) (reduceTo: context) = Map.map (fun k v -> Map.find k cur) reduceTo
     
-    // let supply(init: context) (supp: (Parameter*value) list) = List.fold(fun (s: context) (k, v) -> s.Add(k, v)) init supp
+    let reduceWithVars (cur: context) (reduceTo: context) vars = 
+        let issome k v = Option.isSome v
+        let someget k v = Option.get v
+        Map.map (fun k v ->
+            if reduceTo.ContainsKey k then
+                Some(v)
+            elif List.exists(fun var -> var = k) vars then
+                Some(v)
+            else
+                None) cur |> Map.filter issome |> Map.map someget
 
     let supply(context: context) (supp: parameter list) (supa: argument list) = 
         let f(c: context) (p: parameter) (a: argument): context =
@@ -47,3 +56,7 @@ module Context =
 
     let replace(init: context) (newc: context): context =
         newc |> Map.fold(fun (s: context) k t -> s.Add(k, t)) init
+
+    let add(c: context) (from: context) (vars): context =
+        let getV v = from.TryFind(v).Value
+        (c, vars) ||> List.fold(fun st v -> st.Add(v, getV v))

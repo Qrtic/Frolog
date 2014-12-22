@@ -9,8 +9,7 @@ module Rule =
         | F3 of (argument -> argument -> argument -> result)
     
     [<CustomComparison; CustomEquality>]
-    [<StructuredFormatDisplayAttribute("{Signature}")>]
-    /// Note that fact must be fully classified
+    [<StructuredFormatDisplay("{Signature}")>]
     type rule = Fact of Definition | Rule of Definition * f: predicate | ConcatenatedRule of Definition * Call list
         with
         member r.Name = 
@@ -69,8 +68,23 @@ module Rule =
             let v2 = Argument.getValue p2 |> Option.bind Value.int
             match (v1, v2) with
                 | (Some(val1), Some(val2)) -> if val1 + 1 = val2 then Accepted([p1;p2]) else Rejected
+                | Some(val1), None -> Accepted([p1; Argument.create(val1 + 1)])
+                | None, Some(val2) -> Accepted([Argument.create(val2 - 1); p2])
                 | _ -> Rejected
         Rule "inc" p (F2 inc)
+        
+    let DecR: rule = 
+        let p: parameters =
+            [Parameter.create "A"; Parameter.create "B"]
+        let inc(p1: argument) (p2: argument):result =
+            let v1 = Argument.getValue p1 |> Option.bind Value.int
+            let v2 = Argument.getValue p2 |> Option.bind Value.int
+            match (v1, v2) with
+                | (Some(val1), Some(val2)) -> if val1 - 1 = val2 then Accepted([p1;p2]) else Rejected
+                | Some(val1), None -> Accepted([p1; Argument.create(val1 - 1)])
+                | None, Some(val2) -> Accepted([Argument.create(val2 + 1); p2])
+                | _ -> Rejected
+        Rule "dec" p (F2 inc)
 
     let SumR: rule = 
         let p: parameters =
@@ -101,4 +115,28 @@ module Rule =
             | _ -> Rejected
         Rule "divs" p (F2 divisors)
 
-    let defaultRules : rulelist = [IncR; SumR; DivsR]
+    let MulR:rule =
+        let p = [Parameter.create "A"; Parameter.create "B"; Parameter.create "M"]
+        let f a b m =
+            let v1 = Argument.getValue a |> Option.bind Value.int
+            let v2 = Argument.getValue b |> Option.bind Value.int
+            let v3 = Argument.getValue m |> Option.bind Value.int
+            match (v1, v2, v3) with
+            | Some(val1), Some(val2), Some(val3) -> if val1 * val2 = val3 then Accepted([a;b;m]) else Rejected
+            | Some(val1), Some(val2), None -> Accepted([a;b;Argument.create(val1 * val2)])
+            | Some(val1), None, Some(val3) -> Accepted([a;Argument.create(val3/val1);m])
+            | None, Some(val2), Some(val3) -> Accepted([Argument.create(val3/val2); b; m])
+            | _ -> Rejected
+        Rule "mul" p (F3 f)
+
+    let GrR: rule =
+        let p = [Parameter.create "A"; Parameter.create "B"]
+        let f a b =
+            let v1 = Argument.getValue a |> Option.bind Value.int
+            let v2 = Argument.getValue b |> Option.bind Value.int
+            match v1, v2 with
+            | Some(v1), Some(v2) -> if v1 > v2 then Accepted([a;b]) else Rejected
+            | _ -> Rejected
+        Rule "greater" p (F2 f)
+
+    let defaultRules : rulelist = [IncR; DecR; SumR; DivsR; MulR; GrR]
