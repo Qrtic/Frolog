@@ -1,23 +1,21 @@
-﻿namespace SearchLibTests
+﻿namespace Frolog.Tests
 
-open SearchLib
-open SearchLib.Context
-open SearchLib.SearchMachine
-open SearchLib.Rule
+open Frolog
+open Frolog.DefineRule
 
 [<RequireQualifiedAccess>]
 module Factorial =
-    let FromZero = rule.fact(Signature.define("factorial", ["0"; "1"]))
-    let FromN = 
-        let def = Signature.define("factorial", ["X"; "F"])
-        let calls = [
-            Signature.call("greater", ["X"; "0"]);
-            Signature.call("dec", ["X"; "X1"]);
-            Signature.call("factorial", ["X1"; "F1"]);
-            Signature.call("mul", ["X"; "F1"; "F"])
-        ]
-        rule.ConcatenatedRule(def, calls)
+    let fromZero = tryDefFact "factorial(0, 1)" |> Option.get
+    let fromN = 
+        let call (s: string) = term s |> Option.bind sign |> Option.get
+        let def = call "factorial(X, F)"
+        defConcatRule (def) 
+            (defBody [
+                call ">(X, 0)";
+                call "--(X, X1)";
+                call "factorial(X1; F1)";
+                call "*(X, F1, F)"])
 
     let appendFactorial(m: ISearchMachine) =
-        m.AddRule FromZero
-        m.AddRule FromN
+        m.AddRule fromZero
+        m.AddRule fromN

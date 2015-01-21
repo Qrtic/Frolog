@@ -1,9 +1,7 @@
-﻿namespace SearchLibTests
+﻿namespace Frolog.Tests
 
-open SearchLib
-open SearchLib.Context
-open SearchLib.Rule
-open SearchLib.SearchMachine
+open Frolog
+open Frolog.SearchMachines
 
 [<RequireQualifiedAccess>]
 module Distributions =
@@ -13,7 +11,7 @@ module Distributions =
 
 module TestSearchMachine =
     let starttest (factsGet) (queriesGet) factsN queriesN times precedences =
-        let test (m: ISearchMachine) (s: Call list): (int64 * context array array) =
+        let test (m: ISearchMachine) (s: Signature list): (int64 * RuleOutput array array) =
             let res = Array.create s.Length [||]
             let sw = System.Diagnostics.Stopwatch.StartNew()
             for i in 0..s.Length-1 do
@@ -26,26 +24,26 @@ module TestSearchMachine =
         let prepare m facts =
             let addrule (s: #ISearchMachine) r = s.AddRule r
             facts |> List.iter(fun r -> addrule m r)
-            Factorial.appendFactorial m
+            // Factorial.appendFactorial m
         let simpleGet(facts)() = 
             let machine = SearchMachines.Simple.Create()
             prepare machine facts
-            machine :> SearchMachine.ISearchMachine
+            machine :> ISearchMachine
         let fifocacheGet(facts)() = 
             let machine = SearchMachines.Custom.CacheFirstMachine prms
             prepare machine facts
-            machine :> SearchMachine.ISearchMachine
+            machine :> ISearchMachine
         let lifocacheGet(facts)() = 
             let machine = SearchMachines.Custom.CacheLastMachine prms
             prepare machine facts
-            machine :> SearchMachine.ISearchMachine
+            machine :> ISearchMachine
 
         /// Returns hits, ms, res
         let getIter getter qs =
             let _iter (mGet: unit -> #ISearchMachine) queries ret =
                 let m = mGet()
                 ret(m, test m queries)
-            _iter getter qs (fun (m: SearchMachine.ISearchMachine, r) -> 
+            _iter getter qs (fun (m: ISearchMachine, r) -> 
                                             match m with
                                             | :? SearchMachines.Simple as simpl -> 0, fst r, snd r
                                             | :? SearchMachines.Custom as custm -> custm.CacheHits, fst r, snd r)

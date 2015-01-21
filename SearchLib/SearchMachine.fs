@@ -1,73 +1,34 @@
-﻿module SearchLib.SearchMachine
-
-open SearchLib.Common
-open SearchLib.Rule
-open SearchLib.Context
+﻿namespace Frolog
 
 // Temporary removed all immutablity
 type CacheParameters = { maxPrecedences : int }
 
 type ISearchMachine = 
-    abstract member Execute: Call -> context seq
-    abstract member AddRule: rule -> unit
-    abstract member PrintAll: Call -> unit
+    abstract member Execute: Signature -> RuleOutput seq
+    abstract member AddRule: Rule -> unit
 
 module SearchMachines =
     type Simple =
-        private new() = {kb = Knowledgebase.Default; finder = new SimpleFinder()}
-        private new(finder) = {kb = Knowledgebase.Default; finder = finder}
+        private new() = {kb = Knowledgebase.Default; searcher = new SimpleSearcher()}
+        private new(finder) = {kb = Knowledgebase.Default; searcher = finder}
         static member Create() = Simple()
-        val finder: Finder
+        val searcher: ISearcher
         val mutable kb: Rulebase
-        member this.AddRule(r: rule) = 
+        member this.AddRule(r: Rule) = 
             let newk = this.kb.Append r
             this.kb <- newk
-        member this.Execute(s: Call) = this.Execute(s, Context.EmptyContext)
-        member this.Execute(s: Call, c: context): context seq =
-            let vars = s.args |> List.choose Argument.asVariable
-            let findres = this.finder.Find this.kb c s
-            seq {
-                for res in findres do
-                    match res with
-                    | Failure -> ()
-                    | Success(resContext) -> yield resContext
-                    | Continuation(resContext, calls) ->
-                        let rec recproc(contexts: context seq) (calls: Call list) =
-                            if List.isEmpty calls || Seq.isEmpty contexts then
-                                contexts
-                            else
-                                let call = List.head calls
-                                let rescalls = List.tail calls
-                                let cntxs = contexts |> Seq.collect(fun c -> this.Execute(call, c)) |> Seq.toList
-                                recproc cntxs rescalls
-
-                        for proced in recproc [resContext] calls do
-                            let returned = Context.replace proced c
-                            let reduced = Context.reduce returned c
-                            let added = Context.add reduced returned vars
-                            yield added
-            }
-        member this.PrintAll(s: Call) =
-            printfn "Call %s(%A)" s.name s.args
-            let contexts = this.Execute s
-
-            if Seq.isEmpty contexts then
-                printfn "false"
-            elif not (List.exists(fun p -> Argument.isVariable p) s.args) then
-                    printfn "true"
-            else
-                for c in contexts do printfn "%A" c
+        member this.Execute(s: Signature) = this.Execute(s, Context.Empty)
+        member this.Execute(s: Signature, c: Context) = this.searcher.Search this.kb c s
         interface ISearchMachine with
             member t.AddRule r = t.AddRule r
             member t.Execute s = t.Execute s
-            member t.PrintAll s = t.PrintAll s
     
-    type Custom(pre: Call -> unit, query: Call -> context seq option, post: Call*context seq -> unit) =
+    type Custom(pre: Signature -> unit, query: Signature -> RuleOutput seq option, post: Signature*RuleOutput seq -> unit) =
+        // TODO: Customize finder
         let mutable simple = Simple.Create()
         let mutable hits = 0
-        member this.AddRule(r: rule) = simple.AddRule r
-        member this.PrintAll(s: Call) = simple.PrintAll s
-        member this.Execute(s: Call) = 
+        member this.AddRule(r: Rule) = simple.AddRule r
+        member this.Execute(s: Signature) = 
             pre s |> ignore
             let prequery = query s
             match prequery with
@@ -83,10 +44,9 @@ module SearchMachines =
         interface ISearchMachine with
             member t.AddRule r = t.AddRule r
             member t.Execute s = t.Execute s
-            member t.PrintAll s = t.PrintAll s
 
         static member CacheFirstMachine cacheParameters =
-            let cache = ref Map.empty<Call, context seq>
+            let cache = ref Map.empty<Signature, RuleOutput seq>
             let none s = ()
             let query = (!cache).TryFind
             let post(s, cs) = 
@@ -96,12 +56,12 @@ module SearchMachines =
             new Custom(none, query, post)
     
         static member CacheLastMachine cacheParameters =
-            let chc = Array.create<(Call*(context seq)) option>(cacheParameters.maxPrecedences) Option.None
+            let chc = Array.create<(Signature*(RuleOutput seq)) option>(cacheParameters.maxPrecedences) Option.None
             let chcPtr = ref 0
             let lastCacheResult = ref false
             
-            let rec tryfind (s: Call) =
-                let foundres = chc |> Array.choose(fun x -> x) |> Array.tryFind(fun t -> Call.Equals(s, (fst t)))
+            let rec tryfind (s: Signature) =
+                let foundres = chc |> Array.choose(fun x -> x) |> Array.tryFind(fun t -> Signature.Equals(s, (fst t)))
                 lastCacheResult := foundres.IsSome
                 match foundres with
                 | Some(_, cs) -> Some(cs)

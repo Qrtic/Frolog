@@ -1,4 +1,4 @@
-﻿namespace SearchLib.DataStructures
+﻿namespace Frolog.DataStructures
 
 [<RequireQualifiedAccess>]
 module Common =

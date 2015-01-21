@@ -1,92 +1,31 @@
-﻿namespace SearchLib
+﻿namespace Frolog
 
-open SearchLib.Common
+open Frolog.Common
 
-[<CustomEquality>][<CustomComparison>]
 [<StructuredFormatDisplay("{AsString}")>]
-type Definition = {name: string; prms: parameters}
+type Signature = Signature of Term
     with
-    member d.AsString = 
-        let parameterString = ("", d.prms) ||> List.fold(fun acc p -> acc + p.AsString + ", ")
-        let trimmed = parameterString.Trim([|','; ' '|])
-        sprintf "%s(%s)" d.name trimmed
-    override d.Equals(d1) = 
-        match d1 with
-        | :? Definition as d1 -> Definition.StrongEquals(d, d1)
-        | _ -> false
-    override d.GetHashCode() =
-        d.name.GetHashCode() + d.prms.GetHashCode()
-    static member Compatible(d1: Definition, d2: Definition) =
-        let cnames = d1.name = d2.name
-        let cprms = lazy List.fold2(fun s t1 t2 -> s && t1 ?= t2) true d1.prms d2.prms
-        cnames && cprms.Force()
-    static member StrongEquals(d1: Definition, d2: Definition) =
-        let cnames = d1.name = d2.name
-        let cprms = lazy ((d1.prms.Length = d2.prms.Length) && List.fold2(fun s t1 t2 -> s && t1 = t2) true d1.prms d2.prms)
-        cnames && cprms.Force()
-    static member CompareTo(d1: Definition) (d2: Definition) =
-        let namec = d1.name.CompareTo(d2.name)
-        let argsc = d1.prms.Length.CompareTo(d2.prms.Length)
-        if namec = 0 then argsc else namec
-    interface System.IComparable<Definition> with
-        member d.CompareTo(d1) = Definition.CompareTo d d1
-    interface System.IComparable with
-        member d.CompareTo(o) = 
-            match o with
-            | :? Definition as d1 -> Definition.CompareTo d d1
-            | _ -> failwith "Cant compare definition with any other type"
-    override d.ToString() = d.AsString
-        
-[<CustomEquality>][<CustomComparison>]
-[<StructuredFormatDisplay("{AsString}")>]
-type Call = {name: string; args: arguments}
-    with
-    member c.AsString = 
-        let parameterString = ("", c.args) ||> List.fold(fun acc arg -> acc + arg.AsString + ", ")
-        let trimmed = parameterString.Trim([|','; ' '|])
-        sprintf "%s(%s)" c.name trimmed
-    override c.Equals(d1) = 
-        match d1 with
-        | :? Call as c1 -> Call.Equals(c, c1)
-        | _ -> false
-    override c.GetHashCode() =
-        c.name.GetHashCode() + c.args.GetHashCode()
-    static member Equals(c1: Call, c2: Call) =
-        let cnames = c1.name = c2.name
-        let cprms = lazy List.fold2(fun s t1 t2 -> s && t1 ?= t2) true c1.args c2.args
-        cnames && cprms.Force()
-    static member Compare(c1: Call) (c2: Call) =
-            c1.AsString.CompareTo(c2.AsString)
-    interface System.IComparable<Call> with
-        member c.CompareTo(c1) = Call.Compare c c1
-    interface System.IComparable with
-        member c.CompareTo(o) = 
-            match o with
-            | :? Call as c1 -> Call.Compare c c1
-            | _ -> failwith "Cant compare definition with any other type"
-    override d.ToString() = d.AsString
+    member s.AsString =
+        let (Signature(t)) = s
+        t.AsString
+    static member AsTerm signature =
+        let (Signature(term)) = signature
+        term
+    static member GetName signature =
+        let (Signature(Structure(name, args))) = signature
+        name
+    static member GetArguments signature =
+        let (Signature(Structure(name, args))) = signature
+        args
 
-type Signature() =
-    static member compatible(d: Definition, c: Call) =
-        let cnames = d.name = c.name
-        let cprmsLen = d.prms.Length = c.args.Length
-        if cnames && cprmsLen then
-            List.forall2(fun t1 t2 -> Unify.canUnify t1 t2) d.prms c.args
-        else
-            false
+[<AutoOpen>]
+module SignatureHelper =
+    let sign term =
+        match term with
+        | Structure(_, _) -> Some(Signature(term))
+        | _ -> None
+    let signf term =
+        match term with
+        | Structure(_, _) -> Signature(term)
+        | _ ->  failwith "Cant instantiate signature"
         
-    static member define(name, parameters) = {name = name; prms = parameters}
-    static member define(name, prms : string list) =
-        let parameters = prms |> List.map(fun p -> Parameter.create p)
-        {name = name; prms = parameters}
-    static member define(name, prms : int list) =
-        let parameters = prms |> List.map(fun p -> Parameter.create p)
-        {name = name; prms = parameters}
-
-    static member call(name, arguments) = {name = name; args = arguments}
-    static member call(name, args: string list) =
-        let arguments = args |> List.map(fun p -> Argument.create p)
-        {name = name; args = arguments}
-    static member call(name, args: int list) =
-        let arguments = args |> List.map(fun p -> Argument.create p)
-        {name = name; args = arguments}

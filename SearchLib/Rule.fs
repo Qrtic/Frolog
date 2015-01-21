@@ -1,142 +1,144 @@
-﻿namespace SearchLib
+﻿namespace Frolog
 
-module Rule =
-    type result = Accepted of arguments | Rejected
-    type predicate = 
-        | F0 of result
-        | F1 of ((argument) -> result) 
-        | F2 of (argument -> argument -> result) 
-        | F3 of (argument -> argument -> argument -> result)
+open Frolog.ContextHelper
+
+// RuleInput is desctructured argument terms
+type RuleInput = RuleInput of Term list
+type RuleOutput = RuleOutput of Term list
+
+module RuleInputOutputConvert =
+    let inputToOutput (RuleInput(input)) = RuleOutput(input)
+    let outputToInput (RuleOutput(output)) = RuleInput(output)
+
+type PredicateResult = Failed | Success of RuleOutput
+
+open RuleInputOutputConvert
+
+type RuleBody = True | False | Predicate of (RuleInput -> PredicateResult) | Single of Signature | Continuation of Signature * RuleBody
+and Rule = Rule of definition: Signature * body: RuleBody
+
+type Rule with
+    member r.Signature = 
+        let (Rule(def, _)) = r
+        def
+
+module DefineRule =
+    // Rule is only a structure with defined constraints
+    // It can be fully defined aka f(1).
+    // Or partially defined f(1, X).
+    // And can be constrained by f(1, X) :- X > 3.
+    let defFact sign = Rule(sign, True)
+    let tryDefFact t =
+        match Option.bind sign (term t) with
+        | None -> None
+        | Some(sign) -> Some(Rule(sign, True))
+
+    let defConcatRule term body = Rule(term, body)
     
-    [<CustomComparison; CustomEquality>]
-    [<StructuredFormatDisplay("{Signature}")>]
-    type rule = Fact of Definition | Rule of Definition * f: predicate | ConcatenatedRule of Definition * Call list
-        with
-        member r.Name = 
-            match r with
-            | Fact(def) -> def.name
-            | Rule(def, _) -> def.name
-            | ConcatenatedRule(def, _) -> def.name
-        member r.Parameters = 
-            match r with
-            | Fact(def) -> def.prms
-            | Rule(def, _) -> def.prms
-            | ConcatenatedRule(def, _) -> def.prms
-        member r.Signature = 
-            match r with
-            | Fact(def) -> def
-            | Rule(def, b) -> def
-            | ConcatenatedRule(def, calls) -> def
-        static member fact(def: Definition) = Fact(def)
-        static member create(name: string) (prms: parameters) (p: predicate) = Rule({name = name; prms = prms}, p)
-        member r.haveSameSignature (o: rule) = r.Signature.Equals(o.Signature)
-        static member CompareSignatures (r1: rule) (r2: rule) = Definition.CompareTo r1.Signature r2.Signature
-        member r.Equals(r1: rule) =
-            let signaturesEq = Definition.StrongEquals(r.Signature, r1.Signature)
-            match r, r1 with
-            | Fact(def), Fact(def1) -> Definition.StrongEquals(def, def1)
-            | Rule(d, p), Rule(d1, p1) -> false // TODO: how to define? p = p1
-            | ConcatenatedRule(d, p), ConcatenatedRule(d1, p1) -> signaturesEq && p = p1
-            | _ -> false
-        override r.Equals(o) = 
-            match o with
-            | :? rule as r1 -> r.Equals(r1)
-            | _ -> false
-        interface System.IComparable<rule> with
-            member r.CompareTo (o: rule) = rule.CompareSignatures r o
-        interface System.IComparable with
-            member r.CompareTo (o: System.Object) = 
-                match o with
-                | :? rule as r1 -> rule.CompareSignatures r r1
-                | _ -> failwith "cannot compare rule with any other types"
-        override r.GetHashCode() = System.Guid.NewGuid().GetHashCode() // r.Signature.AsString.GetHashCode()
-        member r.AsString = r.ToString()
-        override r.ToString() = sprintf "Rule = %s" r.Signature.AsString
-    type rulelist = list<rule>
-    
-    let Fact(name: string) (prms: parameters) = rule.fact {name = name; prms = prms}
-    
-    let Rule(name: string) (prms: parameters) (p: predicate) = rule.create name prms p
-    
-    let ConRule(name: string) (prms: parameters) (calls: Call list) = rule.ConcatenatedRule(Signature.define(name, prms), calls)
-    
-    let IncR: rule = 
-        let p: parameters =
-            [Parameter.create "A"; Parameter.create "B"]
-        let inc(p1: argument) (p2: argument):result =
-            let v1 = Argument.getValue p1 |> Option.bind Value.int
-            let v2 = Argument.getValue p2 |> Option.bind Value.int
-            match (v1, v2) with
-                | (Some(val1), Some(val2)) -> if val1 + 1 = val2 then Accepted([p1;p2]) else Rejected
-                | Some(val1), None -> Accepted([p1; Argument.create(val1 + 1)])
-                | None, Some(val2) -> Accepted([Argument.create(val2 - 1); p2])
-                | _ -> Rejected
-        Rule "inc" p (F2 inc)
+    let rec defBody calllist =
+        match calllist with
+        | [] -> True
+        | [h] -> Single(h)
+        | h::t -> Continuation(h, defBody t)
+
+    let defPredicate term inputConverter predicate =
+        let inputConvert input convert predicate =
+            let (RuleInput(arguments)) = input
+            if List.length arguments = List.length convert then
+                let convertedArgs = List.map2(fun conv x -> conv(Term.tryGetValue x)) convert arguments
+                predicate convertedArgs
+            else
+                Failed
+        Rule(Signature(term), Predicate(fun input -> inputConvert input inputConverter predicate))
+
+    let defUnify term =
+        let unif (input: RuleInput): PredicateResult =
+            match input with
+            | RuleInput([t]) -> 
+                match Term.tryUnify term t with
+                | Some(unified) -> Success(RuleOutput[unified])
+                | None -> Failed
+            | _ -> Failed
+        Rule(Signature(term), Predicate(unif))
         
-    let DecR: rule = 
-        let p: parameters =
-            [Parameter.create "A"; Parameter.create "B"]
-        let inc(p1: argument) (p2: argument):result =
-            let v1 = Argument.getValue p1 |> Option.bind Value.int
-            let v2 = Argument.getValue p2 |> Option.bind Value.int
-            match (v1, v2) with
-                | (Some(val1), Some(val2)) -> if val1 - 1 = val2 then Accepted([p1;p2]) else Rejected
-                | Some(val1), None -> Accepted([p1; Argument.create(val1 - 1)])
-                | None, Some(val2) -> Accepted([Argument.create(val2 + 1); p2])
-                | _ -> Rejected
-        Rule "dec" p (F2 inc)
+    [<AutoOpen>]
+    module Converters =
+        let convertInt = Option.bind(fun x -> 
+                    let ok, v = System.Int32.TryParse x
+                    if ok then Some(v) else None)
 
-    let SumR: rule = 
-        let p: parameters =
-            [Parameter.create "A"; Parameter.create "B"; Parameter.create "C"]
-        let sum(p1: argument) (p2: argument) (p3: argument):result =
-            let v1 = Argument.getValue p1 |> Option.bind Value.int
-            let v2 = Argument.getValue p2 |> Option.bind Value.int
-            let v3 = Argument.getValue p3 |> Option.bind Value.int
-            match (v1, v2, v3) with
-                | (Some(val1), Some(val2), Some(val3)) -> if val1 + val2 = val3 then Accepted([p1;p2;p3]) else Rejected
-                | (Some(val1), Some(val2), None) -> Accepted([p1;p2;Argument.create(val1 + val2)])
-                | (Some(val1), None, Some(val3)) -> Accepted([p1;Argument.create(val3 - val1);p3])
-                | (None, Some(val2), Some(val3)) -> Accepted([Argument.create(val3 - val2);p2;p3])
-                | _ -> Rejected
-        Rule "sum" p (F3 sum)
+        // TODO: implement
+        let convertIntList x = failwith "Not implemented converter: int list"
 
-    let DivsR:rule = 
-        let p: parameters =
-            [Parameter.create "A"; Parameter.create "B"]
-        let divisors(p1: argument) (p2: argument): result =
-            let v1 = Argument.getValue p1 |> Option.bind Value.int
-            let v2 = Argument.getValue p2 |> Option.bind Value.intList
-            let getdivs x = {1..x} |> Seq.filter(fun i -> x % i = 0) |> Set.ofSeq
-            let seteq val1 val2 = Set.isEmpty(Set.difference (getdivs val1) (Set.ofList val2))
-            match (v1, v2) with
-            | (Some(val1), Some(val2)) -> if seteq val1 val2 then Accepted([p1; p2]) else Rejected
-            | (Some(val1), None) -> Accepted([p1; Argument.create(getdivs val1 |> Set.toList)])
-            | _ -> Rejected
-        Rule "divs" p (F2 divisors)
+    let inline success (list: System.Object list) =
+        let inline create t = termf (t.ToString())
+        Success(RuleOutput(List.map create list))
+        
+    module StandartPredicates =
+        // What is good:
+        // We have nice and compact definition
+        // What is bad:
+        // We have no unification
+        // We have no constraints
 
-    let MulR:rule =
-        let p = [Parameter.create "A"; Parameter.create "B"; Parameter.create "M"]
-        let f a b m =
-            let v1 = Argument.getValue a |> Option.bind Value.int
-            let v2 = Argument.getValue b |> Option.bind Value.int
-            let v3 = Argument.getValue m |> Option.bind Value.int
-            match (v1, v2, v3) with
-            | Some(val1), Some(val2), Some(val3) -> if val1 * val2 = val3 then Accepted([a;b;m]) else Rejected
-            | Some(val1), Some(val2), None -> Accepted([a;b;Argument.create(val1 * val2)])
-            | Some(val1), None, Some(val3) -> Accepted([a;Argument.create(val3/val1);m])
-            | None, Some(val2), Some(val3) -> Accepted([Argument.create(val3/val2); b; m])
-            | _ -> Rejected
-        Rule "mul" p (F3 f)
+        let defEq =
+            defPredicate (termf "=(X, Y)") [convertInt; convertInt] (function
+                | [Some(a); Some(b)] -> if a = b then success [a; b] else Failed
+                | [Some(a); None] -> success [a; a]
+                | [None; Some(b)] -> success [b; b]
+                | _ -> Failed)
+            
+        let defGr =
+            defPredicate (termf ">(X, Y)") [convertInt; convertInt] (function
+                | [Some(a); Some(b)] -> if a > b then success [a; b] else Failed
+                | _ -> Failed)
+            
+        let defInc =
+            defPredicate (termf "++(X, Y)") [convertInt; convertInt] (function
+                    | [Some(x);Some(y)] when x + 1 = y -> success [x; y]
+                    | [Some(x); None] -> success [x; x+1]
+                    | [None; Some(y)] -> success [y-1; y]
+                    | _ -> Failed
+                )
+        
+        let defDec =
+            defPredicate (termf "--(X, Y)") [convertInt; convertInt] (function
+                    | [Some(x); Some(y)] when x - 1 = y -> success [x; y]
+                    | [Some(x); None] -> success [x; x-1]
+                    | [None; Some(y)] -> success [y=1; y]
+                    | _ -> Failed
+                )
+        
+        let defSum =
+            defPredicate (termf "+(A, B, C)") [convertInt; convertInt; convertInt] (function
+                | [Some(a); Some(b); Some(c)] when a + b = c -> success [a; b; c]
+                | [Some(a); Some(b); None] -> success[a; b; a + b]
+                | [Some(a); None; Some(c)] -> success[a; c - a; c]
+                | [None; Some(b); Some(c)] -> success[c - b; b; c]
+                | _ -> Failed
+            )
+        
+        let defMul =
+            defPredicate (termf "*(A, B, C)") [convertInt; convertInt; convertInt] (function
+                | [Some(a); Some(b); Some(c)] when a * b = c -> success [a; b; c]
+                | [Some(a); Some(b); None] -> success[a; b; a * b]
+                | [Some(a); None; Some(c)] -> success[a; c / a; c]
+                | [None; Some(b); Some(c)] -> success[c / b; b; c]
+                | _ -> Failed
+            )
 
-    let GrR: rule =
-        let p = [Parameter.create "A"; Parameter.create "B"]
-        let f a b =
-            let v1 = Argument.getValue a |> Option.bind Value.int
-            let v2 = Argument.getValue b |> Option.bind Value.int
-            match v1, v2 with
-            | Some(v1), Some(v2) -> if v1 > v2 then Accepted([a;b]) else Rejected
-            | _ -> Rejected
-        Rule "greater" p (F2 f)
+        let defDiv =
+            defPredicate (termf "/(A, B, C)") [convertInt; convertInt; convertInt] (function
+                | [Some(a); Some(b); Some(c)] when a / b = c -> success [a; b; c]
+                | [Some(a); Some(b); None] -> success[a; b; a / b]
+                | [Some(a); None; Some(c)] -> success[a; a / c; c]
+                | [None; Some(b); Some(c)] -> success[c * b; b; c]
+                | _ -> Failed
+            )
 
-    let defaultRules : rulelist = [IncR; DecR; SumR; DivsR; MulR; GrR]
+        let defDivs =
+            defPredicate (termf "divs(A, B)") [convertInt; convertIntList] (function
+                | _ -> Failed)
+
+    open StandartPredicates
+    let standartRules = [defInc; defDec; defSum; defMul; defDiv; defEq; defGr]
