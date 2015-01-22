@@ -13,7 +13,7 @@ module Factorial =
             (defBody [
                 call ">(X, 0)";
                 call "--(X, X1)";
-                call "factorial(X1; F1)";
+                call "factorial(X1, F1)";
                 call "*(X, F1, F)"])
 
     let appendFactorial(m: ISearchMachine) =

@@ -4,7 +4,7 @@
 type CacheParameters = { maxPrecedences : int }
 
 type ISearchMachine = 
-    abstract member Execute: Signature -> RuleOutput seq
+    abstract member Execute: Signature -> SearchResult
     abstract member AddRule: Rule -> unit
 
 module SearchMachines =
@@ -22,7 +22,7 @@ module SearchMachines =
             member t.AddRule r = t.AddRule r
             member t.Execute s = t.Execute s
     
-    type Custom(pre: Signature -> unit, query: Signature -> RuleOutput seq option, post: Signature*RuleOutput seq -> unit) =
+    type Custom(pre: Signature -> unit, query: Signature -> SearchResult option, post: Signature*SearchResult -> unit) =
         // TODO: Customize finder
         let mutable simple = Simple.Create()
         let mutable hits = 0
@@ -45,7 +45,7 @@ module SearchMachines =
             member t.Execute s = t.Execute s
 
         static member CacheFirstMachine cacheParameters =
-            let cache = ref Map.empty<Signature, RuleOutput seq>
+            let cache = ref Map.empty<Signature, SearchResult>
             let none s = ()
             let query = (!cache).TryFind
             let post(s, cs) = 
@@ -55,7 +55,7 @@ module SearchMachines =
             new Custom(none, query, post)
     
         static member CacheLastMachine cacheParameters =
-            let chc = Array.create<(Signature*(RuleOutput seq)) option>(cacheParameters.maxPrecedences) Option.None
+            let chc = Array.create<(Signature*SearchResult) option>(cacheParameters.maxPrecedences) Option.None
             let chcPtr = ref 0
             let lastCacheResult = ref false
             

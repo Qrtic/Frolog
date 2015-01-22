@@ -11,7 +11,7 @@ module Distributions =
 
 module TestSearchMachine =
     let starttest (factsGet) (queriesGet) factsN queriesN times precedences =
-        let test (m: ISearchMachine) (s: Signature list): (int64 * RuleOutput array array) =
+        let test (m: ISearchMachine) (s: Signature list): (int64 * Signature array array) =
             let res = Array.create s.Length [||]
             let sw = System.Diagnostics.Stopwatch.StartNew()
             for i in 0..s.Length-1 do

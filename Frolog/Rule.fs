@@ -1,18 +1,18 @@
 ﻿namespace Frolog
 
 // RuleInput is desctructured argument terms
-type RuleInput = RuleInput of Term list
-type RuleOutput = RuleOutput of Term list
+type PredicateInput = PredicateInput of Term list
+type PredicateOutput = PredicateOutput of Term list
 
 module RuleInputOutputConvert =
-    let inputToOutput (RuleInput(input)) = RuleOutput(input)
-    let outputToInput (RuleOutput(output)) = RuleInput(output)
+    let inputToOutput (PredicateInput(input)) = PredicateOutput(input)
+    let outputToInput (PredicateOutput(output)) = PredicateInput(output)
 
-type PredicateResult = Failed | Success of RuleOutput
+type PredicateResult = Failed | Success of PredicateOutput
 
 open RuleInputOutputConvert
 
-type RuleBody = True | False | Predicate of (RuleInput -> PredicateResult) | Single of Signature | Continuation of Signature * RuleBody
+type RuleBody = True | False | Predicate of (PredicateInput -> PredicateResult) | Continuation of Signature * RuleBody
 and Rule = Rule of definition: Signature * body: RuleBody
 
 type Rule with
@@ -36,12 +36,12 @@ module DefineRule =
     let rec defBody calllist =
         match calllist with
         | [] -> True
-        | [h] -> Single(h)
+        | [h] -> Continuation(h, True)
         | h::t -> Continuation(h, defBody t)
 
     let defPredicate term inputConverter predicate =
         let inputConvert input convert predicate =
-            let (RuleInput(arguments)) = input
+            let (PredicateInput(arguments)) = input
             if List.length arguments = List.length convert then
                 let convertedArgs = List.map2(fun conv x -> conv(Term.tryGetValue x)) convert arguments
                 predicate convertedArgs
@@ -50,11 +50,11 @@ module DefineRule =
         Rule(Signature(term), Predicate(fun input -> inputConvert input inputConverter predicate))
 
     let defUnify term =
-        let unif (input: RuleInput): PredicateResult =
+        let unif input =
             match input with
-            | RuleInput([t]) -> 
+            | PredicateInput([t]) -> 
                 match Term.tryUnify term t with
-                | Some(unified) -> Success(RuleOutput[unified])
+                | Some(unified) -> Success(PredicateOutput[unified])
                 | None -> Failed
             | _ -> Failed
         Rule(Signature(term), Predicate(unif))
@@ -70,7 +70,7 @@ module DefineRule =
 
     let inline success (list: System.Object list) =
         let inline create t = termf (t.ToString())
-        Success(RuleOutput(List.map create list))
+        Success(PredicateOutput(List.map create list))
         
     module StandartPredicates =
         // What is good:

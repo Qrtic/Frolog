@@ -38,17 +38,19 @@ module SimpleTest =
         printfn "Signature executed and results in = %A" result
         result
 
-    let checklen factop Signatureop =
-        check factop Signatureop |> List.length
+    let checklen factop signatureop =
+        check factop signatureop |> List.length
         
-    let check_1 factop Signatureop =
-        checklen factop Signatureop |> should equal 1
+    let check_1 factop signatureop =
+        checklen factop signatureop |> should equal 1
 
-    let check_0 factop Signatureop =
-        checklen factop Signatureop |> should equal 0
+    let check_0 factop signatureop =
+        checklen factop signatureop |> should equal 0
         
-    let check_eq factop Signatureop res =
-        check factop Signatureop |> Set.ofList |> Set.difference(Set.ofSeq(res)) |> Set.isEmpty |> should equal true
+    let check_eq factop signatureop res =
+        let callres = check factop signatureop |> Set.ofSeq
+        let expectedres = Set.ofList res
+        Set.intersect callres expectedres |> Set.count |> should equal (Set.count expectedres)
 
     // Check time for all iterations in ms
     let check_time Rules Signatures maxTime =
@@ -80,17 +82,7 @@ module SimpleTest =
     [<Test>]
     let ``Simple. Signature var fact with variable``() =
         check_1 FactOptions.Variable SignatureOptions.VarSignature
-    
-    [<Test>]
-    let ``Simple. Signature fact with same Context``() =
-        check_1 FactOptions.Defined SignatureOptions.VarSignature
-    [<Test>]
-    let ``Simple. Signature fact with another Context``() =
-        check_0 FactOptions.Defined SignatureOptions.VarSignature
-    [<Test>]
-    let ``Simple. Signature fact with empty Context``() =
-        check_1 FactOptions.Defined SignatureOptions.VarSignature
-        
+            
     [<Test>]
     let ``Simple. Check inc predicate``() =
         check_1 FactOptions.None (signOpt "++(1, 2)")
@@ -131,13 +123,22 @@ module SimpleTest =
         let r = defConcatRule cls (defBody [forceSign "+(X, X, Y1)"; forceSign "+(Y1, X, Y)"])
         check_1 (FactOptions.Custom(r)) (signOpt "x3(3, 9)")
         check_0 (FactOptions.Custom(r)) (signOpt "x3(3, 10)")
-
+        
     [<Test>]
     let ``Simple. Check Signature custom Rule(d=2) with Context doesnt changes the Context``() =
         let cls = forceSign "x3(X, Y)"
         let r = defConcatRule cls (defBody [forceSign "+(X, X, Y1)"; forceSign "+(Y1, X, Y)"])
-        check_eq (FactOptions.Custom(r)) (signOpt "x3(3, 9)") [RuleOutput([Value("1")])]
+        check_eq (FactOptions.Custom(r)) (signOpt "x3(3, 9)") [forceSign "x3(3, 9)"]
+        check_eq (FactOptions.Custom(r)) (signOpt "x3(3, A)") [forceSign "x3(3, 9)"]
         check_eq (FactOptions.Custom(r)) (signOpt "x3(3, 10)") []
+
+    [<Test>]
+    let ``Simple. Check Signature custom Rule(d=3) with Context doesnt changes the Context``() =
+        let cls = forceSign "x4(X, Y)"
+        let r = defConcatRule cls (defBody [forceSign "+(X, X, Y1)"; forceSign "+(Y1, X, Y2)"; forceSign "+(Y2, X, Y)"])
+        check_eq (FactOptions.Custom(r)) (signOpt "x4(3, 12)") [forceSign "x4(3, 12)"]
+        check_eq (FactOptions.Custom(r)) (signOpt "x4(3, A)") [forceSign "x4(3, 12)"]
+        check_eq (FactOptions.Custom(r)) (signOpt "x4(3, 13)") []
 
     [<TestFixture>]
     module CustomRulesTest =
@@ -152,7 +153,7 @@ module SimpleTest =
             forceSign (sprintf "parent(%s, %s)" parent child)
             
         [<Test>]
-        let ``Grandparent. Signature grandparents Rule``() =
+        let ``Grandparent. Check fully initialized rules.``() =
             let factopt = FactOptions.Multiple([parent "andrew" "pasha"; parent "alesha" "misha"; parent "misha" "sasha"; parent "misha" "yura"; isgrandparent()])
             check_1 factopt (signOpt "grandparent(alesha, sasha)")
             check_1 factopt (signOpt "grandparent(alesha, yura)")
@@ -160,22 +161,22 @@ module SimpleTest =
             check_0 factopt (signOpt "grandparent(alesha, misha)")
 
         [<Test>]
-        let ``Grandparent. Signature grandparents Rule with Context``() =
+        let ``Grandparent. Check with variables.``() =
             let factopt = FactOptions.Multiple([parent "andrew" "pasha"; parent "alesha" "misha"; parent "misha" "sasha"; parent "misha" "yura"; isgrandparent()])
-            check_1 factopt (signOpt "grandparent(G, C")
-            check_1 factopt (signOpt "grandparent(alesha, yura")
-            check_0 factopt (signOpt "grandparent(andrew, pasha")
-            check_0 factopt (signOpt "grandparent(alesha, misha")
+            check_eq factopt (signOpt "grandparent(alesha, X)") [forceSign "grandparent(alesha, sasha)"; forceSign "grandparent(alesha, yura)"]
             
-            (*
-        [<Test>]
+        (*[<Test>]
         let ``Factorial. Signature factorial``() =
             let factorial = (FactOptions.Multiple([Frolog.Tests.Factorial.fromZero; Factorial.fromN]))
+            
+            check_eq factorial (signOpt "factorial(1, 1)") [forceSign "factorial(1, 1)"]
+            check_eq factorial (signOpt "factorial(2, 2)") [forceSign "factorial(2, 2)"]
+            check_eq factorial (signOpt "factorial(2, A)") [forceSign "factorial(2, 2)"]
+
             check_1 factorial (signOpt "factorial(0, 1)")
             check_1 factorial (signOpt "factorial(1, 1)")
             check_1 factorial (signOpt "factorial(2, 2)")
-            check_1 factorial (signOpt "factorial(3, 6)")
-            *)
+            check_1 factorial (signOpt "factorial(3, 6)")*)
 
         [<TestFixture>]
         module TimeTest =
