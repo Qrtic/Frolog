@@ -18,12 +18,10 @@ type Knowledgebase(rules: Rule list) =
         member k.Rules = k.rules
     
 type ISearcher =
-    abstract Search: Rulebase -> Context -> Signature -> RuleOutput seq
-
-open ContextHelper
-
+    abstract Search: Rulebase -> Signature -> RuleOutput seq
+    
 module Search =    
-    let rec search knowledgebase context call =
+    let rec search knowledgebase call =
         let kb = knowledgebase :> Rulebase
         // Stages
 
@@ -90,11 +88,11 @@ module Search =
             // search for suitable predicate
             for Rule(def, body) in kb.Rules do
             // match call to predicate (change parameters with arguments)
-            let matchedRule = ContextHelper.unifySignatures call def context
+            let matchedRule = unifySignatures call def
             
             match matchedRule with
             | None -> ()
-            | Some(signature, _) ->
+            | Some(signature) ->
                 let rec procBody body = 
                     match body with
                     | False -> 
@@ -108,7 +106,7 @@ module Search =
                     // internal substitution (change variables to arguments)
                     | Single(ruleSign) ->                   
                         let substitutedCall = internalSubstitute def call ruleSign
-                        let res = search knowledgebase context substitutedCall
+                        let res = search knowledgebase substitutedCall
                         res |> Seq.map(fun s -> Success(s))
                     | Continuation(ruleSign, cont) -> 
                         if not <| canApply def call then
@@ -118,7 +116,7 @@ module Search =
                             // apply
                             let appCurrent = internalSubstitute def call ruleSign
                             // evaluate
-                            let evCurrent = search knowledgebase context appCurrent
+                            let evCurrent = search knowledgebase appCurrent
 
                             seq {
                                 for RuleOutput(current) in evCurrent do
@@ -134,7 +132,7 @@ module Search =
                                             // backapply
                                             let bappCurrent = backSubstitute cont (sign predRes) appInner
                                             // evaluate second time to check all constaints
-                                            let evbapCurrent = search knowledgebase context bappCurrent
+                                            let evbapCurrent = search knowledgebase bappCurrent
                                             // return result
                                             for evbap in evbapCurrent do
                                                 yield PredicateResult.Success(evbap)
@@ -149,13 +147,13 @@ module Search =
 
 type SimpleSearcher() =
     interface ISearcher with
-        member __.Search rb c call = Search.search rb c call
+        member __.Search rb call = Search.search rb call
 
 type DebugInfoSearcher() =
     interface ISearcher with
-        member s.Search rb c call = 
+        member s.Search rb call = 
             debug (sprintf "Called rule %s" call.AsString)
-            let found = (new SimpleSearcher() :> ISearcher).Search rb c call
+            let found = (new SimpleSearcher() :> ISearcher).Search rb call
             if (Seq.isEmpty found) then
                 debug "No rules match."
             else
@@ -164,9 +162,9 @@ type DebugInfoSearcher() =
             found
 
 module Execute =
-    let exec (f: ISearcher) (d: Rulebase) (start: Context) (s: Signature): unit =
-        printfn "Execute: %s. Context = %s" s.AsString (start.ToString())
-        let res = f.Search d start s
+    let exec (f: ISearcher) (d: Rulebase) (s: Signature): unit =
+        printfn "Execute: %s." s.AsString
+        let res = f.Search d s
         if Seq.isEmpty res then
             printfn "Result: %b." false
         else

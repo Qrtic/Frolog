@@ -1,7 +1,5 @@
 ﻿namespace Frolog
 
-open Frolog.ContextHelper
-
 // RuleInput is desctructured argument terms
 type RuleInput = RuleInput of Term list
 type RuleOutput = RuleOutput of Term list

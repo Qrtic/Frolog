@@ -17,8 +17,7 @@ module SearchMachines =
         member this.AddRule(r: Rule) = 
             let newk = this.kb.Append r
             this.kb <- newk
-        member this.Execute(s: Signature) = this.Execute(s, Context.Empty)
-        member this.Execute(s: Signature, c: Context) = this.searcher.Search this.kb c s
+        member this.Execute(s: Signature) = this.searcher.Search this.kb s
         interface ISearchMachine with
             member t.AddRule r = t.AddRule r
             member t.Execute s = t.Execute s

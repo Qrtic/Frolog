@@ -47,7 +47,7 @@
     <Compile Include="Common.fs" />
     <Compile Include="Term.fs" />
     <Compile Include="Signature.fs" />
-    <Compile Include="Context.fs" />
+    <Compile Include="Unify.fs" />
     <Compile Include="Rule.fs" />
     <Compile Include="Knowledgebase.fs" />
     <Compile Include="SearchMachine.fs" />
