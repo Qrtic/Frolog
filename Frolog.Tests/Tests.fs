@@ -41,6 +41,9 @@ module SimpleTest =
     let checklen factop signatureop =
         check factop signatureop |> List.length
         
+    let check_2 factop signatureop =
+        checklen factop signatureop |> should equal 2
+
     let check_1 factop signatureop =
         checklen factop signatureop |> should equal 1
 
@@ -161,11 +164,18 @@ module SimpleTest =
             check_0 factopt (signOpt "grandparent(alesha, misha)")
 
         [<Test>]
+        let ``Grandparent. Check len of variable rules.``() =
+            let factopt = FactOptions.Multiple([parent "andrew" "pasha"; parent "alesha" "misha"; parent "misha" "sasha"; parent "misha" "yura"; isgrandparent()])
+            check_2 factopt (signOpt "grandparent(alesha, X)")
+            check_0 factopt (signOpt "grandparent(andrew, X)")
+            check_0 factopt (signOpt "grandparent(misha, X)")
+
+        [<Test>]
         let ``Grandparent. Check with variables.``() =
             let factopt = FactOptions.Multiple([parent "andrew" "pasha"; parent "alesha" "misha"; parent "misha" "sasha"; parent "misha" "yura"; isgrandparent()])
             check_eq factopt (signOpt "grandparent(alesha, X)") [forceSign "grandparent(alesha, sasha)"; forceSign "grandparent(alesha, yura)"]
             
-        (*[<Test>]
+        [<Test>]
         let ``Factorial. Signature factorial``() =
             let factorial = (FactOptions.Multiple([Frolog.Tests.Factorial.fromZero; Factorial.fromN]))
             
@@ -176,7 +186,8 @@ module SimpleTest =
             check_1 factorial (signOpt "factorial(0, 1)")
             check_1 factorial (signOpt "factorial(1, 1)")
             check_1 factorial (signOpt "factorial(2, 2)")
-            check_1 factorial (signOpt "factorial(3, 6)")*)
+            check_1 factorial (signOpt "factorial(3, 6)")
+            check_1 factorial (signOpt "factorial(4, 24)")
 
         [<TestFixture>]
         module TimeTest =

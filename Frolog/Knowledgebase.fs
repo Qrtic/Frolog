@@ -32,11 +32,13 @@ module Search =
         let canApply def call =
             let defa = Signature.GetArguments def
             let calla = Signature.GetArguments call
+            let isvar = Term.IsVariableTerm
             let anyVar t1 t2 = Term.IsVariableTerm t1 || Term.IsVariableTerm t2
             List.forall2 (fun t1 t2 ->
                 match Term.tryUnify t1 t2 with
                 | Some(Value(v)) when anyVar t1 t2 -> true
                 | Some(Structure(f, args)) as s when anyVar t1 t2 -> true
+                | _ when isvar t1 && isvar t2 -> true
                 | _ -> false) defa calla
 
         // internal substitution (change variables to arguments)
@@ -99,7 +101,6 @@ module Search =
                 let name = Signature.GetName signature
                 let bodyToSignature def defBody resBody =
                     backSub def defBody resBody
-                let name = Signature.GetName signature
                 let bodyToSignature def defBody resBody =
                     backSub def defBody resBody
 
