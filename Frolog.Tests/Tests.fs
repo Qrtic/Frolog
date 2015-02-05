@@ -56,12 +56,14 @@ module SimpleTest =
         Set.intersect callres expectedres |> Set.count |> should equal (Set.count expectedres)
 
     // Check time for all iterations in ms
-    let check_time Rules Signatures maxTime =
+    let check_time rules signatures maxTime =
         let sm = SearchMachines.Simple.Create()
         sm.kb <- Knowledgebase.Default
+        for r in rules do sm.AddRule r
+
         let sw = new System.Diagnostics.Stopwatch()
         sw.Start()
-        for c in Signatures do
+        for c in signatures do
             sm.Execute(c) |> ignore
         sw.Stop()
         sw.ElapsedMilliseconds |> should lessThan maxTime

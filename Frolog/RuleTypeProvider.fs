@@ -9,6 +9,7 @@ open System.Linq
 
 open DefineRule
 
+(*This module is in development
 module RuleTypeProvideModule =
     let extractRules (lines: string array) =
                 let cnt = Array.length lines
@@ -82,3 +83,4 @@ module RuleTypeProvideModule =
     [<TypeProviderAssembly>]
     do()
     #endif
+*)

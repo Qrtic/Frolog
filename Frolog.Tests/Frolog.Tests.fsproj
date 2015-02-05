@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Frolog.Tests</RootNamespace>
     <AssemblyName>Frolog.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
     <Name>Frolog.Tests</Name>
@@ -60,6 +60,8 @@
     <Compile Include="Common.fs" />
     <Compile Include="Term.fs" />
     <Compile Include="Factorial.fs" />
+    <Compile Include="Grandparent.fs" />
+    <Compile Include="GGrandParent.fs" />
     <Compile Include="Tests.fs" />
     <Compile Include="TestSearchMachine.fs" />
     <Compile Include="Main.fs" />

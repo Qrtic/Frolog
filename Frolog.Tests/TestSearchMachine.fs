@@ -7,7 +7,7 @@ open Frolog.SearchMachines
 module Distributions =
     let random min max = 
         let r = new System.Random()
-        fun x -> r.Next(min, max)
+        fun (x) -> r.Next(min, max)
 
 module TestSearchMachine =
     let starttest (factsGet) (queriesGet) factsN queriesN times precedences =
@@ -44,9 +44,10 @@ module TestSearchMachine =
                 let m = mGet()
                 ret(m, test m queries)
             _iter getter qs (fun (m: ISearchMachine, r) -> 
-                                            match m with
-                                            | :? SearchMachines.Simple as simpl -> 0, fst r, snd r
-                                            | :? SearchMachines.Custom as custm -> custm.CacheHits, fst r, snd r)
+                                    match m with
+                                    | :? SearchMachines.Simple as simpl -> 0, fst r, snd r
+                                    | :? SearchMachines.Custom as custm -> custm.CacheHits, fst r, snd r
+                                    | _ -> failwith "Unknown type of search machine.")
 
         let testSmth get' print' qs =
             let mutable time = 0L
@@ -79,5 +80,6 @@ module TestSearchMachine =
                 printfn "Fifo results are wrong."
             if (not (aresameres ressimple reslifo)) then
                 printfn "Lifo results are wrong."
+            printfn "_______________________________"
 
         printfn "Test finished."

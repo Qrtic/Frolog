@@ -8,6 +8,10 @@ type ISearchMachine =
     abstract member AddRule: Rule -> unit
 
 module SearchMachines =
+    type ExecuteSearcher(machine : ISearchMachine) =
+        interface ISearcher with
+            member __.Search kb s = machine.Execute s
+
     type Simple =
         private new() = {kb = Knowledgebase.Default; searcher = new SimpleSearcher()}
         private new(finder) = {kb = Knowledgebase.Default; searcher = finder}
@@ -24,9 +28,10 @@ module SearchMachines =
     
     type Custom(pre: Signature -> unit, query: Signature -> SearchResult option, post: Signature*SearchResult -> unit) =
         // TODO: Customize finder
-        let mutable simple = Simple.Create()
+        let mutable kb: Rulebase = Knowledgebase.Default :> Rulebase
         let mutable hits = 0
-        member this.AddRule(r: Rule) = simple.AddRule r
+        member this.searcher = new ExecuteSearcher(this)
+        member this.AddRule(r: Rule) = kb <- kb.Append r
         member this.Execute(s: Signature) = 
             pre s |> ignore
             let prequery = query s
@@ -35,7 +40,7 @@ module SearchMachines =
                 hits <- hits + 1
                 contexts
             | None -> 
-                let res = simple.Execute s
+                let res = Search.search (this.searcher :> ISearcher) kb s
                 post (s, res) |> ignore
                 res
         member this.CacheHits with get() = hits
@@ -46,19 +51,17 @@ module SearchMachines =
 
         static member CacheFirstMachine cacheParameters =
             let cache = ref Map.empty<Signature, SearchResult>
-            let none s = ()
-            let query = (!cache).TryFind
+            let query =  (!cache).TryFind
             let post(s, cs) = 
-                let overmax = (!cache).Count < cacheParameters.maxPrecedences
-                if overmax then
+                if (!cache).Count < cacheParameters.maxPrecedences then
                     cache := (!cache).Add(s, cs)
-            new Custom(none, query, post)
-    
+            new Custom(ignore, query, post)
+
         static member CacheLastMachine cacheParameters =
             let chc = Array.create<(Signature*SearchResult) option>(cacheParameters.maxPrecedences) Option.None
             let chcPtr = ref 0
             let lastCacheResult = ref false
-            
+
             let rec tryfind (s: Signature) =
                 let foundres = chc |> Array.choose(fun x -> x) |> Array.tryFind(fun t -> Signature.Equals(s, (fst t)))
                 lastCacheResult := foundres.IsSome
@@ -72,5 +75,4 @@ module SearchMachines =
                     if (!chcPtr = cacheParameters.maxPrecedences) then
                         chcPtr := 0
                         
-            let none s = ()
-            new Custom(none, tryfind, insertnew)
+            new Custom(ignore, tryfind, insertnew)

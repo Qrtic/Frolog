@@ -11,12 +11,8 @@ type Signature = Signature of Term
     static member AsTerm signature =
         let (Signature(term)) = signature
         term
-    static member GetName signature =
-        let (Signature(Structure(name, args))) = signature
-        name
-    static member GetArguments signature =
-        let (Signature(Structure(name, args))) = signature
-        args
+    static member GetName (Signature(Structure(name, _))) = name
+    static member GetArguments (Signature(Structure(_, args))) = args
 
 [<AutoOpen>]
 module SignatureHelper =

@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Frolog</RootNamespace>
     <AssemblyName>Frolog</AssemblyName>
-    <TargetFrameworkVersion>v4.5.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.3.1.0</TargetFSharpCoreVersion>
     <Name>Frolog</Name>
     <TargetFrameworkProfile />
@@ -53,7 +53,15 @@
     <Compile Include="SearchMachine.fs" />
     <Compile Include="ProvidedTypes-0.2.fs" />
     <Compile Include="RuleTypeProvider.fs" />
+    <Compile Include="CustomRules.fs" />
     <None Include="test.fsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Frolog.DataStructures\Frolog.DataStructures.fsproj">
+      <Name>Frolog.DataStructures</Name>
+      <Project>{3d5ec56d-e0d3-4e09-acaa-002e39e6a893}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>

@@ -23,7 +23,7 @@ type ISearcher =
     abstract Search: Rulebase -> Signature -> SearchResult
     
 module Search =    
-    let rec search knowledgebase call: Signature seq =
+    let rec search (searcher: #ISearcher) knowledgebase call: Signature seq =
         let kb = knowledgebase :> Rulebase
         // Stages
 
@@ -93,7 +93,7 @@ module Search =
                     backSub apDef c1 c2
             | _ -> None
 
-        let checkRule(Rule(def, body)) =
+        let checkRule(Rule(def, body, isInternal)) =
             let matchedRule = unifySignatures call def
             match matchedRule with
             | None -> Seq.empty
@@ -120,7 +120,11 @@ module Search =
                             // apply
                             let appCurrent = internalSubstitute def call ruleSign
                             // evaluate
-                            let evCurrent = search knowledgebase appCurrent
+                            let evCurrent =
+                                if isInternal then
+                                    search searcher knowledgebase appCurrent
+                                else
+                                    searcher.Search knowledgebase appCurrent
 
                             let applyCur appInner =
                                 let appInnerBody = substituteBody ruleSign appInner cont
@@ -150,7 +154,7 @@ module Search =
 
 type SimpleSearcher() =
     interface ISearcher with
-        member __.Search rb call = Search.search rb call
+        member this.Search rb call = Search.search this rb call
 
 type DebugInfoSearcher() =
     interface ISearcher with
