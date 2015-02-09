@@ -55,7 +55,7 @@ module Main =
     [<EntryPoint>]
     let main args =
         // starttest (fun x -> []) (createFibsQueries (Distributions.random 1 10)) 0 200 2 100
-        use stream = System.IO.File.Open("testresults" + System.DateTime.Now.ToString() + ".txt", System.IO.FileMode.CreateNew)
+        use stream = System.IO.File.Open("testresults" + System.DateTime.Now.ToShortDateString() + ".txt", System.IO.FileMode.CreateNew)
         use wr = new System.IO.StreamWriter(stream)
         System.Console.SetOut(wr)
         for d in [10; 25; 50; 100; 500; 1000] do

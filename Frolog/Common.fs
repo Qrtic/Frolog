@@ -12,6 +12,7 @@ module Common =
     
     let isVariableName (s : string) = System.Char.IsUpper (s.Chars 0)
     let isStructureName (s: string) = s.Chars 0 = '(' && s.Chars(s.Length - 1) = ')'
+    let isUnderscore (s: string) = s = "_"
 
     let same x y = x = y
     let contains (container) (what) =

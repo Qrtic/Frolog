@@ -135,15 +135,21 @@ module Search =
                         | Success(PredicateOutput(pout)) ->
                             Seq.singleton(Lexem(Call(sign name pout)))
                     | Lexem(Call(c)) -> 
-                        let cur = internalSubstitute def call c
-                        // evaluate
-                        let evCurrent =
-                            if isInternal then
-                                search searcher knowledgebase cur
-                            else
-                                searcher.Search knowledgebase cur
-                        let binder c = Some(Lexem(Call c))
-                        Seq.map (unifySignatures cur) >> Seq.choose (Option.bind binder) <| evCurrent
+                        if Signature.GetName c = "not" then
+                            // That is the not option
+                            match Signature.GetArguments c with
+                            | [Structure(cname, args)] -> procBody(Not(Lexem(Call(sign cname args))))
+                            | _ -> failwith "Cant parse not expression."
+                        else
+                            let cur = internalSubstitute def call c
+                            // evaluate
+                            let evCurrent =
+                                if isInternal then
+                                    search searcher knowledgebase cur
+                                else
+                                    searcher.Search knowledgebase cur
+                            let binder c = Some(Lexem(Call c))
+                            Seq.map (unifySignatures cur) >> Seq.choose (Option.bind binder) <| evCurrent
                     | Or(b1, b2) ->
                         let p1 = procBody b1
                         let p2 = procBody b2

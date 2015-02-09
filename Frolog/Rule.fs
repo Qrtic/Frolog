@@ -55,6 +55,17 @@ module DefineRule =
     let internal _defConcatRule term body = Rule(term, body, true)
     let defConcatRule term body = Rule(term, body, false)
     
+    let rec combine body rule =
+        let rec combineBody body1 body2 =
+            match body1 with
+            | Lexem(_) -> Conjunction(body1, body2)
+            | Conjunction(b1, b2) -> Conjunction(b1, combineBody b2 body2)
+            | Or(b1, b2) -> Or(combineBody b1 body2, combineBody b2 body2)
+            | Cut(b) -> Conjunction(body1, body2)
+            | Not(b) -> Conjunction(body1, body2)
+        let (Rule(def, b, isInternal)) = rule
+        Rule(def, combineBody b body, isInternal)
+
     let internal _defOrRule term body1 body2 = Rule(term, Or(body1, body2), true)
     let internal defOrRule term body1 body2 = Rule(term, Or(body1, body2), false)
 

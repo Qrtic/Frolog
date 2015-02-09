@@ -76,6 +76,7 @@ type Term =
         | _ -> false
     static member GetVariableName t =
         match t with
+        | Variable(name) when isUnderscore name -> None
         | Variable(name) -> Some(name)
         | _ -> None
 
