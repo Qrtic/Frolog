@@ -1,11 +1,11 @@
 ﻿namespace Frolog.Tests
 
 open NUnit.Framework
-open FsUnit
 
 open Frolog
 open Frolog.DefineRule
 open Frolog.SearchMachines
+open Frolog.CustomRules
 
 type FactOptions = None | Variable | Defined | Custom of Rule | Multiple of Rule seq
 type SignatureOptions = FactValueSignature | AnotherValueSignature | VarSignature | CustomSignature of Signature
@@ -42,18 +42,22 @@ module SimpleTest =
         check factop signatureop |> List.length
         
     let check_2 factop signatureop =
-        checklen factop signatureop |> should equal 2
+        let len = checklen factop signatureop 
+        Assert.AreEqual(len, 2)
 
     let check_1 factop signatureop =
-        checklen factop signatureop |> should equal 1
+        let len = checklen factop signatureop 
+        Assert.AreEqual(len, 1)
 
     let check_0 factop signatureop =
-        checklen factop signatureop |> should equal 0
+        let len = checklen factop signatureop 
+        Assert.AreEqual(len, 0)
         
     let check_eq factop signatureop res =
         let callres = check factop signatureop |> Set.ofSeq
         let expectedres = Set.ofList res
-        Set.intersect callres expectedres |> Set.count |> should equal (Set.count expectedres)
+        let intersectLen = Set.intersect callres expectedres |> Set.count
+        Assert.AreEqual(intersectLen, Set.count expectedres)
 
     // Check time for all iterations in ms
     let check_time rules signatures maxTime =
@@ -66,7 +70,7 @@ module SimpleTest =
         for c in signatures do
             sm.Execute(c) |> ignore
         sw.Stop()
-        sw.ElapsedMilliseconds |> should lessThan maxTime
+        Assert.LessOrEqual(sw.ElapsedMilliseconds, maxTime)
 
     [<Test>]
     let ``Simple. Signature fact with it value``() =
@@ -179,7 +183,7 @@ module SimpleTest =
             
         [<Test>]
         let ``Factorial. Signature factorial``() =
-            let factorial = (FactOptions.Multiple([Frolog.Tests.Factorial.fromZero; Factorial.fromN]))
+            let factorial = (FactOptions.Multiple([Factorial.fromZero; Factorial.fromN]))
             
             check_eq factorial (signOpt "factorial(1, 1)") [forceSign "factorial(1, 1)"]
             check_eq factorial (signOpt "factorial(2, 2)") [forceSign "factorial(2, 2)"]
@@ -195,17 +199,17 @@ module SimpleTest =
         module TimeTest =
             let r = new System.Random()
             let person(max) = r.Next(max).ToString()
-            let nFacts = 1000 * 1000
-            let nSignatures = 1000 * 1000
-            let maxTime = 10 * 1000
+            let nFacts = 1000
+            let nCalls = 10000
+            let maxTime = 30L * 1000L
 
             [<Test>]
             let ``Performance. Signature simple facts``() =   
                 let facts = [1..nFacts] |> List.map(fun x -> forceFact (sprintf "b(%s)" (person(nFacts))))
-                let signatures = [1..nSignatures] |> List.map(fun x -> forceSign (sprintf "b(%s)" (person(nFacts))))
-                check_time facts signatures maxTime
+                let calls = [1..nCalls] |> List.map(fun x -> forceSign (sprintf "b(%s)" (person(nFacts))))
+                check_time facts calls maxTime
             [<Test>]
             let ``Performance. Signature 2d Rules``() =
                 let parents = [1..nFacts] |> List.map(fun x -> parent (person(nFacts)) (person(nFacts)))
-                let signatures = [1..nSignatures] |> List.map(fun x -> forceSign (sprintf "grandparent(%s, %s)" (person(nFacts)) (person(nFacts))))
-                check_time (isgrandparent()::parents) signatures maxTime
+                let calls = [1..nCalls] |> List.map(fun x -> forceSign (sprintf "grandparent(%s, %s)" (person(nFacts)) (person(nFacts))))
+                check_time (isgrandparent()::parents) calls maxTime

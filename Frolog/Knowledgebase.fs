@@ -70,27 +70,47 @@ module Search =
                         | Some(vname, vvalue) -> vvalue)
             Signature.Signature(Structure(Signature.GetName subCall, substituted))
 
-        // Changes all bodyies in forward order
+        // Changes all bodies in forward order
         let rec substituteBody def call body =
             match body with
-            | True | False | Predicate(_) -> body
-            | Continuation(bodyS, cont) ->
-                let cur = internalSubstitute def call bodyS
-                Continuation(cur, substituteBody def call cont)
+            | Lexem(Call lexemCall) -> Lexem(Call(internalSubstitute def call lexemCall))
+            | Conjunction(body1, body2) -> Conjunction(substituteBody def call body1, substituteBody def call body2)
+            | Or(body1, body2) -> Or(substituteBody def call body1, substituteBody def call body2)
+            | _ -> body
 
-        // Matches True, True
-        // or Predicate and Continuation(signature, True)
-        // or Continuation, Continuation of same deep level
+        let rec substituteBodyByBody defBody callBody subBody =
+            match defBody, callBody with
+            | Lexem(Call d), Lexem(Call c) -> substituteBody d c subBody
+            | Lexem(_), Lexem(_) -> subBody
+            | Conjunction(db1, db2), Conjunction(cb1, cb2) ->
+                let leftBodySub = substituteBodyByBody db1 cb1 subBody
+                let rightBodySub = substituteBodyByBody db2 cb2 leftBodySub
+                rightBodySub
+            | Or(db1, db2), Or(cb1, cb2) -> 
+                let leftBodySub = substituteBodyByBody db1 cb1 subBody
+                let rightBodySub = substituteBodyByBody db2 cb2 leftBodySub
+                rightBodySub
+            | Cut(db), Cut(cb) -> substituteBodyByBody db cb subBody
+            | Not(db), Not(cb) -> substituteBodyByBody db cb subBody
+            | _ -> failwith "Cant substitute different bodies"  
+
         let rec backSub def defBody resBody =
             match defBody, resBody with
-            | True, True -> Some def
-            | Predicate(_), Continuation(s, True) -> Some s
-            | Continuation(bs1, c1), Continuation(bs2, c2) ->
-                match unifySignatures bs1 bs2 with
+            | Lexem(Call(s1)), Lexem(Call(s2)) -> internalSubstitute s1 s2 def |> Some
+            | Lexem(Predicate(_)), Lexem(Call s) -> Some s
+            | Lexem(_), Lexem(_) -> Some def
+            | Conjunction(b1, b2), Conjunction(b3, b4) -> 
+                match backSub def b1 b3 with
+                | Some s -> 
+                    match backSub s b2 b4 with
+                    | Some s -> Some s
+                    | _ -> None
                 | None -> None
-                | Some(s) ->
-                    let apDef = internalSubstitute bs1 bs2 def
-                    backSub apDef c1 c2
+            | Or(b1, b2), Or(b3, b4) ->
+                match backSub def b1 b3, backSub def b2 b4 with
+                | Some s1, Some s2 -> internalSubstitute s1 s2 def |> Some
+                | _ -> None
+            | Cut(b1), Cut(b2) -> backSub def b1 b2
             | _ -> None
 
         let checkRule(Rule(def, body, isInternal)) =
@@ -104,44 +124,48 @@ module Search =
                 let bodyToSignature def defBody resBody =
                     backSub def defBody resBody
 
-                let rec procBody body = 
-                    match body with
-                    | False -> Seq.empty
-                    | True -> Seq.singleton(True)
-                    | Predicate(p) -> 
-                        match p (PredicateInput(Signature.GetArguments signature)) with
+                let rec procBody = 
+                    function
+                    | Lexem(False) -> Seq.empty
+                    | Lexem(True) -> Seq.singleton(Lexem(True))
+                    | Lexem(Predicate(p)) -> 
+                        let cur = internalSubstitute def call signature
+                        match p (PredicateInput(Signature.GetArguments cur)) with
                         | Failed -> Seq.empty
                         | Success(PredicateOutput(pout)) ->
-                            Seq.singleton(Continuation(sign name pout, True))
-                    | Continuation(ruleSign, cont) -> 
+                            Seq.singleton(Lexem(Call(sign name pout)))
+                    | Lexem(Call(c)) -> 
+                        let cur = internalSubstitute def call c
+                        // evaluate
+                        let evCurrent =
+                            if isInternal then
+                                search searcher knowledgebase cur
+                            else
+                                searcher.Search knowledgebase cur
+                        let binder c = Some(Lexem(Call c))
+                        Seq.map (unifySignatures cur) >> Seq.choose (Option.bind binder) <| evCurrent
+                    | Or(b1, b2) ->
+                        let p1 = procBody b1
+                        let p2 = procBody b2
+                        Seq.concat [Seq.map(fun p -> Or(p, b2)) p1; Seq.map(fun p -> Or(b1, p)) p2]
+                    | Conjunction(b1, b2) ->
+                        // TODO research in what case
                         if not <| canApply def call then
                             Seq.empty
                         else
-                            // apply
-                            let appCurrent = internalSubstitute def call ruleSign
-                            // evaluate
-                            let evCurrent =
-                                if isInternal then
-                                    search searcher knowledgebase appCurrent
-                                else
-                                    searcher.Search knowledgebase appCurrent
-
-                            let applyCur appInner =
-                                let appInnerBody = substituteBody ruleSign appInner cont
-                                // evaluate inner
-                                let evInner = procBody appInnerBody
-                                let applyInner inner =  
-                                    // apply back
-                                    let withInner = backSub def body (Continuation(appInner, inner))
-                                    match withInner with
-                                    | None -> Seq.empty
-                                    | Some withInner -> 
-                                        let current = backSub appInner appInnerBody inner
-                                        match current with
-                                        | None -> Seq.empty
-                                        | Some s -> Seq.singleton (Continuation(s, inner))
-                                Seq.map applyInner evInner |> Seq.concat
-                            Seq.map applyCur evCurrent |> Seq.concat
+                            let subB1 = substituteBody def call b1
+                            let procedB1 = procBody subB1
+                            seq {
+                                for pb1 in procedB1 do
+                                    let preSubB2 = substituteBody def call b2
+                                    let subB2 = substituteBodyByBody b1 pb1 preSubB2
+                                    let procedB2 = procBody subB2
+                                    for pb2 in procedB2 do
+                                        let postSub1 = substituteBodyByBody subB2 pb2 pb1
+                                        yield Conjunction(postSub1, pb2)
+                            }
+                    | Not(_) -> failwith "Not implemented function <NOT>"
+                    | Cut(_) -> failwith "Not implemented function <CUT>"
                 // recursively call internal calls with autosubstitution of next calls
                 // return result signature
                 let proced = procBody body |> Seq.toList

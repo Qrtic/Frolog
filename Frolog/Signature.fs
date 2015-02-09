@@ -11,8 +11,14 @@ type Signature = Signature of Term
     static member AsTerm signature =
         let (Signature(term)) = signature
         term
-    static member GetName (Signature(Structure(name, _))) = name
-    static member GetArguments (Signature(Structure(_, args))) = args
+    static member GetName =
+        function
+        | Signature(Structure(name, _)) -> name
+        | _ -> failwith "Wrongly constructed signature"
+    static member GetArguments =
+        function
+        | Signature(Structure(_, args)) -> args
+        | _ -> failwith "Wrongly constructed signature"
 
 [<AutoOpen>]
 module SignatureHelper =

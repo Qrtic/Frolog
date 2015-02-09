@@ -1,13 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22310.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Frolog", "Frolog\Frolog.fsproj", "{2318A313-429B-4BB3-909B-0A4EA7FB2C9A}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Frolog.Tests", "Frolog.Tests\Frolog.Tests.fsproj", "{98EAB99E-61F6-4DF4-87FF-892228E46E91}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Frolog.DataStructures", "Frolog.DataStructures\Frolog.DataStructures.fsproj", "{3D5EC56D-E0D3-4E09-ACAA-002E39E6A893}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Frolog.Measurements", "Frolog.Measurements\Frolog.Measurements.fsproj", "{5B2BD6E6-515C-4631-9D93-1B795AC18924}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Frolog.CustomRules", "Frolog.CustomRules\Frolog.CustomRules.fsproj", "{FCD6239C-BA45-40A9-BCB0-115522799BBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1A4C4BA7-B992-4387-B33D-4551941F9130}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +36,14 @@ Global
 		{3D5EC56D-E0D3-4E09-ACAA-002E39E6A893}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D5EC56D-E0D3-4E09-ACAA-002E39E6A893}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D5EC56D-E0D3-4E09-ACAA-002E39E6A893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B2BD6E6-515C-4631-9D93-1B795AC18924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2BD6E6-515C-4631-9D93-1B795AC18924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B2BD6E6-515C-4631-9D93-1B795AC18924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2BD6E6-515C-4631-9D93-1B795AC18924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCD6239C-BA45-40A9-BCB0-115522799BBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCD6239C-BA45-40A9-BCB0-115522799BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCD6239C-BA45-40A9-BCB0-115522799BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCD6239C-BA45-40A9-BCB0-115522799BBE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

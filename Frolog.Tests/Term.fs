@@ -5,7 +5,7 @@ open Frolog
 // Test term create
 
 open NUnit.Framework
-open FsUnit
+open Frolog.Common
 
 [<TestFixture>]
 module TermCreateTests =

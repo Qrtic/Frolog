@@ -12,7 +12,22 @@ type PredicateResult = Failed | Success of PredicateOutput
 
 open RuleInputOutputConvert
 
-type RuleBody = True | False | Predicate of (PredicateInput -> PredicateResult) | Continuation of Signature * RuleBody
+type RuleBodyLexem =
+    | True
+    | False
+    | Call of Signature
+    | Predicate of (PredicateInput -> PredicateResult)
+type RuleBody = 
+    // Simple success verifier
+    | Lexem of RuleBodyLexem
+    // Execute second if first succeed
+    | Conjunction of RuleBody * RuleBody
+    // Execute first and then second
+    | Or of RuleBody * RuleBody
+    // Execute only this
+    | Cut of RuleBody
+    // If fails then succeed
+    | Not of RuleBody
 and Rule = Rule of definition: Signature * body: RuleBody * isInternal: bool
 
 type Rule with
@@ -20,35 +35,39 @@ type Rule with
         let (Rule(def, _, _)) = r
         def
 
+// Rule is only a structure with defined constraints
+// It can be fully defined aka f(1).
+// Or partially defined f(1, X).
+// And can be constrained by f(1, X) :- X > 3.
 module DefineRule =
-    // Rule is only a structure with defined constraints
-    // It can be fully defined aka f(1).
-    // Or partially defined f(1, X).
-    // And can be constrained by f(1, X) :- X > 3.
-    let internal _defFact sign = Rule(sign, True, true)
-    let defFact sign = Rule(sign, True, false)
+    let internal _defFact sign = Rule(sign, Lexem(True), true)
+    let defFact sign = Rule(sign, Lexem(True), false)
+
     let internal _tryDefFact t =
         match Option.bind sign (term t) with
         | None -> None
-        | Some(sign) -> Some(Rule(sign, True, true))
+        | Some(sign) -> Some(Rule(sign, Lexem(True), true))
     let tryDefFact t =
         match Option.bind sign (term t) with
         | None -> None
-        | Some(sign) -> Some(Rule(sign, True, false))
+        | Some(sign) -> Some(Rule(sign, Lexem(True), false))
         
     let internal _defConcatRule term body = Rule(term, body, true)
     let defConcatRule term body = Rule(term, body, false)
     
+    let internal _defOrRule term body1 body2 = Rule(term, Or(body1, body2), true)
+    let internal defOrRule term body1 body2 = Rule(term, Or(body1, body2), false)
+
     let rec internal _defBody calllist =
         match calllist with
-        | [] -> True
-        | [h] -> Continuation(h, True)
-        | h::t -> Continuation(h, _defBody t)
+        | [] -> Lexem(True)
+        | [h] -> Lexem(Call(h))
+        | h::t -> Conjunction(Lexem(Call h), _defBody t)
     let rec defBody calllist =
         match calllist with
-        | [] -> True
-        | [h] -> Continuation(h, True)
-        | h::t -> Continuation(h, defBody t)
+        | [] -> Lexem(True)
+        | [h] -> Lexem(Call(h))
+        | h::t -> Conjunction(Lexem(Call h), _defBody t)
         
     let internal _defPredicate term inputConverter predicate =
         let inputConvert input convert predicate =
@@ -58,7 +77,7 @@ module DefineRule =
                 predicate convertedArgs
             else
                 Failed
-        Rule(Signature(term), Predicate(fun input -> inputConvert input inputConverter predicate), true)
+        Rule(Signature(term), Lexem(Predicate(fun input -> inputConvert input inputConverter predicate)), true)
     let defPredicate term inputConverter predicate =
         let inputConvert input convert predicate =
             let (PredicateInput(arguments)) = input
@@ -67,7 +86,7 @@ module DefineRule =
                 predicate convertedArgs
             else
                 Failed
-        Rule(Signature(term), Predicate(fun input -> inputConvert input inputConverter predicate), false)
+        Rule(Signature(term), Lexem(Predicate(fun input -> inputConvert input inputConverter predicate)), false)
 
     let internal _defUnify term =
         let unif input =
@@ -77,7 +96,7 @@ module DefineRule =
                 | Some(unified) -> Success(PredicateOutput[unified])
                 | None -> Failed
             | _ -> Failed
-        Rule(Signature(term), Predicate(unif), true)
+        Rule(Signature(term), Lexem(Predicate(unif)), true)
         
     [<AutoOpen>]
     module Converters =
@@ -136,6 +155,15 @@ module DefineRule =
                 | _ -> Failed
             )
         
+        let defSub =
+            _defPredicate (termf "-(A, B, C)") [convertInt; convertInt; convertInt] (function
+                | [Some(a); Some(b); Some(c)] when a - b = c -> success [a; b; c]
+                | [Some(a); Some(b); None] -> success[a; b; a - b]
+                | [Some(a); None; Some(c)] -> success[a; c + a; c]
+                | [None; Some(b); Some(c)] -> success[c + b; b; c]
+                | _ -> Failed
+            )
+        
         let defMul =
             _defPredicate (termf "*(A, B, C)") [convertInt; convertInt; convertInt] (function
                 | [Some(a); Some(b); Some(c)] when a * b = c -> success [a; b; c]
@@ -159,4 +187,4 @@ module DefineRule =
                 | _ -> Failed)
 
     open StandartPredicates
-    let standartRules = [defInc; defDec; defSum; defMul; defDiv; defEq; defGr]
+    let standartRules = [defInc; defDec; defSum; defSub; defMul; defDiv; defEq; defGr]
