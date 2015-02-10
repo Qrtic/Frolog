@@ -51,7 +51,7 @@ module SearchMachines =
 
         static member CacheFirstMachine cacheParameters =
             let cache = ref Map.empty<Signature, SearchResult>
-            let query =  (!cache).TryFind
+            let query s =  (!cache).TryFind s
             let post(s, cs) = 
                 if (!cache).Count < cacheParameters.maxPrecedences then
                     cache := (!cache).Add(s, cs)
@@ -69,7 +69,7 @@ module SearchMachines =
                 | Some(_, cs) -> Some(cs)
                 | None -> None
             let insertnew(s, cs) =
-                if not !lastCacheResult then
+                if not !lastCacheResult && cacheParameters.maxPrecedences > 0 then
                     chc.[!chcPtr] <- Some((s, cs))
                     incr chcPtr
                     if (!chcPtr = cacheParameters.maxPrecedences) then

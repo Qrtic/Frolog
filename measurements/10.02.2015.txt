@@ -1,0 +1,6144 @@
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 11 with 3 hits.
+Fifo executes in 1 with 3 hits.
+Lifo executes in 5 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 3 with 13 hits.
+Fifo executes in 3 with 13 hits.
+Lifo executes in 2 with 14 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 1 with 42 hits.
+Fifo executes in 1 with 42 hits.
+Lifo executes in 2 with 42 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 9 with 31 hits.
+Fifo executes in 7 with 31 hits.
+Lifo executes in 8 with 28 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 10 with 268 hits.
+Fifo executes in 6 with 268 hits.
+Lifo executes in 13 with 292 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 7 with 419 hits.
+Fifo executes in 7 with 419 hits.
+Lifo executes in 16 with 419 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 25 with 126 hits.
+Fifo executes in 30 with 126 hits.
+Lifo executes in 26 with 115 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 8 with 919 hits.
+Fifo executes in 7 with 919 hits.
+Lifo executes in 24 with 919 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 7 with 919 hits.
+Fifo executes in 7 with 919 hits.
+Lifo executes in 29 with 919 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 57 with 790 hits.
+Fifo executes in 55 with 790 hits.
+Lifo executes in 87 with 773 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 40 with 2419 hits.
+Fifo executes in 32 with 2419 hits.
+Lifo executes in 84 with 2419 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 42 with 2419 hits.
+Fifo executes in 40 with 2419 hits.
+Lifo executes in 109 with 2419 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 2 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 2 with 6 hits.
+Fifo executes in 2 with 6 hits.
+Lifo executes in 3 with 6 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 7 with 4 hits.
+Fifo executes in 7 with 4 hits.
+Lifo executes in 8 with 3 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 8 with 44 hits.
+Fifo executes in 8 with 44 hits.
+Lifo executes in 18 with 40 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 12 with 170 hits.
+Fifo executes in 10 with 170 hits.
+Lifo executes in 47 with 170 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 19 with 18 hits.
+Fifo executes in 19 with 18 hits.
+Lifo executes in 22 with 16 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 19 with 154 hits.
+Fifo executes in 20 with 154 hits.
+Lifo executes in 59 with 141 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 20 with 538 hits.
+Fifo executes in 19 with 538 hits.
+Lifo executes in 117 with 538 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 74 with 106 hits.
+Fifo executes in 70 with 106 hits.
+Lifo executes in 97 with 103 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 75 with 1024 hits.
+Fifo executes in 72 with 1024 hits.
+Lifo executes in 296 with 991 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 54 with 1934 hits.
+Fifo executes in 53 with 1934 hits.
+Lifo executes in 385 with 1934 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 2 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 2 with 1 hits.
+Fifo executes in 2 with 1 hits.
+Lifo executes in 4 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 8 with 0 hits.
+Fifo executes in 8 with 0 hits.
+Lifo executes in 8 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 9 with 3 hits.
+Fifo executes in 10 with 3 hits.
+Lifo executes in 18 with 4 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 14 with 16 hits.
+Fifo executes in 13 with 16 hits.
+Lifo executes in 65 with 16 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 17 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 20 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 22 with 6 hits.
+Fifo executes in 22 with 6 hits.
+Lifo executes in 62 with 10 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 37 with 52 hits.
+Fifo executes in 40 with 52 hits.
+Lifo executes in 253 with 52 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 72 with 7 hits.
+Fifo executes in 73 with 7 hits.
+Lifo executes in 93 with 5 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 84 with 58 hits.
+Fifo executes in 81 with 58 hits.
+Lifo executes in 347 with 70 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 154 with 290 hits.
+Fifo executes in 150 with 290 hits.
+Lifo executes in 1410 with 290 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 2 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 2 with 0 hits.
+Fifo executes in 2 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 7 with 0 hits.
+Fifo executes in 8 with 0 hits.
+Lifo executes in 8 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 8 with 0 hits.
+Fifo executes in 9 with 0 hits.
+Lifo executes in 18 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 14 with 2 hits.
+Fifo executes in 16 with 2 hits.
+Lifo executes in 69 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 18 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 20 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 20 with 0 hits.
+Fifo executes in 27 with 0 hits.
+Lifo executes in 62 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 38 with 2 hits.
+Fifo executes in 36 with 2 hits.
+Lifo executes in 265 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 72 with 0 hits.
+Fifo executes in 67 with 0 hits.
+Lifo executes in 90 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 85 with 2 hits.
+Fifo executes in 87 with 2 hits.
+Lifo executes in 362 with 5 hits.
+Parameters: {factsN = 25;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 169 with 9 hits.
+Fifo executes in 170 with 9 hits.
+Lifo executes in 1596 with 9 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 3 with 1 hits.
+Fifo executes in 3 with 1 hits.
+Lifo executes in 3 with 3 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 3 with 11 hits.
+Fifo executes in 3 with 11 hits.
+Lifo executes in 3 with 10 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 2 with 45 hits.
+Fifo executes in 2 with 45 hits.
+Lifo executes in 3 with 45 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 18 with 27 hits.
+Fifo executes in 19 with 27 hits.
+Lifo executes in 19 with 33 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 11 with 295 hits.
+Fifo executes in 9 with 295 hits.
+Lifo executes in 17 with 297 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 5 with 419 hits.
+Fifo executes in 5 with 419 hits.
+Lifo executes in 15 with 419 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 37 with 112 hits.
+Fifo executes in 37 with 112 hits.
+Lifo executes in 42 with 130 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 10 with 919 hits.
+Fifo executes in 9 with 919 hits.
+Lifo executes in 28 with 919 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 10 with 919 hits.
+Fifo executes in 10 with 919 hits.
+Lifo executes in 31 with 919 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 102 with 736 hits.
+Fifo executes in 98 with 736 hits.
+Lifo executes in 119 with 778 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 41 with 2419 hits.
+Fifo executes in 38 with 2419 hits.
+Lifo executes in 88 with 2419 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 36 with 2419 hits.
+Fifo executes in 35 with 2419 hits.
+Lifo executes in 106 with 2419 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 3 with 1 hits.
+Fifo executes in 3 with 1 hits.
+Lifo executes in 4 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 3 with 3 hits.
+Fifo executes in 3 with 3 hits.
+Lifo executes in 4 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 4 with 8 hits.
+Fifo executes in 4 with 8 hits.
+Lifo executes in 5 with 8 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 20 with 6 hits.
+Fifo executes in 22 with 6 hits.
+Lifo executes in 20 with 2 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 21 with 40 hits.
+Fifo executes in 22 with 40 hits.
+Lifo executes in 30 with 46 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 19 with 167 hits.
+Fifo executes in 18 with 167 hits.
+Lifo executes in 57 with 167 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 44 with 10 hits.
+Fifo executes in 41 with 10 hits.
+Lifo executes in 45 with 16 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 41 with 164 hits.
+Fifo executes in 39 with 164 hits.
+Lifo executes in 80 with 159 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 32 with 536 hits.
+Fifo executes in 32 with 536 hits.
+Lifo executes in 129 with 536 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 131 with 122 hits.
+Fifo executes in 128 with 122 hits.
+Lifo executes in 153 with 105 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 112 with 1012 hits.
+Fifo executes in 108 with 1012 hits.
+Lifo executes in 333 with 1019 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 67 with 1932 hits.
+Fifo executes in 67 with 1932 hits.
+Lifo executes in 403 with 1932 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 5 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 3 with 0 hits.
+Lifo executes in 4 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 4 with 2 hits.
+Fifo executes in 4 with 2 hits.
+Lifo executes in 6 with 2 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 20 with 0 hits.
+Fifo executes in 19 with 0 hits.
+Lifo executes in 20 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 22 with 4 hits.
+Fifo executes in 21 with 4 hits.
+Lifo executes in 30 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 27 with 11 hits.
+Fifo executes in 26 with 11 hits.
+Lifo executes in 80 with 11 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 47 with 1 hits.
+Fifo executes in 42 with 1 hits.
+Lifo executes in 45 with 2 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 46 with 10 hits.
+Fifo executes in 45 with 10 hits.
+Lifo executes in 87 with 8 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 61 with 50 hits.
+Fifo executes in 65 with 50 hits.
+Lifo executes in 278 with 50 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 131 with 6 hits.
+Fifo executes in 138 with 6 hits.
+Lifo executes in 158 with 8 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 143 with 59 hits.
+Fifo executes in 146 with 59 hits.
+Lifo executes in 409 with 65 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 206 with 278 hits.
+Fifo executes in 200 with 278 hits.
+Lifo executes in 1460 with 278 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 3 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 3 with 0 hits.
+Lifo executes in 5 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 5 with 0 hits.
+Lifo executes in 6 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 20 with 0 hits.
+Fifo executes in 20 with 0 hits.
+Lifo executes in 20 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 21 with 1 hits.
+Fifo executes in 21 with 1 hits.
+Lifo executes in 31 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 26 with 1 hits.
+Fifo executes in 27 with 1 hits.
+Lifo executes in 84 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 52 with 0 hits.
+Fifo executes in 45 with 0 hits.
+Lifo executes in 46 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 50 with 0 hits.
+Fifo executes in 46 with 0 hits.
+Lifo executes in 86 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 62 with 4 hits.
+Fifo executes in 62 with 4 hits.
+Lifo executes in 290 with 4 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 136 with 0 hits.
+Fifo executes in 133 with 0 hits.
+Lifo executes in 158 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 148 with 3 hits.
+Fifo executes in 152 with 3 hits.
+Lifo executes in 429 with 2 hits.
+Parameters: {factsN = 100;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 232 with 15 hits.
+Fifo executes in 226 with 15 hits.
+Lifo executes in 1670 with 15 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 17 with 1 hits.
+Fifo executes in 16 with 1 hits.
+Lifo executes in 16 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 16 with 14 hits.
+Fifo executes in 14 with 14 hits.
+Lifo executes in 15 with 13 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 10 with 43 hits.
+Fifo executes in 10 with 43 hits.
+Lifo executes in 11 with 43 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 79 with 38 hits.
+Fifo executes in 79 with 38 hits.
+Lifo executes in 82 with 33 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 37 with 302 hits.
+Fifo executes in 36 with 302 hits.
+Lifo executes in 46 with 284 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 16 with 420 hits.
+Fifo executes in 17 with 420 hits.
+Lifo executes in 26 with 420 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 157 with 117 hits.
+Fifo executes in 165 with 117 hits.
+Lifo executes in 163 with 120 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 23 with 919 hits.
+Fifo executes in 19 with 919 hits.
+Lifo executes in 37 with 919 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 19 with 919 hits.
+Fifo executes in 20 with 919 hits.
+Lifo executes in 41 with 919 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 351 with 761 hits.
+Fifo executes in 348 with 761 hits.
+Lifo executes in 364 with 776 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 47 with 2419 hits.
+Fifo executes in 48 with 2419 hits.
+Lifo executes in 102 with 2419 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 42 with 2419 hits.
+Fifo executes in 45 with 2419 hits.
+Lifo executes in 116 with 2419 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 18 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 18 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 18 with 2 hits.
+Fifo executes in 16 with 2 hits.
+Lifo executes in 17 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 17 with 8 hits.
+Fifo executes in 16 with 8 hits.
+Lifo executes in 20 with 8 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 92 with 3 hits.
+Fifo executes in 87 with 3 hits.
+Lifo executes in 87 with 5 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 79 with 44 hits.
+Fifo executes in 80 with 44 hits.
+Lifo executes in 93 with 37 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 69 with 154 hits.
+Fifo executes in 64 with 154 hits.
+Lifo executes in 98 with 154 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 177 with 19 hits.
+Fifo executes in 176 with 19 hits.
+Lifo executes in 172 with 19 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 158 with 155 hits.
+Fifo executes in 155 with 155 hits.
+Lifo executes in 190 with 171 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 97 with 529 hits.
+Fifo executes in 95 with 529 hits.
+Lifo executes in 196 with 529 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 459 with 109 hits.
+Fifo executes in 451 with 109 hits.
+Lifo executes in 473 with 131 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 310 with 1000 hits.
+Fifo executes in 309 with 1000 hits.
+Lifo executes in 534 with 1026 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 149 with 1930 hits.
+Fifo executes in 151 with 1930 hits.
+Lifo executes in 487 with 1930 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 19 with 0 hits.
+Fifo executes in 19 with 0 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 19 with 1 hits.
+Fifo executes in 18 with 1 hits.
+Lifo executes in 19 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 17 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 19 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 88 with 0 hits.
+Fifo executes in 87 with 0 hits.
+Lifo executes in 86 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 93 with 3 hits.
+Fifo executes in 89 with 3 hits.
+Lifo executes in 96 with 4 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 92 with 5 hits.
+Fifo executes in 92 with 5 hits.
+Lifo executes in 154 with 5 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 187 with 0 hits.
+Fifo executes in 183 with 0 hits.
+Lifo executes in 178 with 2 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 188 with 4 hits.
+Fifo executes in 186 with 4 hits.
+Lifo executes in 226 with 14 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 200 with 42 hits.
+Fifo executes in 189 with 42 hits.
+Lifo executes in 406 with 42 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 482 with 3 hits.
+Fifo executes in 481 with 3 hits.
+Lifo executes in 527 with 5 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 486 with 59 hits.
+Fifo executes in 485 with 59 hits.
+Lifo executes in 749 with 57 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 514 with 279 hits.
+Fifo executes in 505 with 279 hits.
+Lifo executes in 1754 with 279 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 19 with 0 hits.
+Fifo executes in 16 with 0 hits.
+Lifo executes in 16 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 18 with 0 hits.
+Fifo executes in 16 with 0 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 19 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 19 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 89 with 0 hits.
+Fifo executes in 94 with 0 hits.
+Lifo executes in 87 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 87 with 0 hits.
+Fifo executes in 85 with 0 hits.
+Lifo executes in 102 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 102 with 0 hits.
+Fifo executes in 96 with 0 hits.
+Lifo executes in 146 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 176 with 0 hits.
+Fifo executes in 180 with 0 hits.
+Lifo executes in 180 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 195 with 1 hits.
+Fifo executes in 185 with 1 hits.
+Lifo executes in 225 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 198 with 5 hits.
+Fifo executes in 198 with 5 hits.
+Lifo executes in 428 with 5 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 476 with 1 hits.
+Fifo executes in 479 with 1 hits.
+Lifo executes in 516 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 484 with 4 hits.
+Fifo executes in 484 with 4 hits.
+Lifo executes in 762 with 4 hits.
+Parameters: {factsN = 500;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 573 with 19 hits.
+Fifo executes in 611 with 19 hits.
+Lifo executes in 1992 with 19 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 36 with 1 hits.
+Fifo executes in 37 with 1 hits.
+Lifo executes in 34 with 2 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 33 with 15 hits.
+Fifo executes in 28 with 15 hits.
+Lifo executes in 31 with 11 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 23 with 41 hits.
+Fifo executes in 20 with 41 hits.
+Lifo executes in 20 with 41 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 158 with 31 hits.
+Fifo executes in 161 with 31 hits.
+Lifo executes in 167 with 34 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 82 with 274 hits.
+Fifo executes in 81 with 274 hits.
+Lifo executes in 80 with 294 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 33 with 419 hits.
+Fifo executes in 30 with 419 hits.
+Lifo executes in 42 with 419 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 303 with 135 hits.
+Fifo executes in 307 with 135 hits.
+Lifo executes in 305 with 126 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 43 with 919 hits.
+Fifo executes in 36 with 919 hits.
+Lifo executes in 51 with 919 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 36 with 919 hits.
+Fifo executes in 33 with 919 hits.
+Lifo executes in 56 with 919 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 637 with 789 hits.
+Fifo executes in 619 with 789 hits.
+Lifo executes in 659 with 791 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 63 with 2419 hits.
+Fifo executes in 59 with 2419 hits.
+Lifo executes in 110 with 2419 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 60 with 2419 hits.
+Fifo executes in 53 with 2419 hits.
+Lifo executes in 137 with 2419 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 33 with 0 hits.
+Fifo executes in 33 with 0 hits.
+Lifo executes in 33 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 35 with 1 hits.
+Fifo executes in 34 with 1 hits.
+Lifo executes in 36 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 36 with 6 hits.
+Fifo executes in 32 with 6 hits.
+Lifo executes in 35 with 6 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 176 with 3 hits.
+Fifo executes in 175 with 3 hits.
+Lifo executes in 176 with 3 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 157 with 53 hits.
+Fifo executes in 158 with 53 hits.
+Lifo executes in 175 with 39 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 127 with 166 hits.
+Fifo executes in 117 with 166 hits.
+Lifo executes in 153 with 166 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 348 with 22 hits.
+Fifo executes in 357 with 22 hits.
+Lifo executes in 347 with 16 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 291 with 174 hits.
+Fifo executes in 293 with 174 hits.
+Lifo executes in 347 with 149 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 172 with 535 hits.
+Fifo executes in 176 with 535 hits.
+Lifo executes in 265 with 535 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 857 with 97 hits.
+Fifo executes in 867 with 97 hits.
+Lifo executes in 886 with 103 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 566 with 1054 hits.
+Fifo executes in 552 with 1054 hits.
+Lifo executes in 785 with 1032 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 251 with 1934 hits.
+Fifo executes in 241 with 1934 hits.
+Lifo executes in 571 with 1934 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 35 with 0 hits.
+Fifo executes in 33 with 0 hits.
+Lifo executes in 33 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 37 with 0 hits.
+Fifo executes in 33 with 0 hits.
+Lifo executes in 35 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 36 with 0 hits.
+Fifo executes in 33 with 0 hits.
+Lifo executes in 35 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 176 with 0 hits.
+Fifo executes in 175 with 0 hits.
+Lifo executes in 172 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 179 with 4 hits.
+Fifo executes in 180 with 4 hits.
+Lifo executes in 192 with 3 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 183 with 12 hits.
+Fifo executes in 179 with 12 hits.
+Lifo executes in 225 with 12 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 352 with 1 hits.
+Fifo executes in 352 with 1 hits.
+Lifo executes in 344 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 346 with 10 hits.
+Fifo executes in 352 with 10 hits.
+Lifo executes in 394 with 6 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 344 with 62 hits.
+Fifo executes in 347 with 62 hits.
+Lifo executes in 550 with 62 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 903 with 8 hits.
+Fifo executes in 898 with 8 hits.
+Lifo executes in 924 with 6 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 900 with 47 hits.
+Fifo executes in 903 with 47 hits.
+Lifo executes in 1158 with 63 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 899 with 274 hits.
+Fifo executes in 903 with 274 hits.
+Lifo executes in 2172 with 274 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 34 with 0 hits.
+Fifo executes in 36 with 0 hits.
+Lifo executes in 37 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 39 with 0 hits.
+Fifo executes in 36 with 0 hits.
+Lifo executes in 33 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 35 with 0 hits.
+Fifo executes in 36 with 0 hits.
+Lifo executes in 38 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 177 with 0 hits.
+Fifo executes in 170 with 0 hits.
+Lifo executes in 172 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 174 with 0 hits.
+Fifo executes in 171 with 0 hits.
+Lifo executes in 186 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 187 with 0 hits.
+Fifo executes in 182 with 0 hits.
+Lifo executes in 236 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 346 with 0 hits.
+Fifo executes in 352 with 0 hits.
+Lifo executes in 356 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 347 with 0 hits.
+Fifo executes in 364 with 0 hits.
+Lifo executes in 402 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 377 with 2 hits.
+Fifo executes in 370 with 2 hits.
+Lifo executes in 596 with 2 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 894 with 0 hits.
+Fifo executes in 918 with 0 hits.
+Lifo executes in 908 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 917 with 2 hits.
+Fifo executes in 919 with 2 hits.
+Lifo executes in 1192 with 4 hits.
+Parameters: {factsN = 1000;
+ factsD = 10;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 993 with 7 hits.
+Fifo executes in 1096 with 7 hits.
+Lifo executes in 2531 with 7 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 1 with 2 hits.
+Fifo executes in 1 with 2 hits.
+Lifo executes in 1 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 1 with 9 hits.
+Fifo executes in 1 with 9 hits.
+Lifo executes in 1 with 11 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 1 with 44 hits.
+Fifo executes in 1 with 44 hits.
+Lifo executes in 2 with 44 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 7 with 32 hits.
+Fifo executes in 8 with 32 hits.
+Lifo executes in 7 with 33 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 5 with 296 hits.
+Fifo executes in 5 with 296 hits.
+Lifo executes in 11 with 283 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 4 with 420 hits.
+Fifo executes in 3 with 420 hits.
+Lifo executes in 11 with 420 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 16 with 121 hits.
+Fifo executes in 16 with 121 hits.
+Lifo executes in 18 with 111 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 7 with 919 hits.
+Fifo executes in 7 with 919 hits.
+Lifo executes in 25 with 919 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 8 with 919 hits.
+Fifo executes in 7 with 919 hits.
+Lifo executes in 27 with 919 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 57 with 769 hits.
+Fifo executes in 55 with 769 hits.
+Lifo executes in 77 with 750 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 33 with 2419 hits.
+Fifo executes in 33 with 2419 hits.
+Lifo executes in 84 with 2419 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 37 with 2419 hits.
+Fifo executes in 34 with 2419 hits.
+Lifo executes in 112 with 2419 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 1 with 4 hits.
+Fifo executes in 1 with 4 hits.
+Lifo executes in 1 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 1 with 11 hits.
+Fifo executes in 1 with 11 hits.
+Lifo executes in 4 with 11 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 8 with 5 hits.
+Fifo executes in 8 with 5 hits.
+Lifo executes in 8 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 8 with 50 hits.
+Fifo executes in 8 with 50 hits.
+Lifo executes in 18 with 43 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 9 with 186 hits.
+Fifo executes in 9 with 186 hits.
+Lifo executes in 41 with 186 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 16 with 13 hits.
+Fifo executes in 17 with 13 hits.
+Lifo executes in 23 with 19 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 21 with 146 hits.
+Fifo executes in 19 with 146 hits.
+Lifo executes in 61 with 160 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 18 with 536 hits.
+Fifo executes in 18 with 536 hits.
+Lifo executes in 116 with 536 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 73 with 121 hits.
+Fifo executes in 70 with 121 hits.
+Lifo executes in 93 with 101 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 67 with 1035 hits.
+Fifo executes in 66 with 1035 hits.
+Lifo executes in 292 with 1022 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 54 with 1932 hits.
+Fifo executes in 53 with 1932 hits.
+Lifo executes in 382 with 1932 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 2 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 2 with 2 hits.
+Fifo executes in 2 with 2 hits.
+Lifo executes in 4 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 8 with 0 hits.
+Fifo executes in 7 with 0 hits.
+Lifo executes in 8 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 9 with 2 hits.
+Fifo executes in 9 with 2 hits.
+Lifo executes in 18 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 14 with 13 hits.
+Fifo executes in 17 with 13 hits.
+Lifo executes in 84 with 13 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 20 with 0 hits.
+Fifo executes in 19 with 0 hits.
+Lifo executes in 22 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 24 with 13 hits.
+Fifo executes in 23 with 13 hits.
+Lifo executes in 73 with 12 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 35 with 55 hits.
+Fifo executes in 35 with 55 hits.
+Lifo executes in 249 with 55 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 69 with 5 hits.
+Fifo executes in 70 with 5 hits.
+Lifo executes in 93 with 8 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 85 with 61 hits.
+Fifo executes in 85 with 61 hits.
+Lifo executes in 350 with 72 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 151 with 303 hits.
+Fifo executes in 147 with 303 hits.
+Lifo executes in 1385 with 303 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 2 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 2 with 0 hits.
+Fifo executes in 2 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 8 with 0 hits.
+Fifo executes in 7 with 0 hits.
+Lifo executes in 8 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 10 with 0 hits.
+Fifo executes in 8 with 0 hits.
+Lifo executes in 18 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 14 with 1 hits.
+Fifo executes in 15 with 1 hits.
+Lifo executes in 67 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 16 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 22 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 21 with 0 hits.
+Fifo executes in 22 with 0 hits.
+Lifo executes in 62 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 37 with 5 hits.
+Fifo executes in 37 with 5 hits.
+Lifo executes in 265 with 5 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 74 with 0 hits.
+Fifo executes in 68 with 0 hits.
+Lifo executes in 89 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 84 with 3 hits.
+Fifo executes in 87 with 3 hits.
+Lifo executes in 362 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 175 with 14 hits.
+Fifo executes in 171 with 14 hits.
+Lifo executes in 1617 with 14 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 4 with 2 hits.
+Fifo executes in 3 with 2 hits.
+Lifo executes in 4 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 4 with 8 hits.
+Fifo executes in 3 with 8 hits.
+Lifo executes in 3 with 18 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 2 with 41 hits.
+Fifo executes in 2 with 41 hits.
+Lifo executes in 3 with 41 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 19 with 30 hits.
+Fifo executes in 18 with 30 hits.
+Lifo executes in 19 with 34 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 11 with 276 hits.
+Fifo executes in 10 with 276 hits.
+Lifo executes in 15 with 303 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 6 with 419 hits.
+Fifo executes in 5 with 419 hits.
+Lifo executes in 14 with 419 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 36 with 143 hits.
+Fifo executes in 36 with 143 hits.
+Lifo executes in 42 with 130 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 10 with 919 hits.
+Fifo executes in 10 with 919 hits.
+Lifo executes in 30 with 919 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 9 with 919 hits.
+Fifo executes in 10 with 919 hits.
+Lifo executes in 35 with 919 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 101 with 770 hits.
+Fifo executes in 98 with 770 hits.
+Lifo executes in 122 with 753 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 37 with 2419 hits.
+Fifo executes in 38 with 2419 hits.
+Lifo executes in 84 with 2419 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 35 with 2419 hits.
+Fifo executes in 35 with 2419 hits.
+Lifo executes in 108 with 2419 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 5 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 4 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 4 with 15 hits.
+Fifo executes in 3 with 15 hits.
+Lifo executes in 5 with 15 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 22 with 2 hits.
+Fifo executes in 20 with 2 hits.
+Lifo executes in 20 with 8 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 20 with 37 hits.
+Fifo executes in 20 with 37 hits.
+Lifo executes in 29 with 27 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 22 with 162 hits.
+Fifo executes in 19 with 162 hits.
+Lifo executes in 55 with 162 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 45 with 15 hits.
+Fifo executes in 44 with 15 hits.
+Lifo executes in 45 with 19 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 39 with 158 hits.
+Fifo executes in 39 with 158 hits.
+Lifo executes in 80 with 146 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 35 with 514 hits.
+Fifo executes in 33 with 514 hits.
+Lifo executes in 131 with 514 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 130 with 105 hits.
+Fifo executes in 128 with 105 hits.
+Lifo executes in 160 with 98 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 105 with 1023 hits.
+Fifo executes in 107 with 1023 hits.
+Lifo executes in 334 with 1021 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 69 with 1927 hits.
+Fifo executes in 68 with 1927 hits.
+Lifo executes in 411 with 1927 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 3 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 3 with 0 hits.
+Lifo executes in 5 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 6 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 20 with 0 hits.
+Fifo executes in 21 with 0 hits.
+Lifo executes in 22 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 23 with 4 hits.
+Fifo executes in 23 with 4 hits.
+Lifo executes in 34 with 2 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 28 with 9 hits.
+Fifo executes in 29 with 9 hits.
+Lifo executes in 83 with 9 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 43 with 0 hits.
+Fifo executes in 44 with 0 hits.
+Lifo executes in 47 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 50 with 8 hits.
+Fifo executes in 45 with 8 hits.
+Lifo executes in 86 with 10 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 65 with 44 hits.
+Fifo executes in 59 with 44 hits.
+Lifo executes in 270 with 44 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 138 with 3 hits.
+Fifo executes in 140 with 3 hits.
+Lifo executes in 154 with 4 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 151 with 61 hits.
+Fifo executes in 146 with 61 hits.
+Lifo executes in 424 with 75 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 204 with 254 hits.
+Fifo executes in 209 with 254 hits.
+Lifo executes in 1475 with 254 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 5 with 0 hits.
+Lifo executes in 4 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 4 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 7 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 20 with 0 hits.
+Fifo executes in 22 with 0 hits.
+Lifo executes in 23 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 22 with 0 hits.
+Fifo executes in 21 with 0 hits.
+Lifo executes in 30 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 27 with 1 hits.
+Fifo executes in 27 with 1 hits.
+Lifo executes in 85 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 44 with 0 hits.
+Fifo executes in 46 with 0 hits.
+Lifo executes in 44 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 46 with 0 hits.
+Fifo executes in 47 with 0 hits.
+Lifo executes in 87 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 63 with 2 hits.
+Fifo executes in 63 with 2 hits.
+Lifo executes in 293 with 2 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 138 with 0 hits.
+Fifo executes in 132 with 0 hits.
+Lifo executes in 153 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 154 with 5 hits.
+Fifo executes in 148 with 5 hits.
+Lifo executes in 434 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 235 with 21 hits.
+Fifo executes in 232 with 21 hits.
+Lifo executes in 1872 with 21 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 17 with 3 hits.
+Fifo executes in 15 with 3 hits.
+Lifo executes in 18 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 18 with 10 hits.
+Fifo executes in 16 with 10 hits.
+Lifo executes in 15 with 12 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 12 with 45 hits.
+Fifo executes in 9 with 45 hits.
+Lifo executes in 11 with 45 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 85 with 26 hits.
+Fifo executes in 82 with 26 hits.
+Lifo executes in 82 with 25 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 37 with 298 hits.
+Fifo executes in 36 with 298 hits.
+Lifo executes in 44 with 286 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 17 with 419 hits.
+Fifo executes in 17 with 419 hits.
+Lifo executes in 25 with 419 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 163 with 106 hits.
+Fifo executes in 155 with 106 hits.
+Lifo executes in 166 with 122 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 25 with 919 hits.
+Fifo executes in 21 with 919 hits.
+Lifo executes in 38 with 919 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 21 with 919 hits.
+Fifo executes in 21 with 919 hits.
+Lifo executes in 45 with 919 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 339 with 814 hits.
+Fifo executes in 331 with 814 hits.
+Lifo executes in 367 with 734 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 48 with 2419 hits.
+Fifo executes in 45 with 2419 hits.
+Lifo executes in 96 with 2419 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 50 with 2419 hits.
+Fifo executes in 47 with 2419 hits.
+Lifo executes in 126 with 2419 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 16 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 17 with 2 hits.
+Fifo executes in 16 with 2 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 17 with 7 hits.
+Fifo executes in 16 with 7 hits.
+Lifo executes in 23 with 7 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 85 with 5 hits.
+Fifo executes in 85 with 5 hits.
+Lifo executes in 86 with 3 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 80 with 53 hits.
+Fifo executes in 77 with 53 hits.
+Lifo executes in 91 with 36 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 66 with 163 hits.
+Fifo executes in 63 with 163 hits.
+Lifo executes in 99 with 163 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 178 with 14 hits.
+Fifo executes in 179 with 14 hits.
+Lifo executes in 189 with 23 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 164 with 152 hits.
+Fifo executes in 157 with 152 hits.
+Lifo executes in 195 with 168 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 99 with 523 hits.
+Fifo executes in 95 with 523 hits.
+Lifo executes in 196 with 523 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 476 with 111 hits.
+Fifo executes in 464 with 111 hits.
+Lifo executes in 487 with 103 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 313 with 1059 hits.
+Fifo executes in 303 with 1059 hits.
+Lifo executes in 528 with 985 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 148 with 1928 hits.
+Fifo executes in 144 with 1928 hits.
+Lifo executes in 482 with 1928 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 18 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 20 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 19 with 0 hits.
+Fifo executes in 16 with 0 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 22 with 0 hits.
+Fifo executes in 19 with 0 hits.
+Lifo executes in 21 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 91 with 1 hits.
+Fifo executes in 85 with 1 hits.
+Lifo executes in 84 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 87 with 3 hits.
+Fifo executes in 87 with 3 hits.
+Lifo executes in 99 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 96 with 17 hits.
+Fifo executes in 94 with 17 hits.
+Lifo executes in 140 with 17 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 184 with 3 hits.
+Fifo executes in 173 with 3 hits.
+Lifo executes in 188 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 178 with 9 hits.
+Fifo executes in 190 with 9 hits.
+Lifo executes in 219 with 5 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 195 with 47 hits.
+Fifo executes in 193 with 47 hits.
+Lifo executes in 410 with 47 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 474 with 2 hits.
+Fifo executes in 480 with 2 hits.
+Lifo executes in 497 with 6 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 488 with 61 hits.
+Fifo executes in 475 with 61 hits.
+Lifo executes in 741 with 65 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 508 with 292 hits.
+Fifo executes in 508 with 292 hits.
+Lifo executes in 1777 with 292 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 18 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 17 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 21 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 19 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 86 with 0 hits.
+Fifo executes in 86 with 0 hits.
+Lifo executes in 86 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 94 with 0 hits.
+Fifo executes in 88 with 0 hits.
+Lifo executes in 96 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 95 with 0 hits.
+Fifo executes in 98 with 0 hits.
+Lifo executes in 150 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 179 with 0 hits.
+Fifo executes in 179 with 0 hits.
+Lifo executes in 183 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 179 with 0 hits.
+Fifo executes in 180 with 0 hits.
+Lifo executes in 221 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 199 with 2 hits.
+Fifo executes in 208 with 2 hits.
+Lifo executes in 437 with 2 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 471 with 0 hits.
+Fifo executes in 475 with 0 hits.
+Lifo executes in 495 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 493 with 1 hits.
+Fifo executes in 498 with 1 hits.
+Lifo executes in 759 with 4 hits.
+Parameters: {factsN = 500;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 576 with 16 hits.
+Fifo executes in 558 with 16 hits.
+Lifo executes in 2017 with 16 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 35 with 0 hits.
+Fifo executes in 35 with 0 hits.
+Lifo executes in 33 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 29 with 15 hits.
+Fifo executes in 29 with 15 hits.
+Lifo executes in 33 with 10 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 20 with 42 hits.
+Fifo executes in 21 with 42 hits.
+Lifo executes in 20 with 42 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 161 with 36 hits.
+Fifo executes in 156 with 36 hits.
+Lifo executes in 158 with 33 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 72 with 305 hits.
+Fifo executes in 68 with 305 hits.
+Lifo executes in 80 with 289 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 33 with 419 hits.
+Fifo executes in 29 with 419 hits.
+Lifo executes in 38 with 419 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 322 with 105 hits.
+Fifo executes in 308 with 105 hits.
+Lifo executes in 303 with 134 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 35 with 919 hits.
+Fifo executes in 33 with 919 hits.
+Lifo executes in 51 with 919 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 37 with 919 hits.
+Fifo executes in 33 with 919 hits.
+Lifo executes in 59 with 919 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 643 with 757 hits.
+Fifo executes in 634 with 757 hits.
+Lifo executes in 662 with 758 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 66 with 2419 hits.
+Fifo executes in 61 with 2419 hits.
+Lifo executes in 110 with 2419 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 63 with 2419 hits.
+Fifo executes in 60 with 2419 hits.
+Lifo executes in 145 with 2419 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 35 with 0 hits.
+Fifo executes in 34 with 0 hits.
+Lifo executes in 36 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 33 with 2 hits.
+Fifo executes in 33 with 2 hits.
+Lifo executes in 37 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 33 with 7 hits.
+Fifo executes in 32 with 7 hits.
+Lifo executes in 33 with 7 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 172 with 2 hits.
+Fifo executes in 169 with 2 hits.
+Lifo executes in 166 with 4 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 164 with 40 hits.
+Fifo executes in 160 with 40 hits.
+Lifo executes in 168 with 48 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 124 with 164 hits.
+Fifo executes in 121 with 164 hits.
+Lifo executes in 155 with 164 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 353 with 15 hits.
+Fifo executes in 335 with 15 hits.
+Lifo executes in 340 with 19 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 294 with 173 hits.
+Fifo executes in 291 with 173 hits.
+Lifo executes in 347 with 148 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 176 with 525 hits.
+Fifo executes in 192 with 525 hits.
+Lifo executes in 288 with 525 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 892 with 111 hits.
+Fifo executes in 881 with 111 hits.
+Lifo executes in 895 with 119 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 568 with 1030 hits.
+Fifo executes in 566 with 1030 hits.
+Lifo executes in 783 with 1029 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 246 with 1935 hits.
+Fifo executes in 245 with 1935 hits.
+Lifo executes in 588 with 1935 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 36 with 0 hits.
+Fifo executes in 34 with 0 hits.
+Lifo executes in 37 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 36 with 0 hits.
+Fifo executes in 37 with 0 hits.
+Lifo executes in 36 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 38 with 0 hits.
+Fifo executes in 38 with 0 hits.
+Lifo executes in 35 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 177 with 0 hits.
+Fifo executes in 187 with 0 hits.
+Lifo executes in 181 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 186 with 2 hits.
+Fifo executes in 179 with 2 hits.
+Lifo executes in 183 with 3 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 174 with 13 hits.
+Fifo executes in 173 with 13 hits.
+Lifo executes in 228 with 13 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 359 with 0 hits.
+Fifo executes in 358 with 0 hits.
+Lifo executes in 348 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 355 with 13 hits.
+Fifo executes in 353 with 13 hits.
+Lifo executes in 401 with 9 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 360 with 41 hits.
+Fifo executes in 367 with 41 hits.
+Lifo executes in 578 with 41 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 907 with 6 hits.
+Fifo executes in 906 with 6 hits.
+Lifo executes in 930 with 7 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 925 with 60 hits.
+Fifo executes in 917 with 60 hits.
+Lifo executes in 1165 with 67 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 897 with 277 hits.
+Fifo executes in 888 with 277 hits.
+Lifo executes in 2141 with 277 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 39 with 0 hits.
+Fifo executes in 35 with 0 hits.
+Lifo executes in 33 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 39 with 0 hits.
+Fifo executes in 33 with 0 hits.
+Lifo executes in 33 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 39 with 0 hits.
+Fifo executes in 34 with 0 hits.
+Lifo executes in 35 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 174 with 1 hits.
+Fifo executes in 170 with 1 hits.
+Lifo executes in 168 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 184 with 0 hits.
+Fifo executes in 175 with 0 hits.
+Lifo executes in 182 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 179 with 2 hits.
+Fifo executes in 177 with 2 hits.
+Lifo executes in 236 with 2 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 359 with 0 hits.
+Fifo executes in 345 with 0 hits.
+Lifo executes in 345 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 353 with 0 hits.
+Fifo executes in 359 with 0 hits.
+Lifo executes in 408 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 372 with 1 hits.
+Fifo executes in 381 with 1 hits.
+Lifo executes in 596 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 896 with 0 hits.
+Fifo executes in 910 with 0 hits.
+Lifo executes in 915 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 913 with 2 hits.
+Fifo executes in 917 with 2 hits.
+Lifo executes in 1208 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 25;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 1011 with 14 hits.
+Fifo executes in 1004 with 14 hits.
+Lifo executes in 2427 with 14 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 1 with 13 hits.
+Fifo executes in 1 with 13 hits.
+Lifo executes in 1 with 20 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 1 with 44 hits.
+Fifo executes in 1 with 44 hits.
+Lifo executes in 2 with 44 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 7 with 31 hits.
+Fifo executes in 7 with 31 hits.
+Lifo executes in 8 with 22 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 5 with 272 hits.
+Fifo executes in 5 with 272 hits.
+Lifo executes in 11 with 274 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 3 with 419 hits.
+Fifo executes in 5 with 419 hits.
+Lifo executes in 12 with 419 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 16 with 117 hits.
+Fifo executes in 16 with 117 hits.
+Lifo executes in 18 with 132 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 7 with 919 hits.
+Fifo executes in 7 with 919 hits.
+Lifo executes in 24 with 919 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 7 with 919 hits.
+Fifo executes in 7 with 919 hits.
+Lifo executes in 30 with 919 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 57 with 735 hits.
+Fifo executes in 56 with 735 hits.
+Lifo executes in 72 with 788 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 29 with 2419 hits.
+Fifo executes in 29 with 2419 hits.
+Lifo executes in 78 with 2419 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 31 with 2419 hits.
+Fifo executes in 31 with 2419 hits.
+Lifo executes in 115 with 2419 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 2 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 1 with 2 hits.
+Fifo executes in 1 with 2 hits.
+Lifo executes in 1 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 2 with 10 hits.
+Fifo executes in 2 with 10 hits.
+Lifo executes in 3 with 10 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 7 with 3 hits.
+Fifo executes in 7 with 3 hits.
+Lifo executes in 8 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 8 with 49 hits.
+Fifo executes in 8 with 49 hits.
+Lifo executes in 20 with 47 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 10 with 167 hits.
+Fifo executes in 12 with 167 hits.
+Lifo executes in 45 with 167 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 18 with 18 hits.
+Fifo executes in 18 with 18 hits.
+Lifo executes in 20 with 28 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 18 with 182 hits.
+Fifo executes in 18 with 182 hits.
+Lifo executes in 58 with 179 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 19 with 516 hits.
+Fifo executes in 20 with 516 hits.
+Lifo executes in 126 with 516 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 66 with 122 hits.
+Fifo executes in 68 with 122 hits.
+Lifo executes in 90 with 129 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 68 with 1021 hits.
+Fifo executes in 71 with 1021 hits.
+Lifo executes in 283 with 988 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 53 with 1929 hits.
+Fifo executes in 54 with 1929 hits.
+Lifo executes in 378 with 1929 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 2 with 0 hits.
+Fifo executes in 2 with 0 hits.
+Lifo executes in 4 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 8 with 1 hits.
+Fifo executes in 8 with 1 hits.
+Lifo executes in 9 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 9 with 1 hits.
+Fifo executes in 9 with 1 hits.
+Lifo executes in 19 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 16 with 16 hits.
+Fifo executes in 16 with 16 hits.
+Lifo executes in 66 with 16 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 18 with 0 hits.
+Fifo executes in 19 with 0 hits.
+Lifo executes in 20 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 22 with 10 hits.
+Fifo executes in 20 with 10 hits.
+Lifo executes in 61 with 9 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 39 with 32 hits.
+Fifo executes in 38 with 32 hits.
+Lifo executes in 252 with 32 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 67 with 8 hits.
+Fifo executes in 66 with 8 hits.
+Lifo executes in 89 with 9 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 85 with 64 hits.
+Fifo executes in 88 with 64 hits.
+Lifo executes in 351 with 58 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 146 with 303 hits.
+Fifo executes in 147 with 303 hits.
+Lifo executes in 1385 with 303 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 2 with 0 hits.
+Fifo executes in 2 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 7 with 0 hits.
+Fifo executes in 8 with 0 hits.
+Lifo executes in 8 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 8 with 0 hits.
+Fifo executes in 9 with 0 hits.
+Lifo executes in 18 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 15 with 0 hits.
+Fifo executes in 14 with 0 hits.
+Lifo executes in 68 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 17 with 0 hits.
+Fifo executes in 20 with 0 hits.
+Lifo executes in 21 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 22 with 0 hits.
+Fifo executes in 20 with 0 hits.
+Lifo executes in 61 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 36 with 2 hits.
+Fifo executes in 37 with 2 hits.
+Lifo executes in 259 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 67 with 0 hits.
+Fifo executes in 70 with 0 hits.
+Lifo executes in 92 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 83 with 3 hits.
+Fifo executes in 85 with 3 hits.
+Lifo executes in 358 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 167 with 18 hits.
+Fifo executes in 164 with 18 hits.
+Lifo executes in 1593 with 18 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 3 with 2 hits.
+Fifo executes in 4 with 2 hits.
+Lifo executes in 4 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 3 with 9 hits.
+Fifo executes in 3 with 9 hits.
+Lifo executes in 4 with 16 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 3 with 42 hits.
+Fifo executes in 2 with 42 hits.
+Lifo executes in 3 with 42 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 20 with 23 hits.
+Fifo executes in 21 with 23 hits.
+Lifo executes in 22 with 28 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 9 with 299 hits.
+Fifo executes in 10 with 299 hits.
+Lifo executes in 17 with 278 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 5 with 419 hits.
+Fifo executes in 5 with 419 hits.
+Lifo executes in 15 with 419 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 37 with 140 hits.
+Fifo executes in 37 with 140 hits.
+Lifo executes in 40 with 120 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 9 with 919 hits.
+Fifo executes in 9 with 919 hits.
+Lifo executes in 27 with 919 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 9 with 919 hits.
+Fifo executes in 9 with 919 hits.
+Lifo executes in 30 with 919 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 100 with 781 hits.
+Fifo executes in 102 with 781 hits.
+Lifo executes in 123 with 773 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 35 with 2419 hits.
+Fifo executes in 35 with 2419 hits.
+Lifo executes in 83 with 2419 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 39 with 2419 hits.
+Fifo executes in 39 with 2419 hits.
+Lifo executes in 113 with 2419 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 5 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 3 with 1 hits.
+Fifo executes in 4 with 1 hits.
+Lifo executes in 4 with 2 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 4 with 10 hits.
+Fifo executes in 4 with 10 hits.
+Lifo executes in 5 with 10 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 20 with 3 hits.
+Fifo executes in 24 with 3 hits.
+Lifo executes in 20 with 4 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 22 with 38 hits.
+Fifo executes in 20 with 38 hits.
+Lifo executes in 28 with 42 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 18 with 167 hits.
+Fifo executes in 17 with 167 hits.
+Lifo executes in 50 with 167 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 42 with 15 hits.
+Fifo executes in 46 with 15 hits.
+Lifo executes in 46 with 22 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 42 with 167 hits.
+Fifo executes in 43 with 167 hits.
+Lifo executes in 77 with 172 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 29 with 540 hits.
+Fifo executes in 30 with 540 hits.
+Lifo executes in 122 with 540 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 132 with 104 hits.
+Fifo executes in 129 with 104 hits.
+Lifo executes in 151 with 97 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 112 with 1017 hits.
+Fifo executes in 105 with 1017 hits.
+Lifo executes in 322 with 1013 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 67 with 1931 hits.
+Fifo executes in 73 with 1931 hits.
+Lifo executes in 413 with 1931 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 5 with 0 hits.
+Lifo executes in 4 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 4 with 1 hits.
+Fifo executes in 4 with 1 hits.
+Lifo executes in 6 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 20 with 0 hits.
+Fifo executes in 20 with 0 hits.
+Lifo executes in 20 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 24 with 2 hits.
+Fifo executes in 24 with 2 hits.
+Lifo executes in 31 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 26 with 13 hits.
+Fifo executes in 26 with 13 hits.
+Lifo executes in 78 with 13 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 42 with 1 hits.
+Fifo executes in 41 with 1 hits.
+Lifo executes in 44 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 48 with 9 hits.
+Fifo executes in 49 with 9 hits.
+Lifo executes in 95 with 8 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 60 with 46 hits.
+Fifo executes in 59 with 46 hits.
+Lifo executes in 271 with 46 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 137 with 5 hits.
+Fifo executes in 130 with 5 hits.
+Lifo executes in 152 with 5 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 146 with 67 hits.
+Fifo executes in 147 with 67 hits.
+Lifo executes in 426 with 58 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 202 with 261 hits.
+Fifo executes in 214 with 261 hits.
+Lifo executes in 1450 with 261 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 3 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 3 with 0 hits.
+Lifo executes in 4 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 5 with 0 hits.
+Lifo executes in 7 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 22 with 0 hits.
+Fifo executes in 22 with 0 hits.
+Lifo executes in 24 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 22 with 0 hits.
+Fifo executes in 21 with 0 hits.
+Lifo executes in 32 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 26 with 1 hits.
+Fifo executes in 27 with 1 hits.
+Lifo executes in 79 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 42 with 0 hits.
+Fifo executes in 41 with 0 hits.
+Lifo executes in 46 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 46 with 0 hits.
+Fifo executes in 46 with 0 hits.
+Lifo executes in 89 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 63 with 1 hits.
+Fifo executes in 65 with 1 hits.
+Lifo executes in 285 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 132 with 0 hits.
+Fifo executes in 128 with 0 hits.
+Lifo executes in 159 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 153 with 2 hits.
+Fifo executes in 148 with 2 hits.
+Lifo executes in 414 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 238 with 16 hits.
+Fifo executes in 230 with 16 hits.
+Lifo executes in 1666 with 16 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 18 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 16 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 14 with 13 hits.
+Fifo executes in 15 with 13 hits.
+Lifo executes in 14 with 15 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 12 with 40 hits.
+Fifo executes in 10 with 40 hits.
+Lifo executes in 11 with 40 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 83 with 27 hits.
+Fifo executes in 86 with 27 hits.
+Lifo executes in 86 with 26 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 40 with 291 hits.
+Fifo executes in 40 with 291 hits.
+Lifo executes in 45 with 290 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 17 with 419 hits.
+Fifo executes in 16 with 419 hits.
+Lifo executes in 25 with 419 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 155 with 124 hits.
+Fifo executes in 156 with 124 hits.
+Lifo executes in 156 with 131 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 19 with 919 hits.
+Fifo executes in 20 with 919 hits.
+Lifo executes in 38 with 919 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 28 with 919 hits.
+Fifo executes in 23 with 919 hits.
+Lifo executes in 43 with 919 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 333 with 780 hits.
+Fifo executes in 334 with 780 hits.
+Lifo executes in 364 with 760 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 47 with 2419 hits.
+Fifo executes in 44 with 2419 hits.
+Lifo executes in 96 with 2419 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 45 with 2419 hits.
+Fifo executes in 39 with 2419 hits.
+Lifo executes in 119 with 2419 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 17 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 18 with 2 hits.
+Fifo executes in 18 with 2 hits.
+Lifo executes in 17 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 15 with 9 hits.
+Fifo executes in 17 with 9 hits.
+Lifo executes in 18 with 9 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 85 with 6 hits.
+Fifo executes in 84 with 6 hits.
+Lifo executes in 88 with 7 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 84 with 53 hits.
+Fifo executes in 87 with 53 hits.
+Lifo executes in 88 with 45 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 63 with 163 hits.
+Fifo executes in 62 with 163 hits.
+Lifo executes in 97 with 163 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 177 with 17 hits.
+Fifo executes in 170 with 17 hits.
+Lifo executes in 175 with 17 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 165 with 161 hits.
+Fifo executes in 151 with 161 hits.
+Lifo executes in 194 with 154 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 98 with 530 hits.
+Fifo executes in 97 with 530 hits.
+Lifo executes in 197 with 530 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 461 with 111 hits.
+Fifo executes in 456 with 111 hits.
+Lifo executes in 479 with 102 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 308 with 1017 hits.
+Fifo executes in 310 with 1017 hits.
+Lifo executes in 514 with 1034 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 145 with 1931 hits.
+Fifo executes in 150 with 1931 hits.
+Lifo executes in 495 with 1931 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 18 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 18 with 0 hits.
+Fifo executes in 16 with 0 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 17 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 19 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 87 with 0 hits.
+Fifo executes in 90 with 0 hits.
+Lifo executes in 88 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 86 with 6 hits.
+Fifo executes in 85 with 6 hits.
+Lifo executes in 95 with 2 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 94 with 17 hits.
+Fifo executes in 93 with 17 hits.
+Lifo executes in 144 with 17 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 179 with 0 hits.
+Fifo executes in 181 with 0 hits.
+Lifo executes in 186 with 3 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 186 with 12 hits.
+Fifo executes in 187 with 12 hits.
+Lifo executes in 227 with 14 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 199 with 48 hits.
+Fifo executes in 200 with 48 hits.
+Lifo executes in 401 with 48 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 486 with 9 hits.
+Fifo executes in 474 with 9 hits.
+Lifo executes in 495 with 8 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 488 with 72 hits.
+Fifo executes in 476 with 72 hits.
+Lifo executes in 746 with 60 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 506 with 293 hits.
+Fifo executes in 507 with 293 hits.
+Lifo executes in 1735 with 293 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 16 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 20 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 19 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 17 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 20 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 87 with 0 hits.
+Fifo executes in 89 with 0 hits.
+Lifo executes in 88 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 89 with 0 hits.
+Fifo executes in 89 with 0 hits.
+Lifo executes in 98 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 94 with 1 hits.
+Fifo executes in 91 with 1 hits.
+Lifo executes in 146 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 183 with 0 hits.
+Fifo executes in 183 with 0 hits.
+Lifo executes in 177 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 182 with 0 hits.
+Fifo executes in 179 with 0 hits.
+Lifo executes in 220 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 198 with 3 hits.
+Fifo executes in 193 with 3 hits.
+Lifo executes in 428 with 3 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 551 with 0 hits.
+Fifo executes in 951 with 0 hits.
+Lifo executes in 955 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 806 with 3 hits.
+Fifo executes in 843 with 3 hits.
+Lifo executes in 1370 with 2 hits.
+Parameters: {factsN = 500;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 1014 with 15 hits.
+Fifo executes in 1105 with 15 hits.
+Lifo executes in 3437 with 15 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 72 with 1 hits.
+Fifo executes in 60 with 1 hits.
+Lifo executes in 67 with 2 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 59 with 15 hits.
+Fifo executes in 60 with 15 hits.
+Lifo executes in 59 with 16 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 38 with 46 hits.
+Fifo executes in 40 with 46 hits.
+Lifo executes in 42 with 46 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 339 with 34 hits.
+Fifo executes in 325 with 34 hits.
+Lifo executes in 334 with 25 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 164 with 281 hits.
+Fifo executes in 158 with 281 hits.
+Lifo executes in 173 with 281 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 62 with 420 hits.
+Fifo executes in 60 with 420 hits.
+Lifo executes in 78 with 420 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 563 with 117 hits.
+Fifo executes in 469 with 117 hits.
+Lifo executes in 486 with 101 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 41 with 919 hits.
+Fifo executes in 68 with 919 hits.
+Lifo executes in 97 with 919 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 53 with 919 hits.
+Fifo executes in 60 with 919 hits.
+Lifo executes in 81 with 919 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 946 with 797 hits.
+Fifo executes in 966 with 797 hits.
+Lifo executes in 961 with 789 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 94 with 2419 hits.
+Fifo executes in 71 with 2419 hits.
+Lifo executes in 150 with 2419 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 98 with 2419 hits.
+Fifo executes in 97 with 2419 hits.
+Lifo executes in 211 with 2419 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 61 with 0 hits.
+Fifo executes in 60 with 0 hits.
+Lifo executes in 53 with 2 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 41 with 1 hits.
+Fifo executes in 60 with 1 hits.
+Lifo executes in 39 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 45 with 6 hits.
+Fifo executes in 65 with 6 hits.
+Lifo executes in 56 with 6 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 291 with 2 hits.
+Fifo executes in 282 with 2 hits.
+Lifo executes in 307 with 6 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 258 with 41 hits.
+Fifo executes in 290 with 41 hits.
+Lifo executes in 293 with 32 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 209 with 162 hits.
+Fifo executes in 210 with 162 hits.
+Lifo executes in 270 with 162 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 523 with 16 hits.
+Fifo executes in 556 with 16 hits.
+Lifo executes in 573 with 19 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 468 with 178 hits.
+Fifo executes in 537 with 178 hits.
+Lifo executes in 494 with 164 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 275 with 516 hits.
+Fifo executes in 329 with 516 hits.
+Lifo executes in 443 with 516 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 1161 with 110 hits.
+Fifo executes in 1030 with 110 hits.
+Lifo executes in 1199 with 105 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 681 with 1067 hits.
+Fifo executes in 640 with 1067 hits.
+Lifo executes in 1035 with 1029 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 314 with 1933 hits.
+Fifo executes in 319 with 1933 hits.
+Lifo executes in 709 with 1933 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 52 with 0 hits.
+Fifo executes in 37 with 0 hits.
+Lifo executes in 36 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 39 with 0 hits.
+Fifo executes in 36 with 0 hits.
+Lifo executes in 43 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 68 with 0 hits.
+Fifo executes in 44 with 0 hits.
+Lifo executes in 40 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 200 with 0 hits.
+Fifo executes in 176 with 0 hits.
+Lifo executes in 178 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 191 with 2 hits.
+Fifo executes in 178 with 2 hits.
+Lifo executes in 192 with 3 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 188 with 8 hits.
+Fifo executes in 179 with 8 hits.
+Lifo executes in 247 with 8 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 359 with 0 hits.
+Fifo executes in 375 with 0 hits.
+Lifo executes in 362 with 2 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 356 with 10 hits.
+Fifo executes in 375 with 10 hits.
+Lifo executes in 410 with 8 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 378 with 39 hits.
+Fifo executes in 378 with 39 hits.
+Lifo executes in 602 with 39 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 934 with 7 hits.
+Fifo executes in 965 with 7 hits.
+Lifo executes in 985 with 8 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 942 with 47 hits.
+Fifo executes in 952 with 47 hits.
+Lifo executes in 1213 with 51 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 908 with 296 hits.
+Fifo executes in 911 with 296 hits.
+Lifo executes in 2176 with 296 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 35 with 0 hits.
+Fifo executes in 35 with 0 hits.
+Lifo executes in 34 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 37 with 0 hits.
+Fifo executes in 40 with 0 hits.
+Lifo executes in 34 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 41 with 0 hits.
+Fifo executes in 35 with 0 hits.
+Lifo executes in 38 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 190 with 0 hits.
+Fifo executes in 173 with 0 hits.
+Lifo executes in 188 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 183 with 0 hits.
+Fifo executes in 177 with 0 hits.
+Lifo executes in 197 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 191 with 0 hits.
+Fifo executes in 186 with 0 hits.
+Lifo executes in 254 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 379 with 0 hits.
+Fifo executes in 360 with 0 hits.
+Lifo executes in 367 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 378 with 0 hits.
+Fifo executes in 360 with 0 hits.
+Lifo executes in 419 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 405 with 1 hits.
+Fifo executes in 382 with 1 hits.
+Lifo executes in 631 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 958 with 1 hits.
+Fifo executes in 960 with 1 hits.
+Lifo executes in 964 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 955 with 0 hits.
+Fifo executes in 961 with 0 hits.
+Lifo executes in 1239 with 2 hits.
+Parameters: {factsN = 1000;
+ factsD = 100;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 1060 with 10 hits.
+Fifo executes in 1048 with 10 hits.
+Lifo executes in 2604 with 10 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 1 with 2 hits.
+Fifo executes in 1 with 2 hits.
+Lifo executes in 1 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 1 with 13 hits.
+Fifo executes in 1 with 13 hits.
+Lifo executes in 1 with 9 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 1 with 41 hits.
+Fifo executes in 1 with 41 hits.
+Lifo executes in 2 with 41 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 8 with 31 hits.
+Fifo executes in 7 with 31 hits.
+Lifo executes in 8 with 34 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 5 with 298 hits.
+Fifo executes in 5 with 298 hits.
+Lifo executes in 12 with 286 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 4 with 419 hits.
+Fifo executes in 4 with 419 hits.
+Lifo executes in 14 with 419 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 18 with 109 hits.
+Fifo executes in 16 with 109 hits.
+Lifo executes in 19 with 131 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 7 with 919 hits.
+Fifo executes in 7 with 919 hits.
+Lifo executes in 26 with 919 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 7 with 919 hits.
+Fifo executes in 7 with 919 hits.
+Lifo executes in 29 with 919 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 59 with 758 hits.
+Fifo executes in 61 with 758 hits.
+Lifo executes in 79 with 792 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 38 with 2419 hits.
+Fifo executes in 36 with 2419 hits.
+Lifo executes in 86 with 2419 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 31 with 2419 hits.
+Fifo executes in 35 with 2419 hits.
+Lifo executes in 109 with 2419 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 2 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 1 with 4 hits.
+Fifo executes in 1 with 4 hits.
+Lifo executes in 1 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 2 with 12 hits.
+Fifo executes in 2 with 12 hits.
+Lifo executes in 3 with 12 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 9 with 9 hits.
+Fifo executes in 7 with 9 hits.
+Lifo executes in 8 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 9 with 41 hits.
+Fifo executes in 8 with 41 hits.
+Lifo executes in 19 with 44 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 10 with 162 hits.
+Fifo executes in 11 with 162 hits.
+Lifo executes in 45 with 162 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 18 with 20 hits.
+Fifo executes in 17 with 20 hits.
+Lifo executes in 20 with 10 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 20 with 158 hits.
+Fifo executes in 19 with 158 hits.
+Lifo executes in 58 with 166 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 20 with 527 hits.
+Fifo executes in 19 with 527 hits.
+Lifo executes in 124 with 527 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 71 with 125 hits.
+Fifo executes in 71 with 125 hits.
+Lifo executes in 97 with 108 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 69 with 1043 hits.
+Fifo executes in 72 with 1043 hits.
+Lifo executes in 300 with 1028 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 54 with 1927 hits.
+Fifo executes in 57 with 1927 hits.
+Lifo executes in 401 with 1927 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 2 with 0 hits.
+Fifo executes in 2 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 8 with 1 hits.
+Fifo executes in 7 with 1 hits.
+Lifo executes in 8 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 10 with 1 hits.
+Fifo executes in 8 with 1 hits.
+Lifo executes in 19 with 2 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 15 with 14 hits.
+Fifo executes in 14 with 14 hits.
+Lifo executes in 68 with 14 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 18 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 20 with 1 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 22 with 15 hits.
+Fifo executes in 21 with 15 hits.
+Lifo executes in 63 with 5 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 38 with 44 hits.
+Fifo executes in 36 with 44 hits.
+Lifo executes in 254 with 44 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 71 with 6 hits.
+Fifo executes in 68 with 6 hits.
+Lifo executes in 93 with 5 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 88 with 58 hits.
+Fifo executes in 87 with 58 hits.
+Lifo executes in 360 with 64 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 156 with 289 hits.
+Fifo executes in 150 with 289 hits.
+Lifo executes in 1407 with 289 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 2 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 1 with 0 hits.
+Fifo executes in 1 with 0 hits.
+Lifo executes in 1 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 2 with 0 hits.
+Fifo executes in 2 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 7 with 0 hits.
+Fifo executes in 7 with 0 hits.
+Lifo executes in 8 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 9 with 0 hits.
+Fifo executes in 9 with 0 hits.
+Lifo executes in 19 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 16 with 0 hits.
+Fifo executes in 14 with 0 hits.
+Lifo executes in 70 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 19 with 0 hits.
+Fifo executes in 16 with 0 hits.
+Lifo executes in 21 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 27 with 0 hits.
+Fifo executes in 25 with 0 hits.
+Lifo executes in 71 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 39 with 3 hits.
+Fifo executes in 38 with 3 hits.
+Lifo executes in 266 with 3 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 66 with 1 hits.
+Fifo executes in 81 with 1 hits.
+Lifo executes in 101 with 0 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 85 with 1 hits.
+Fifo executes in 88 with 1 hits.
+Lifo executes in 371 with 3 hits.
+Parameters: {factsN = 25;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 200 with 15 hits.
+Fifo executes in 183 with 15 hits.
+Lifo executes in 1637 with 15 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 3 with 0 hits.
+Lifo executes in 3 with 1 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 3 with 18 hits.
+Fifo executes in 3 with 18 hits.
+Lifo executes in 3 with 11 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 2 with 49 hits.
+Fifo executes in 2 with 49 hits.
+Lifo executes in 3 with 49 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 21 with 40 hits.
+Fifo executes in 19 with 40 hits.
+Lifo executes in 19 with 29 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 12 with 292 hits.
+Fifo executes in 11 with 292 hits.
+Lifo executes in 16 with 298 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 5 with 419 hits.
+Fifo executes in 7 with 419 hits.
+Lifo executes in 15 with 419 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 37 with 118 hits.
+Fifo executes in 42 with 118 hits.
+Lifo executes in 41 with 132 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 12 with 919 hits.
+Fifo executes in 9 with 919 hits.
+Lifo executes in 29 with 919 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 10 with 919 hits.
+Fifo executes in 11 with 919 hits.
+Lifo executes in 34 with 919 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 103 with 767 hits.
+Fifo executes in 103 with 767 hits.
+Lifo executes in 130 with 780 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 35 with 2419 hits.
+Fifo executes in 39 with 2419 hits.
+Lifo executes in 87 with 2419 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 37 with 2419 hits.
+Fifo executes in 38 with 2419 hits.
+Lifo executes in 111 with 2419 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 5 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 4 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 5 with 2 hits.
+Fifo executes in 4 with 2 hits.
+Lifo executes in 4 with 4 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 4 with 8 hits.
+Fifo executes in 4 with 8 hits.
+Lifo executes in 5 with 8 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 22 with 4 hits.
+Fifo executes in 23 with 4 hits.
+Lifo executes in 21 with 3 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 21 with 50 hits.
+Fifo executes in 25 with 50 hits.
+Lifo executes in 31 with 44 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 21 with 165 hits.
+Fifo executes in 19 with 165 hits.
+Lifo executes in 55 with 165 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 45 with 19 hits.
+Fifo executes in 41 with 19 hits.
+Lifo executes in 46 with 17 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 40 with 167 hits.
+Fifo executes in 41 with 167 hits.
+Lifo executes in 82 with 171 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 32 with 514 hits.
+Fifo executes in 33 with 514 hits.
+Lifo executes in 138 with 514 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 137 with 127 hits.
+Fifo executes in 133 with 127 hits.
+Lifo executes in 162 with 124 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 113 with 1005 hits.
+Fifo executes in 108 with 1005 hits.
+Lifo executes in 335 with 1024 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 67 with 1930 hits.
+Fifo executes in 71 with 1930 hits.
+Lifo executes in 424 with 1930 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 5 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 5 with 0 hits.
+Lifo executes in 4 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 5 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 6 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 20 with 1 hits.
+Fifo executes in 20 with 1 hits.
+Lifo executes in 22 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 22 with 2 hits.
+Fifo executes in 27 with 2 hits.
+Lifo executes in 33 with 3 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 29 with 18 hits.
+Fifo executes in 27 with 18 hits.
+Lifo executes in 83 with 18 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 49 with 1 hits.
+Fifo executes in 43 with 1 hits.
+Lifo executes in 49 with 3 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 53 with 10 hits.
+Fifo executes in 52 with 10 hits.
+Lifo executes in 89 with 15 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 65 with 52 hits.
+Fifo executes in 63 with 52 hits.
+Lifo executes in 271 with 52 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 144 with 6 hits.
+Fifo executes in 141 with 6 hits.
+Lifo executes in 166 with 5 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 161 with 62 hits.
+Fifo executes in 148 with 62 hits.
+Lifo executes in 438 with 58 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 210 with 281 hits.
+Fifo executes in 213 with 281 hits.
+Lifo executes in 1491 with 281 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 4 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 3 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 3 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 5 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 5 with 0 hits.
+Fifo executes in 4 with 0 hits.
+Lifo executes in 6 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 21 with 0 hits.
+Fifo executes in 21 with 0 hits.
+Lifo executes in 22 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 24 with 0 hits.
+Fifo executes in 23 with 0 hits.
+Lifo executes in 32 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 27 with 0 hits.
+Fifo executes in 28 with 0 hits.
+Lifo executes in 85 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 50 with 0 hits.
+Fifo executes in 54 with 0 hits.
+Lifo executes in 45 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 50 with 0 hits.
+Fifo executes in 48 with 0 hits.
+Lifo executes in 91 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 68 with 0 hits.
+Fifo executes in 69 with 0 hits.
+Lifo executes in 303 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 138 with 0 hits.
+Fifo executes in 137 with 0 hits.
+Lifo executes in 165 with 2 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 168 with 2 hits.
+Fifo executes in 161 with 2 hits.
+Lifo executes in 443 with 0 hits.
+Parameters: {factsN = 100;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 248 with 10 hits.
+Fifo executes in 233 with 10 hits.
+Lifo executes in 1769 with 10 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 18 with 1 hits.
+Fifo executes in 17 with 1 hits.
+Lifo executes in 16 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 20 with 15 hits.
+Fifo executes in 19 with 15 hits.
+Lifo executes in 14 with 16 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 12 with 41 hits.
+Fifo executes in 10 with 41 hits.
+Lifo executes in 12 with 41 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 91 with 22 hits.
+Fifo executes in 99 with 22 hits.
+Lifo executes in 88 with 38 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 39 with 304 hits.
+Fifo executes in 38 with 304 hits.
+Lifo executes in 48 with 286 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 17 with 420 hits.
+Fifo executes in 17 with 420 hits.
+Lifo executes in 27 with 420 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 170 with 114 hits.
+Fifo executes in 174 with 114 hits.
+Lifo executes in 163 with 126 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 23 with 919 hits.
+Fifo executes in 22 with 919 hits.
+Lifo executes in 43 with 919 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 21 with 919 hits.
+Fifo executes in 20 with 919 hits.
+Lifo executes in 43 with 919 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 370 with 742 hits.
+Fifo executes in 372 with 742 hits.
+Lifo executes in 376 with 752 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 55 with 2419 hits.
+Fifo executes in 49 with 2419 hits.
+Lifo executes in 96 with 2419 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 47 with 2419 hits.
+Fifo executes in 48 with 2419 hits.
+Lifo executes in 119 with 2419 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 17 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 18 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 18 with 1 hits.
+Fifo executes in 17 with 1 hits.
+Lifo executes in 20 with 2 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 16 with 8 hits.
+Fifo executes in 17 with 8 hits.
+Lifo executes in 18 with 8 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 87 with 4 hits.
+Fifo executes in 87 with 4 hits.
+Lifo executes in 92 with 4 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 94 with 39 hits.
+Fifo executes in 85 with 39 hits.
+Lifo executes in 95 with 33 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 66 with 176 hits.
+Fifo executes in 63 with 176 hits.
+Lifo executes in 97 with 176 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 187 with 17 hits.
+Fifo executes in 179 with 17 hits.
+Lifo executes in 183 with 19 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 164 with 149 hits.
+Fifo executes in 171 with 149 hits.
+Lifo executes in 202 with 158 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 106 with 519 hits.
+Fifo executes in 99 with 519 hits.
+Lifo executes in 205 with 519 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 484 with 95 hits.
+Fifo executes in 486 with 95 hits.
+Lifo executes in 497 with 109 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 324 with 979 hits.
+Fifo executes in 337 with 979 hits.
+Lifo executes in 542 with 1047 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 157 with 1930 hits.
+Fifo executes in 150 with 1930 hits.
+Lifo executes in 507 with 1930 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 21 with 0 hits.
+Fifo executes in 17 with 0 hits.
+Lifo executes in 16 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 18 with 0 hits.
+Fifo executes in 23 with 0 hits.
+Lifo executes in 18 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 19 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 20 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 97 with 1 hits.
+Fifo executes in 95 with 1 hits.
+Lifo executes in 87 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 93 with 0 hits.
+Fifo executes in 103 with 0 hits.
+Lifo executes in 100 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 98 with 18 hits.
+Fifo executes in 95 with 18 hits.
+Lifo executes in 159 with 18 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 189 with 0 hits.
+Fifo executes in 179 with 0 hits.
+Lifo executes in 193 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 199 with 5 hits.
+Fifo executes in 186 with 5 hits.
+Lifo executes in 232 with 8 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 208 with 43 hits.
+Fifo executes in 197 with 43 hits.
+Lifo executes in 427 with 43 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 492 with 5 hits.
+Fifo executes in 496 with 5 hits.
+Lifo executes in 521 with 5 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 501 with 57 hits.
+Fifo executes in 496 with 57 hits.
+Lifo executes in 819 with 54 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 528 with 302 hits.
+Fifo executes in 614 with 302 hits.
+Lifo executes in 1834 with 302 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 23 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 16 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 21 with 0 hits.
+Fifo executes in 18 with 0 hits.
+Lifo executes in 17 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 17 with 0 hits.
+Fifo executes in 19 with 0 hits.
+Lifo executes in 21 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 92 with 0 hits.
+Fifo executes in 97 with 0 hits.
+Lifo executes in 95 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 99 with 0 hits.
+Fifo executes in 91 with 0 hits.
+Lifo executes in 104 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 106 with 0 hits.
+Fifo executes in 102 with 0 hits.
+Lifo executes in 156 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 186 with 0 hits.
+Fifo executes in 189 with 0 hits.
+Lifo executes in 189 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 192 with 0 hits.
+Fifo executes in 197 with 0 hits.
+Lifo executes in 231 with 1 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 210 with 5 hits.
+Fifo executes in 202 with 5 hits.
+Lifo executes in 457 with 5 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 502 with 0 hits.
+Fifo executes in 495 with 0 hits.
+Lifo executes in 515 with 0 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 524 with 1 hits.
+Fifo executes in 518 with 1 hits.
+Lifo executes in 795 with 3 hits.
+Parameters: {factsN = 500;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 601 with 14 hits.
+Fifo executes in 605 with 14 hits.
+Lifo executes in 2092 with 14 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 1;}
+Simple executes in 37 with 0 hits.
+Fifo executes in 36 with 0 hits.
+Lifo executes in 35 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 31 with 9 hits.
+Fifo executes in 31 with 9 hits.
+Lifo executes in 32 with 12 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 31 with 38 hits.
+Fifo executes in 22 with 38 hits.
+Lifo executes in 24 with 38 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 5;}
+Simple executes in 170 with 30 hits.
+Fifo executes in 171 with 30 hits.
+Lifo executes in 165 with 37 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 50;}
+Simple executes in 76 with 305 hits.
+Fifo executes in 72 with 305 hits.
+Lifo executes in 87 with 287 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 10;
+ precedencesN = 500;}
+Simple executes in 39 with 419 hits.
+Fifo executes in 33 with 419 hits.
+Lifo executes in 39 with 419 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 10;}
+Simple executes in 329 with 127 hits.
+Fifo executes in 312 with 127 hits.
+Lifo executes in 329 with 122 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 100;}
+Simple executes in 34 with 919 hits.
+Fifo executes in 43 with 919 hits.
+Lifo executes in 58 with 919 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 10;
+ precedencesN = 1000;}
+Simple executes in 35 with 919 hits.
+Fifo executes in 38 with 919 hits.
+Lifo executes in 55 with 919 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 25;}
+Simple executes in 659 with 787 hits.
+Fifo executes in 671 with 787 hits.
+Lifo executes in 687 with 756 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 250;}
+Simple executes in 66 with 2419 hits.
+Fifo executes in 60 with 2419 hits.
+Lifo executes in 113 with 2419 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 10;
+ precedencesN = 2500;}
+Simple executes in 68 with 2419 hits.
+Fifo executes in 64 with 2419 hits.
+Lifo executes in 147 with 2419 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 1;}
+Simple executes in 35 with 0 hits.
+Fifo executes in 39 with 0 hits.
+Lifo executes in 35 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 36 with 0 hits.
+Fifo executes in 37 with 0 hits.
+Lifo executes in 45 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 42 with 7 hits.
+Fifo executes in 50 with 7 hits.
+Lifo executes in 57 with 7 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 5;}
+Simple executes in 228 with 4 hits.
+Fifo executes in 204 with 4 hits.
+Lifo executes in 177 with 8 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 50;}
+Simple executes in 167 with 39 hits.
+Fifo executes in 165 with 39 hits.
+Lifo executes in 177 with 47 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 25;
+ precedencesN = 500;}
+Simple executes in 124 with 166 hits.
+Fifo executes in 136 with 166 hits.
+Lifo executes in 165 with 166 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 10;}
+Simple executes in 352 with 13 hits.
+Fifo executes in 356 with 13 hits.
+Lifo executes in 364 with 23 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 100;}
+Simple executes in 311 with 156 hits.
+Fifo executes in 305 with 156 hits.
+Lifo executes in 370 with 151 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 25;
+ precedencesN = 1000;}
+Simple executes in 189 with 527 hits.
+Fifo executes in 188 with 527 hits.
+Lifo executes in 288 with 527 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 25;}
+Simple executes in 944 with 115 hits.
+Fifo executes in 898 with 115 hits.
+Lifo executes in 928 with 103 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 250;}
+Simple executes in 583 with 1037 hits.
+Fifo executes in 571 with 1037 hits.
+Lifo executes in 808 with 1009 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 25;
+ precedencesN = 2500;}
+Simple executes in 256 with 1928 hits.
+Fifo executes in 255 with 1928 hits.
+Lifo executes in 603 with 1928 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 1;}
+Simple executes in 40 with 0 hits.
+Fifo executes in 37 with 0 hits.
+Lifo executes in 33 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 37 with 0 hits.
+Fifo executes in 36 with 0 hits.
+Lifo executes in 33 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 37 with 2 hits.
+Fifo executes in 33 with 2 hits.
+Lifo executes in 36 with 2 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 5;}
+Simple executes in 182 with 0 hits.
+Fifo executes in 185 with 0 hits.
+Lifo executes in 176 with 3 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 50;}
+Simple executes in 189 with 2 hits.
+Fifo executes in 177 with 2 hits.
+Lifo executes in 189 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 100;
+ precedencesN = 500;}
+Simple executes in 187 with 13 hits.
+Fifo executes in 177 with 13 hits.
+Lifo executes in 248 with 13 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 10;}
+Simple executes in 378 with 2 hits.
+Fifo executes in 364 with 2 hits.
+Lifo executes in 365 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 100;}
+Simple executes in 496 with 10 hits.
+Fifo executes in 358 with 10 hits.
+Lifo executes in 410 with 7 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 100;
+ precedencesN = 1000;}
+Simple executes in 529 with 36 hits.
+Fifo executes in 405 with 36 hits.
+Lifo executes in 581 with 36 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 25;}
+Simple executes in 920 with 3 hits.
+Fifo executes in 921 with 3 hits.
+Lifo executes in 939 with 6 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 250;}
+Simple executes in 923 with 53 hits.
+Fifo executes in 909 with 53 hits.
+Lifo executes in 1174 with 58 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 100;
+ precedencesN = 2500;}
+Simple executes in 907 with 285 hits.
+Fifo executes in 920 with 285 hits.
+Lifo executes in 2183 with 285 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 1;}
+Simple executes in 38 with 0 hits.
+Fifo executes in 34 with 0 hits.
+Lifo executes in 34 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 37 with 0 hits.
+Fifo executes in 35 with 0 hits.
+Lifo executes in 34 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 100;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 38 with 0 hits.
+Fifo executes in 36 with 0 hits.
+Lifo executes in 38 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 5;}
+Simple executes in 179 with 0 hits.
+Fifo executes in 175 with 0 hits.
+Lifo executes in 183 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 50;}
+Simple executes in 189 with 0 hits.
+Fifo executes in 179 with 0 hits.
+Lifo executes in 185 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 500;
+ queriesD = 500;
+ precedencesN = 500;}
+Simple executes in 187 with 0 hits.
+Fifo executes in 186 with 0 hits.
+Lifo executes in 234 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 10;}
+Simple executes in 359 with 0 hits.
+Fifo executes in 364 with 0 hits.
+Lifo executes in 361 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 100;}
+Simple executes in 374 with 0 hits.
+Fifo executes in 366 with 0 hits.
+Lifo executes in 410 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 1000;
+ queriesD = 500;
+ precedencesN = 1000;}
+Simple executes in 378 with 1 hits.
+Fifo executes in 383 with 1 hits.
+Lifo executes in 636 with 1 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 25;}
+Simple executes in 916 with 1 hits.
+Fifo executes in 926 with 1 hits.
+Lifo executes in 934 with 0 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 250;}
+Simple executes in 950 with 3 hits.
+Fifo executes in 922 with 3 hits.
+Lifo executes in 1218 with 2 hits.
+Parameters: {factsN = 1000;
+ factsD = 500;
+ queriesN = 2500;
+ queriesD = 500;
+ precedencesN = 2500;}
+Simple executes in 1006 with 15 hits.
+Fifo executes in 1027 with 15 hits.
+Lifo executes in 2467 with 15 hits.

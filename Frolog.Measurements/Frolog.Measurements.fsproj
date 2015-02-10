@@ -50,7 +50,7 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
     <None Include="App.config" />
-    <Compile Include="TestSearchMachine.fs" />
+    <Compile Include="MachineMeasure.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>

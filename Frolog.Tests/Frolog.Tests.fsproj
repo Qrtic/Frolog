@@ -60,6 +60,7 @@
     <Compile Include="Common.fs" />
     <Compile Include="Term.fs" />
     <Compile Include="Tests.fs" />
+    <Compile Include="Machine.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

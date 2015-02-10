@@ -2,7 +2,6 @@
 
 open Frolog
 open Frolog.DefineRule
-open Frolog.Tests.TestSearchMachine
 open Frolog.CustomRules
 
 module Main =
@@ -30,41 +29,43 @@ module Main =
     let createFibsQueries (distrib: int -> int) size =
         createCustomQueries distrib (fun x -> defCall2 "factorial" (string x) "F") size
 
-    let testFacts() =
-        starttest 
-            (createFacts "b" (Distributions.random 1 1000))
-            (createSimpleQueries "b" (Distributions.random 1 1000))
-            1500
-            3000
-            5
-            3000
+    // TODO: generalize to depth of the rule
+    type measureParameters = { factsN: int; factsD: int; queriesN: int; queriesD: int; precedencesN: int }
+    let measureGGp (mp: measureParameters) resCallback =
+        let prms = { maxPrecedences = mp.precedencesN }
+        let rf = Distributions.random 1 mp.factsD >> (fun o -> o.ToString())
+        let rq = Distributions.random 1 mp.queriesD >> (fun o -> o.ToString())
+        
+        let facts = [1..mp.factsN] |> List.map(fun _ -> GGrandparent.parent (rf()) (rf()))
+        let queries = [1..mp.queriesN] |> List.map(fun _ -> defCall2 "ggrandparent" (rq()) (rq()))
 
-    let testGGp distrib facts queries precedences =
-        let r = Distributions.random 1 distrib
-        let next() = r().ToString()
-        let factsGet = createCustomFacts (fun _ -> next(), next()) (fun (g, c) -> GGrandparent.parent g c)
-        let queryGet = createCustomQueries (fun _ -> next(), next()) (fun (g, c) -> defCall2 "ggrandparent" g c)
-        starttest
-            factsGet
-            queryGet
-            facts
-            queries
-            1
-            precedences
+        let simple = MachinePrepare.fifocacheGet facts prms
+        let fifo = MachinePrepare.fifocacheGet facts prms
+        let lifo = MachinePrepare.lifocacheGet facts prms
+
+        let sr = MachineMeasure.measureMachine simple queries
+        resCallback "Simple" sr
+        let fr = MachineMeasure.measureMachine fifo queries
+        resCallback "Fifo" fr
+        let lr = MachineMeasure.measureMachine lifo queries
+        resCallback "Lifo" lr
 
     [<EntryPoint>]
     let main args =
-        // starttest (fun x -> []) (createFibsQueries (Distributions.random 1 10)) 0 200 2 100
-        use stream = System.IO.File.Open("testresults" + System.DateTime.Now.ToShortDateString() + ".txt", System.IO.FileMode.CreateNew)
-        use wr = new System.IO.StreamWriter(stream)
-        System.Console.SetOut(wr)
-        for d in [10; 25; 50; 100; 500; 1000] do
-            for f in [25; 50; 100; 500; 1000; 2500] do
-                for q in [100; 1000; 3000; 5000] do
-                    for p in [q / 100; q / 10; q; q * 10; q * 100] do
-                        printfn "Use %i distribution coefficient" d
-                        testGGp d f q p |> ignore
-            wr.Flush()
+        let sb = new System.Text.StringBuilder()
+        let wrf (s: string) = sb.AppendLine(s) |> ignore
+        let watch = System.Diagnostics.Stopwatch.StartNew()
+
+        for fd in [10; 25; 100; 500] do
+            printfn "Check fd = %i" fd
+            for f in [25; 100; 500; 1000] do
+                for qd in [10; 25; 100; 500] do
+                    for q in [100; 500; 1000; 2500] do
+                        for p in [q / 100; q / 10; q] do
+                            let prms = { factsN = f; factsD = fd; queriesN = q; queriesD = qd; precedencesN = p }
+                            wrf <| sprintf "Parameters: %A" prms
+                            measureGGp prms (fun name res -> wrf <| sprintf "%s executes in %i with %i hits." name res.time res.hits)
+        printfn "Wait for result. Executed in %i ms." watch.ElapsedMilliseconds
+        System.IO.File.WriteAllText(System.DateTime.Now.ToShortDateString() + ".txt", sb.ToString())
         System.Console.ReadKey() |> ignore
-        wr.Flush()
         0
