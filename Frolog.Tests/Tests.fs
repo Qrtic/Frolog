@@ -4,6 +4,7 @@ open NUnit.Framework
 
 open Frolog
 open Frolog.DefineRule
+open Frolog.DefineRule.DefPublic
 open Frolog.SearchMachines
 open Frolog.CustomRules
 
@@ -122,21 +123,21 @@ module SimpleTest =
     [<Test>]
     let ``Simple. Signature custom Rule with d=1``() =
         let cls = forceSign "x2(X, Y)"
-        let r = defConcatRule cls (defBody [forceSign "+(X, X, Y)"])
+        let r = defCall cls (forceSign "+(X, X, Y)")
         check_1 (FactOptions.Custom(r)) (signOpt "x2(3, 6)")
         check_0 (FactOptions.Custom(r)) (signOpt "x2(3, 7)")
     
     [<Test>]
     let ``Simple. Signature custom Rule with d=2``() =
         let cls = forceSign "x3(X, Y)"
-        let r = defConcatRule cls (defBody [forceSign "+(X, X, Y1)"; forceSign "+(Y1, X, Y)"])
+        let r = defCall cls (forceSign "+(X, X, Y1)") |> combine (defCallBodyf "+(Y1, X, Y)")
         check_1 (FactOptions.Custom(r)) (signOpt "x3(3, 9)")
         check_0 (FactOptions.Custom(r)) (signOpt "x3(3, 10)")
         
     [<Test>]
     let ``Simple. Check Signature custom Rule(d=2) with Context doesnt changes the Context``() =
         let cls = forceSign "x3(X, Y)"
-        let r = defConcatRule cls (defBody [forceSign "+(X, X, Y1)"; forceSign "+(Y1, X, Y)"])
+        let r = defCall cls (forceSign "+(X, X, Y1)") |> combine (defCallBodyf "+(Y1, X, Y)")
         check_eq (FactOptions.Custom(r)) (signOpt "x3(3, 9)") [forceSign "x3(3, 9)"]
         check_eq (FactOptions.Custom(r)) (signOpt "x3(3, A)") [forceSign "x3(3, 9)"]
         check_eq (FactOptions.Custom(r)) (signOpt "x3(3, 10)") []
@@ -144,7 +145,7 @@ module SimpleTest =
     [<Test>]
     let ``Simple. Check Signature custom Rule(d=3) with Context doesnt changes the Context``() =
         let cls = forceSign "x4(X, Y)"
-        let r = defConcatRule cls (defBody [forceSign "+(X, X, Y1)"; forceSign "+(Y1, X, Y2)"; forceSign "+(Y2, X, Y)"])
+        let r = defCall cls (forceSign "+(X, X, Y1)") |> combine (defCallBodyf "+(Y1, X, Y2)") |> combine (defCallBodyf "+(Y2, X, Y)")
         check_eq (FactOptions.Custom(r)) (signOpt "x4(3, 12)") [forceSign "x4(3, 12)"]
         check_eq (FactOptions.Custom(r)) (signOpt "x4(3, A)") [forceSign "x4(3, 12)"]
         check_eq (FactOptions.Custom(r)) (signOpt "x4(3, 13)") []
@@ -156,7 +157,7 @@ module SimpleTest =
         
         let isgrandparent(): Rule =
             let def = forceSign "grandparent(G, C)"
-            defConcatRule def (defBody [forceSign "parent(G, P)"; forceSign "parent(P, C)"])
+            defCall def (forceSign "parent(G, P)") |> combine (defCallBodyf "parent(P, C)")
 
         let parentSignature (parent: string) (child: string) =
             forceSign (sprintf "parent(%s, %s)" parent child)

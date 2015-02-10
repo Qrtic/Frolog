@@ -10,7 +10,7 @@ open Frolog.Common
 [<TestFixture>]
 module MachineTests =
     let testMachineCache (machine: #SearchMachines.Custom) =
-        machine.AddRule(DefineRule.defFact(signf(termf "s(1)")))
+        machine.AddRule(DefineRule.DefPublic.defFact(signf(termf "s(1)")))
         Assert.AreEqual(machine.CacheHits, 0)
         machine.Execute(signf(termf "s(1)")) |> ignore
         Assert.AreEqual(machine.CacheHits, 0)

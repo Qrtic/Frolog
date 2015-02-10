@@ -2,6 +2,7 @@
 
 open Frolog
 open Frolog.DefineRule
+open Frolog.DefineRule.DefPublic
 open Frolog.CustomRules
 
 module Main =

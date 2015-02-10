@@ -2,6 +2,7 @@
 
 open Frolog
 open Frolog.DefineRule
+open Frolog.DefineRule.DefPublic
 
 module MatchesGame =
     let move x = tryDefFact (sprintf "move(%i)" x) |> Option.get
@@ -10,8 +11,8 @@ module MatchesGame =
     let goodMoves = 
         let call (s: string) = term s |> Option.bind sign |> Option.get
         let def = call "good_move(X, M)"
-        [defConcatRule def (defBody [call "move(M)"; call "-(X, M, 1)"]);
-            defConcatRule def (defBody [call "move(M)"; call "-(X, M, X1)"; call "not(good_move(X1, _))"])]
+        [defCall def (call "move(M)") |> combine (defCallBodyf "-(X, M, 1)");
+            defCall def (call "move(M)") |> combine (defCallBodyf "-(X, M, 1)") |> combine (defCallBodyf "not(good_move(X1, _))")]
 
     let gMoves = 
         let call c = Lexem(Call(term c |> Option.bind sign |> Option.get))
