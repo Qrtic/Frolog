@@ -13,8 +13,8 @@ type Knowledgebase(rules: Rule list) =
 
     member k.rules = rules
     interface Rulebase with
-        member k.Append r = new Knowledgebase(r::k.rules) :> Rulebase
-        member k.AppendRange rs = (k, rs) ||> Seq.fold(fun kb r -> new Knowledgebase(r::kb.rules)) :> Rulebase
+        member k.Append r = new Knowledgebase(k.rules@[r]) :> Rulebase
+        member k.AppendRange rs = new Knowledgebase(k.rules@(Seq.toList rs)) :> Rulebase
         member k.Rules = k.rules
     
 type SearchResult = Signature seq

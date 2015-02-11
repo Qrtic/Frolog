@@ -48,6 +48,7 @@
     <Compile Include="Grandparent.fs" />
     <Compile Include="GGrandParent.fs" />
     <Compile Include="MatchesGame.fs" />
+    <Compile Include="DeepRule.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Frolog\Frolog.fsproj">

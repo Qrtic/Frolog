@@ -17,6 +17,13 @@ type RuleBodyLexem =
     | False
     | Call of Signature
     | Predicate of (PredicateInput -> PredicateResult)
+    with
+    override l.ToString() =
+        match l with
+        | True -> "true"
+        | False -> "false"
+        | Call s -> s.AsString
+        | Predicate(_) -> "``P``"
 type RuleBody = 
     // Simple success verifier
     | Lexem of RuleBodyLexem
@@ -28,12 +35,23 @@ type RuleBody =
     | Cut of RuleBody
     // If fails then succeed
     | Not of RuleBody
+    with
+    override b.ToString() = 
+        match b with
+        | Lexem(l) -> l.ToString()
+        | Conjunction(b1, b2) -> sprintf "%s, %s" (b1.ToString()) (b2.ToString())
+        | Or(b1, b2) -> sprintf "%s, %s" (b1.ToString()) (b2.ToString())
+        | Cut(b) -> sprintf "!, %s" (b.ToString())
+        | Not(b) -> sprintf "not(%s)" (b.ToString())
 and Rule = Rule of definition: Signature * body: RuleBody * isInternal: bool
 
 type Rule with
     member r.Signature = 
         let (Rule(def, _, _)) = r
         def
+    member r.Body =
+        let (Rule(_, body, _)) = r
+        body
 
 // Rule is only a structure with defined constraints
 // It can be fully defined aka f(1).
@@ -66,8 +84,8 @@ module DefineRule =
             match Option.bind sign (term t) with
             | None -> None
             | Some(sign) -> Some(Rule(sign, Lexem(True), isInternal)) 
-        let defConjunction term body1 body2 isInternal = Rule(term, body1, isInternal) |> combine body2
-        let defOr term body isInternal = Rule(term, body, isInternal)
+        let defConjunction sign body1 body2 isInternal = Rule(sign, body1, isInternal) |> combine body2
+        let defOr sign body1 body2 isInternal = Rule(sign, Or(body1, body2), isInternal)
         let defPredicate term inputConverter predicate isInternal =
             let inputConvert input convert predicate =
                 let (PredicateInput(arguments)) = input
@@ -77,6 +95,8 @@ module DefineRule =
                 else
                     Failed
             Rule(Signature(term), Lexem(Predicate(fun input -> inputConvert input inputConverter predicate)), isInternal)
+        let defCut sign body isInternal = Rule(sign, Cut(body), isInternal)
+        let defNot sign body isInternal = Rule(sign, Not(body), isInternal)
 
     module internal DefAsInternal =
         open DefInternal
@@ -84,8 +104,10 @@ module DefineRule =
         let tryDefFact t = tryDefFact t true
         let defCall sign call = defCall sign call true
         let defConjunction term body1 body2 = defConjunction term body1 body2 true
-        let defOr term body = defOr term body true
+        let defOr term body1 body2 = defOr term body1 body2 true
         let defPredicate term inputConverter predicate = defPredicate term inputConverter predicate true
+        let defCut sign body isInternal = defCut sign body true
+        let defNot sign body isInternal = defNot sign body true
 
     module public DefPublic =
         open DefInternal
@@ -93,8 +115,10 @@ module DefineRule =
         let tryDefFact t = tryDefFact t false
         let defCall sign call = defCall sign call false
         let defConjunction term body1 body2 = defConjunction term body1 body2 false
-        let defOr term body = defOr term body false
+        let defOr term body1 body2 = defOr term body1 body2 false
         let defPredicate term inputConverter predicate = defPredicate term inputConverter predicate false
+        let defCut sign body isInternal = defCut sign body false
+        let defNot sign body isInternal = defNot sign body false
 
 //    let internal _defConcatRule term body = Rule(term, body, true)
 //    let defConcatRule term body = Rule(term, body, false)
