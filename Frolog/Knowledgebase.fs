@@ -21,8 +21,18 @@ type SearchResult = Signature seq
 
 type ISearcher =
     abstract Search: Rulebase -> Signature -> SearchResult
-    
+
 module Search =    
+    type ProcBodyResult = FalseResult | SingleResult of RuleBody | ManyResults of RuleBody seq | CutResults of RuleBody seq
+    with
+        member r.AsSeq =
+            match r with
+            | FalseResult -> Seq.empty
+            | SingleResult s -> Seq.singleton s
+            | ManyResults ss -> ss
+            | CutResults ss -> ss
+        static member toSeq (r: ProcBodyResult) = r.AsSeq
+
     let rec search (searcher: #ISearcher) knowledgebase call: Signature seq =
         let kb = knowledgebase :> Rulebase
         // Stages
@@ -92,10 +102,15 @@ module Search =
                 rightBodySub
             | Cut(db), Cut(cb) -> substituteBodyByBody db cb subBody
             | Not(db), Not(cb) -> substituteBodyByBody db cb subBody
-            | _ -> failwith "Cant substitute different bodies"  
+            | Cut(db), cb -> substituteBodyByBody db cb subBody // cb // TODO: check this case
+            | Not(ndb), Or(Conjunction(Cut(cdb), Lexem(False)), Lexem(True)) -> 
+                failwith "Dont know what to do in this case"
+            | _ -> failwith "Cant substitute different bodies"
 
         let rec backSub def defBody resBody =
             match defBody, resBody with
+            | Lexem(True), Lexem(True) -> Some def
+            | Lexem(False), Lexem(False) -> Some def
             | Lexem(Call(s1)), Lexem(Call(s2)) -> internalSubstitute s1 s2 def |> Some
             | Lexem(Predicate(_)), Lexem(Call s) -> Some s
             | Lexem(_), Lexem(_) -> Some def
@@ -111,6 +126,7 @@ module Search =
                 | Some s1, Some s2 -> internalSubstitute s1 s2 def |> Some
                 | _ -> None
             | Cut(b1), Cut(b2) -> backSub def b1 b2
+            | Cut(b1), b2 -> backSub def b1 b2
             | _ -> None
 
         let checkRule(Rule(def, body, isInternal)) =
@@ -126,14 +142,14 @@ module Search =
 
                 let rec procBody = 
                     function
-                    | Lexem(False) -> Seq.empty
-                    | Lexem(True) -> Seq.singleton(Lexem(True))
+                    | Lexem(False) -> FalseResult
+                    | Lexem(True) -> SingleResult (Lexem True)
                     | Lexem(Predicate(p)) -> 
                         let cur = internalSubstitute def call signature
                         match p (PredicateInput(Signature.GetArguments cur)) with
-                        | Failed -> Seq.empty
+                        | Failed -> FalseResult
                         | Success(PredicateOutput(pout)) ->
-                            Seq.singleton(Lexem(Call(sign name pout)))
+                            SingleResult(Lexem(Call(sign name pout)))
                     | Lexem(Call(c)) -> 
                         if Signature.GetName c = "not" then
                             // That is the not option
@@ -149,32 +165,57 @@ module Search =
                                 else
                                     searcher.Search knowledgebase cur
                             let binder c = Some(Lexem(Call c))
-                            Seq.map (unifySignatures cur) >> Seq.choose (Option.bind binder) <| evCurrent
+                            ManyResults((Seq.map (unifySignatures cur) >> Seq.choose (Option.bind binder)) evCurrent)
                     | Or(b1, b2) ->
                         let p1 = procBody b1
                         let p2 = procBody b2
-                        Seq.concat [Seq.map(fun p -> Or(p, b2)) p1; Seq.map(fun p -> Or(b1, p)) p2]
+
+                        let left = Seq.map(fun p -> Or(p, b2)) p1.AsSeq
+                        let right = Seq.map(fun p -> Or(b1, p)) p2.AsSeq
+
+                        ManyResults(Seq.concat [left; right])
                     | Conjunction(b1, b2) ->
                         // TODO research in what case
                         if not <| canApply def call then
-                            Seq.empty
+                            FalseResult
                         else
                             let subB1 = substituteBody def call b1
                             let procedB1 = procBody subB1
-                            seq {
-                                for pb1 in procedB1 do
+                            let s = seq {
+                                let e = procedB1.AsSeq.GetEnumerator()
+                                let notCutten = ref true
+
+                                while e.MoveNext() && !notCutten do
+                                    let pb1 = e.Current
                                     let preSubB2 = substituteBody def call b2
                                     let subB2 = substituteBodyByBody b1 pb1 preSubB2
                                     let procedB2 = procBody subB2
-                                    for pb2 in procedB2 do
-                                        let postSub1 = substituteBodyByBody subB2 pb2 pb1
-                                        yield Conjunction(postSub1, pb2)
+                                    match procedB2 with
+                                    | CutResults(pbs2) ->
+                                        for pb2 in pbs2 do
+                                            let postSub1 = substituteBodyByBody subB2 pb2 pb1
+                                            yield Conjunction(postSub1, pb2)
+                                        notCutten := false
+                                    | _ ->
+                                        for pb2 in procedB2.AsSeq do
+                                            let postSub1 = substituteBodyByBody subB2 pb2 pb1
+                                            yield Conjunction(postSub1, pb2)
                             }
-                    | Not(_) -> failwith "Not implemented function <NOT>"
-                    | Cut(_) -> failwith "Not implemented function <CUT>"
+                            ManyResults(s)
+                    | Not(body) -> 
+                        // Not is only an (Cut, False); True
+                        procBody(Or(Conjunction(Cut(body), Lexem(False)), Lexem(True)))
+                        // failwith "Not implemented function <NOT>"
+                    | Cut(body) -> 
+                        // Cut is a message to stop searching for any another facts
+                        // ONLY WITHIN ONE RULE
+                        // TODO: TEST THIS BEHAVIOUR
+                        let procThis = procBody body
+                        CutResults(procThis.AsSeq)
+                        // failwith "Not implemented function <CUT>"
                 // recursively call internal calls with autosubstitution of next calls
                 // return result signature
-                let proced = procBody body |> Seq.toList
+                let proced = procBody body |> ProcBodyResult.toSeq |> Seq.toList
                 let res = proced |> List.map(fun proced -> bodyToSignature def body proced) |> List.choose identity
                 res |> List.toSeq
 

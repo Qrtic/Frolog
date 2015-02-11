@@ -49,7 +49,9 @@ module ControlFlow =
         let f1 = defFact(def "f(1)")
         let f2 = defFact(def "f(2)")
         let cut = defCall (def "call(X)") (def "f(X)") |> combine (Cut(Lexem(True)))
+        let r1 = execute [f1; f2; cut] (def "call(1)")
         Assert.AreEqual(execute [f1; f2; cut] (def "call(1)"), ["call(1)"])
+        let r2 = execute [f1; f2; cut] (def "call(X)")
         Assert.AreEqual(execute [f1; f2; cut] (def "call(X)"), ["call(1)"])
     [<Test>]
     let ``Test of not``() = 
