@@ -16,6 +16,7 @@ module SearchMachines =
         private new() = {kb = Knowledgebase.Default; searcher = new SimpleSearcher()}
         private new(finder) = {kb = Knowledgebase.Default; searcher = finder}
         static member Create() = Simple()
+        static member CreateDebug() = Simple(new DebugInfoSearcher())
         val searcher: ISearcher
         val mutable kb: Rulebase
         member this.AddRule(r: Rule) = 

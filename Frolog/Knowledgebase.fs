@@ -86,6 +86,8 @@ module Search =
             | Lexem(Call lexemCall) -> Lexem(Call(internalSubstitute def call lexemCall))
             | Conjunction(body1, body2) -> Conjunction(substituteBody def call body1, substituteBody def call body2)
             | Or(body1, body2) -> Or(substituteBody def call body1, substituteBody def call body2)
+            | Cut(body) -> Cut(substituteBody def call body)
+            | Not(body) -> Not(substituteBody def call body)
             | _ -> body
 
         let rec substituteBodyByBody defBody callBody subBody =
@@ -104,7 +106,9 @@ module Search =
             | Not(db), Not(cb) -> substituteBodyByBody db cb subBody
             | Cut(db), cb -> substituteBodyByBody db cb subBody // cb // TODO: check this case
             | Not(ndb), Or(Conjunction(Cut(cdb), Lexem(False)), Lexem(True)) -> 
-                failwith "Dont know what to do in this case"
+                // TODO: check this hack
+                // failwith "Dont know what to do in this case"
+                subBody
             | _ -> failwith "Cant substitute different bodies"
 
         let rec backSub def defBody resBody =
@@ -127,6 +131,8 @@ module Search =
                 | _ -> None
             | Cut(b1), Cut(b2) -> backSub def b1 b2
             | Cut(b1), b2 -> backSub def b1 b2
+            | Not(b1), Or(Conjunction(Cut(b2), Lexem False), Lexem True) ->
+                backSub def b1 b2
             | _ -> None
 
         let checkRule(Rule(def, body, isInternal)) =
@@ -168,12 +174,13 @@ module Search =
                             ManyResults((Seq.map (unifySignatures cur) >> Seq.choose (Option.bind binder)) evCurrent)
                     | Or(b1, b2) ->
                         let p1 = procBody b1
-                        let p2 = procBody b2
-
-                        let left = Seq.map(fun p -> Or(p, b2)) p1.AsSeq
-                        let right = Seq.map(fun p -> Or(b1, p)) p2.AsSeq
-
-                        ManyResults(Seq.concat [left; right])
+                        match p1 with
+                        | CutResults(res) -> CutResults(res)
+                        | _ -> 
+                            let p2 = procBody b2
+                            let left = Seq.map(fun p -> Or(p, b2)) p1.AsSeq
+                            let right = Seq.map(fun p -> Or(b1, p)) p2.AsSeq
+                            ManyResults(Seq.concat [left; right])
                     | Conjunction(b1, b2) ->
                         // TODO research in what case
                         if not <| canApply def call then
@@ -201,18 +208,24 @@ module Search =
                                             let postSub1 = substituteBodyByBody subB2 pb2 pb1
                                             yield Conjunction(postSub1, pb2)
                             }
-                            ManyResults(s)
+                            match procedB1 with
+                            | CutResults(_) -> CutResults(s)
+                            | _ -> ManyResults(s)
                     | Not(body) -> 
                         // Not is only an (Cut, False); True
-                        procBody(Or(Conjunction(Cut(body), Lexem(False)), Lexem(True)))
-                        // failwith "Not implemented function <NOT>"
+                        // But this is not a simple substitution
+                        // It is like calling new <Not> predicate
+                        let res = procBody(Or(Conjunction(Cut(body), Lexem(False)), Lexem(True)))
+                        ManyResults(res.AsSeq)
                     | Cut(body) -> 
                         // Cut is a message to stop searching for any another facts
                         // ONLY WITHIN ONE RULE
                         // TODO: TEST THIS BEHAVIOUR
                         let procThis = procBody body
-                        CutResults(procThis.AsSeq)
-                        // failwith "Not implemented function <CUT>"
+                        if Seq.isEmpty procThis.AsSeq then
+                            FalseResult
+                        else
+                            CutResults(procThis.AsSeq)
                 // recursively call internal calls with autosubstitution of next calls
                 // return result signature
                 let proced = procBody body |> ProcBodyResult.toSeq |> Seq.toList
