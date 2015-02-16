@@ -10,7 +10,7 @@ module Common =
 
     let compareOpt (x : #System.IComparable<'T>) (y : #System.IComparable<'T>) = x.CompareTo(y)
     
-    let isVariableName (s : string) = System.Char.IsUpper (s.Chars 0)
+    // let isVariableName (s : string) = System.Char.IsUpper (s.Chars 0)
     let isStructureName (s: string) = s.Chars 0 = '(' && s.Chars(s.Length - 1) = ')'
     let isUnderscore (s: string) = s = "_"
 

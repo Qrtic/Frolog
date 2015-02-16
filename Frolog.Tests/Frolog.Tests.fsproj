@@ -62,6 +62,8 @@
     <Compile Include="Tests.fs" />
     <Compile Include="ControlFlow.fs" />
     <Compile Include="Machine.fs" />
+    <Compile Include="MatchesGame.fs" />
+    <Compile Include="Interval.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

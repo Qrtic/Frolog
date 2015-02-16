@@ -211,5 +211,8 @@ pip-log.txt
 #Translations
 *.mo
 
+#Ide settings
+Frolog.sln.ide/
+
 #Mr Developer
 .mr.developer.cfg

@@ -86,7 +86,8 @@ module TermHelper =
     /// Variable - upperCase word with digits
     /// Structure - lowerCase word with arguments in brackets separated by commas
     let rec term = function
-        | Match "^\s*([a-z0-9]\w*)\s*$" input -> Some(Value input.Head)
+        | s when isUnderscore s -> Some(Variable s)
+        | Match "^\s*([a-z0-9\+\-]\w*)\s*$" input -> Some(Value input.Head)
         | Match "^\s*([A-Z]\w*)\s*$" input -> Some(Variable input.Head)
         | s ->
             let rec getSeparetedByComma cur sindex brLevel res =

@@ -26,8 +26,8 @@ module SignatureHelper =
         match term with
         | Structure(_, _) -> Some(Signature(term))
         | _ -> None
-    let signf term =
-        match term with
-        | Structure(_, _) -> Signature(term)
+    let signf t =
+        match termf t with
+        | Structure(_, _) as term -> Signature(term)
         | _ ->  failwith "Cant instantiate signature"
         

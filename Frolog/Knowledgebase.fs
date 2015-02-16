@@ -86,7 +86,6 @@ module Search =
             | Lexem(Call lexemCall) -> Lexem(Call(internalSubstitute def call lexemCall))
             | Conjunction(body1, body2) -> Conjunction(substituteBody def call body1, substituteBody def call body2)
             | Or(body1, body2) -> Or(substituteBody def call body1, substituteBody def call body2)
-            | Cut(body) -> Cut(substituteBody def call body)
             | Not(body) -> Not(substituteBody def call body)
             | _ -> body
 
@@ -102,10 +101,8 @@ module Search =
                 let leftBodySub = substituteBodyByBody db1 cb1 subBody
                 let rightBodySub = substituteBodyByBody db2 cb2 leftBodySub
                 rightBodySub
-            | Cut(db), Cut(cb) -> substituteBodyByBody db cb subBody
             | Not(db), Not(cb) -> substituteBodyByBody db cb subBody
-            | Cut(db), cb -> substituteBodyByBody db cb subBody // cb // TODO: check this case
-            | Not(ndb), Or(Conjunction(Cut(cdb), Lexem(False)), Lexem(True)) -> 
+            | Not(ndb), Or(Conjunction(cdb, Conjunction(Lexem(Cut), Lexem(False))), Lexem(True)) -> 
                 // TODO: check this hack
                 // failwith "Dont know what to do in this case"
                 subBody
@@ -129,22 +126,19 @@ module Search =
                 match backSub def b1 b3, backSub def b2 b4 with
                 | Some s1, Some s2 -> internalSubstitute s1 s2 def |> Some
                 | _ -> None
-            | Cut(b1), Cut(b2) -> backSub def b1 b2
-            | Cut(b1), b2 -> backSub def b1 b2
-            | Not(b1), Or(Conjunction(Cut(b2), Lexem False), Lexem True) ->
+            | Not(b1), Or(Conjunction(b2, Conjunction(Lexem(Cut), Lexem(False))), Lexem True) ->
                 backSub def b1 b2
             | _ -> None
-
-        let checkRule(Rule(def, body, isInternal)) =
+            
+        let bodyToSignature def defBody resBody =
+            backSub def defBody resBody
+        let mutable cuttenFromAnyRule = false
+        let checkRule(Rule(def, body, isInternal)) : ProcBodyResult =
             let matchedRule = unifySignatures call def
             match matchedRule with
-            | None -> Seq.empty
+            | None -> ProcBodyResult.FalseResult // Seq.empty
             | Some(signature) ->
                 let name = Signature.GetName signature
-                let bodyToSignature def defBody resBody =
-                    backSub def defBody resBody
-                let bodyToSignature def defBody resBody =
-                    backSub def defBody resBody
 
                 let rec procBody = 
                     function
@@ -172,6 +166,10 @@ module Search =
                                     searcher.Search knowledgebase cur
                             let binder c = Some(Lexem(Call c))
                             ManyResults((Seq.map (unifySignatures cur) >> Seq.choose (Option.bind binder)) evCurrent)
+                    | Lexem(Cut) -> 
+                        // Cut is a message to stop searching for any another facts
+                        // ONLY WITHIN ONE RULE
+                        CutResults([Lexem(Cut)])
                     | Or(b1, b2) ->
                         let p1 = procBody b1
                         match p1 with
@@ -188,9 +186,10 @@ module Search =
                         else
                             let subB1 = substituteBody def call b1
                             let procedB1 = procBody subB1
+                            
+                            let notCutten = ref true
                             let s = seq {
                                 let e = procedB1.AsSeq.GetEnumerator()
-                                let notCutten = ref true
 
                                 while e.MoveNext() && !notCutten do
                                     let pb1 = e.Current
@@ -208,43 +207,56 @@ module Search =
                                             let postSub1 = substituteBodyByBody subB2 pb2 pb1
                                             yield Conjunction(postSub1, pb2)
                             }
+                            let s = s |> Seq.toList
                             match procedB1 with
                             | CutResults(_) -> CutResults(s)
+                            | _ when not <| !notCutten -> CutResults(s)
                             | _ -> ManyResults(s)
                     | Not(body) -> 
                         // Not is only an (Cut, False); True
                         // But this is not a simple substitution
                         // It is like calling new <Not> predicate
-                        let res = procBody(Or(Conjunction(Cut(body), Lexem(False)), Lexem(True)))
+                        let res = procBody(Or(Conjunction(body, Conjunction(Lexem(Cut), Lexem(False))), Lexem(True)))
                         ManyResults(res.AsSeq)
-                    | Cut(body) -> 
-                        // Cut is a message to stop searching for any another facts
-                        // ONLY WITHIN ONE RULE
-                        // TODO: TEST THIS BEHAVIOUR
-                        let procThis = procBody body
-                        if Seq.isEmpty procThis.AsSeq then
-                            FalseResult
-                        else
-                            CutResults(procThis.AsSeq)
                 // recursively call internal calls with autosubstitution of next calls
                 // return result signature
-                let proced = procBody body |> ProcBodyResult.toSeq |> Seq.toList
-                let res = proced |> List.map(fun proced -> bodyToSignature def body proced) |> List.choose identity
-                res |> List.toSeq
+                procBody body
+        seq {
+            let e = (kb.Rules |> List.toSeq).GetEnumerator()
+            let notcutten = ref true
+            while e.MoveNext() && !notcutten do
+                let r = e.Current
+                let def = r.Signature
+                let res = checkRule r
+                let results = 
+                    res.AsSeq
+                    |> Seq.choose(fun proced -> bodyToSignature def r.Body proced)
+                    |> Seq.map(fun proced -> 
+                        let g1 = internalSubstitute def call def
+                        internalSubstitute def proced g1)
+                    |> Seq.toList
 
-        // call
-        let res = List.map checkRule kb.Rules |> Seq.concat |> Seq.toList
-        res |> List.toSeq
+                match res with
+                | CutResults(cr) -> 
+                    yield! results
+                    notcutten := false
+                | _ -> yield! results
+        }
 
 type SimpleSearcher() =
     interface ISearcher with
         member this.Search rb call = Search.search this rb call
 
 type DebugInfoSearcher() =
+    let mutable indent = ""
+    let pushIndent() = indent <- indent + "\t"
+    let popIndent() = indent <- indent.Substring(0, indent.Length-1)
     interface ISearcher with
-        member s.Search rb call = 
+        member this.Search rb call = 
             debug (sprintf "Called rule %s" call.AsString)
-            let found = (new SimpleSearcher() :> ISearcher).Search rb call
+            pushIndent()
+            let found = Search.search this rb call
+            popIndent()
             if (Seq.isEmpty found) then
                 debug "No rules match."
             else
@@ -261,4 +273,3 @@ module Execute =
         else
             for r in res do
                 printfn "Result: %b. New context = %s" (true) ((r).ToString())
-                
