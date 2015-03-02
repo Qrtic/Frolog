@@ -234,7 +234,7 @@ module Search =
                     |> Seq.map(fun proced -> 
                         let g1 = internalSubstitute def call def
                         internalSubstitute def proced g1)
-                    |> Seq.toList
+                    // |> Seq.toList
 
                 match res with
                 | CutResults(cr) -> 

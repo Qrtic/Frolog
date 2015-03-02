@@ -8,6 +8,7 @@ type Signature = Signature of Term
     member s.AsString =
         let (Signature(t)) = s
         t.AsString
+    override s.ToString() = s.AsString
     static member AsTerm signature =
         let (Signature(term)) = signature
         term

@@ -11,7 +11,7 @@ open Frolog.CustomRules
 [<TestFixture>]
 module MatchesGame =
     let execute call =
-        let m = SearchMachines.Simple.CreateDebug()
+        let m = SearchMachines.Simple.Create()
         MatchesGame.appendGoodMoveRules m
         m.Execute(call) |> Seq.map(fun s -> s.AsString) |> Seq.toList
 

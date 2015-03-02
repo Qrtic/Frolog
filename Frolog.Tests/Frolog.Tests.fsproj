@@ -64,6 +64,7 @@
     <Compile Include="Machine.fs" />
     <Compile Include="MatchesGame.fs" />
     <Compile Include="Interval.fs" />
+    <Compile Include="DeepRule.fs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

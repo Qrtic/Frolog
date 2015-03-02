@@ -200,7 +200,7 @@ module SimpleTest =
         module TimeTest =
             let r = new System.Random()
             let person(max) = r.Next(max).ToString()
-            let nFacts = 1000
+            let nFacts = 10000
             let nCalls = 10000
             let maxTime = 30L * 1000L
 

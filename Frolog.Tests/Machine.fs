@@ -18,11 +18,11 @@ module MachineTests =
         Assert.AreEqual(machine.CacheHits, 1)
     
     [<Test>]
-    let testFifoCache() =
-        let machine = Frolog.SearchMachines.Custom.CacheFirstMachine({maxPrecedences = 1})
+    let testLIFO() =
+        let machine = Frolog.SearchMachines.Custom.LIFOMachine({maxPrecedences = 1})
         testMachineCache machine
         
     [<Test>]
-    let testLifoCache() =
-        let machine = Frolog.SearchMachines.Custom.CacheLastMachine({maxPrecedences = 1})
+    let testLRU() =
+        let machine = Frolog.SearchMachines.Custom.LRUMachine({maxPrecedences = 1})
         testMachineCache machine

@@ -1,5 +1,7 @@
 ﻿namespace Frolog
 
+open Frolog.DataStructures
+
 // Temporary removed all immutablity
 type CacheParameters = { maxPrecedences : int }
 
@@ -52,27 +54,30 @@ module SearchMachines =
             member t.AddRule r = t.AddRule r
             member t.Execute s = t.Execute s
 
-        static member CacheFirstMachine cacheParameters =
-            let cache = ref Map.empty<Signature, SearchResult>
-            let query s =  (!cache).TryFind s
-            let post(s, cs) = 
-                if (!cache).Count < cacheParameters.maxPrecedences then
-                    cache := (!cache).Add(s, cs)
-            new Custom(ignore, query, post)
+        static member LRUMachine cacheParameters =
+            let lastCacheResult = ref false
+            let comparer s1 s2 = Signature.Equals(fst s1, fst s2)
+            let c = new CustomPQ<Signature*SearchResult>(cacheParameters.maxPrecedences, comparer)
+            let q s =
+                // dummy find
+                let foundres = c.TryFind (s, Seq.empty)
+                lastCacheResult := foundres.IsSome
+                foundres |> Option.bind(fun (s, r) -> Some r)
+            let post(s, cs) =
+                c.Append(s, cs)
+            new Custom(ignore, q, post)
 
-        static member CacheLastMachine cacheParameters =
+        static member LIFOMachine cacheParameters =
             let chc = Array.create<(Signature*SearchResult) option>(cacheParameters.maxPrecedences) Option.None
             let chcPtr = ref 0
-            let lastCacheResult = ref false
-
             let rec tryfind (s: Signature) =
                 let foundres = chc |> Array.choose(fun x -> x) |> Array.tryFind(fun t -> Signature.Equals(s, (fst t)))
-                lastCacheResult := foundres.IsSome
                 match foundres with
                 | Some(_, cs) -> Some(cs)
                 | None -> None
             let insertnew(s, cs) =
-                if not !lastCacheResult && cacheParameters.maxPrecedences > 0 then
+                // Insert always
+                if cacheParameters.maxPrecedences > 0 then
                     chc.[!chcPtr] <- Some((s, cs))
                     incr chcPtr
                     if (!chcPtr = cacheParameters.maxPrecedences) then

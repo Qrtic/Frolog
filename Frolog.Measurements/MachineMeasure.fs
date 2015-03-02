@@ -18,12 +18,12 @@ module MachinePrepare =
         let machine = SearchMachines.Simple.Create()
         prepare machine facts
         machine :> ISearchMachine
-    let fifocacheGet facts prms = 
-        let machine = SearchMachines.Custom.CacheFirstMachine prms
+    let lrucacheGet facts prms = 
+        let machine = SearchMachines.Custom.LRUMachine prms
         prepare machine facts
         machine :> ISearchMachine
     let lifocacheGet facts prms = 
-        let machine = SearchMachines.Custom.CacheLastMachine prms
+        let machine = SearchMachines.Custom.LIFOMachine prms
         prepare machine facts
         machine :> ISearchMachine
 
