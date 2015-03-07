@@ -129,10 +129,9 @@ module Search =
             | Not(b1), Or(Conjunction(b2, Conjunction(Lexem(Cut), Lexem(False))), Lexem True) ->
                 backSub def b1 b2
             | _ -> None
-            
+           
         let bodyToSignature def defBody resBody =
             backSub def defBody resBody
-        let mutable cuttenFromAnyRule = false
         let checkRule(Rule(def, body, isInternal)) : ProcBodyResult =
             let matchedRule = unifySignatures call def
             match matchedRule with

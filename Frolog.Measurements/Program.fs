@@ -50,25 +50,27 @@ module Main =
         let lr = MachineMeasure.measureMachine lifo queries
         resCallback "Lifo" lr
         
-    type measureParameters = { d: int; factsN: int; queriesN: int; precedencesN: int }
+    // With size get nth item
+    type QueryDistribution = int -> int -> int
+    type measureParameters = { d: int; factsN: int; queriesN: int; queriesDistrib: QueryDistribution; precedencesN: int }
     let measureDeepRules (mp: measureParameters) resCallback =
         let r = new System.Random()
         let prms = { maxPrecedences = mp.precedencesN }
         let r() = sprintf "%i" (r.Next())
 
-        let facts = [1..mp.factsN] |> List.map(fun _ -> DeepRule.getFact (r()) (r()))
-        let queries = [1..mp.queriesN] |> List.map(fun _ -> signf <| DeepRule.call mp.d (r()) (r()))
+        let facts = [1..mp.factsN] |> List.map(fun i -> DeepRule.getFact (string i) (r()))
+        let queries = [1..mp.queriesN] |> List.map(fun i -> signf <| DeepRule.call mp.d (string (mp.queriesDistrib mp.factsN i)) "X")
 
-        // let simple = MachinePrepare.simpleGet facts
+        let simple = MachinePrepare.simpleGet facts
         let lru = MachinePrepare.lrucacheGet facts prms
-        // let lifo = MachinePrepare.lifocacheGet facts prms
+        let lifo = MachinePrepare.lifocacheGet facts prms
 
-        //let sr = MachineMeasure.measureMachine simple queries
-        //resCallback "Simple" sr
+        let sr = MachineMeasure.measureMachine simple queries
+        resCallback "Simple" sr
         let fr = MachineMeasure.measureMachine lru queries
         resCallback "LRU" fr
-        // let lr = MachineMeasure.measureMachine lifo queries
-        // resCallback "LIFO" lr
+        let lr = MachineMeasure.measureMachine lifo queries
+        resCallback "LIFO" lr
 
     [<EntryPoint>]
     let main args =
@@ -82,12 +84,18 @@ module Main =
         let tenpercent = 96 / 10
         let mutable cnt = 0
         let mutable pcnt = 0
-        wrf "D\tFacts\tQueries\tPrcd\tName\tTime\tHits"
+
+        let r = new System.Random()
+        let qd size n =
+            // n % size
+            r.Next(size)
+
+        wrf "Deep\tFacts\tQueries\tPrcd\tName\tTime\tHits"
         for d in [1; 2] do
             for f in [25; 100; 500; 1000] do
                 for q in [100; 500; 1000; 2500] do
-                    for p in [q / 100; q / 10; q] do
-                        let prms = { d = d; factsN = f; queriesN = q; precedencesN = p }
+                    for p in [q / 100; q / 10; q / 3] do
+                        let prms = { d = d; factsN = f; queriesN = q; queriesDistrib = qd; precedencesN = p }
                         measureDeepRules prms (fun name res ->
                             let p = prms
                             wrs p.d p.factsN p.queriesN p.precedencesN name res.time res.hits)
@@ -98,6 +106,15 @@ module Main =
                         else
                             cnt <- cnt + 1
         printfn "Wait for result. Executed in %i ms." watch.ElapsedMilliseconds
-        System.IO.File.WriteAllText(System.DateTime.Now.ToShortDateString() + ".txt", sb.ToString())
+        let rec getUniqueFileName name suffix d =
+            let filename = name + (if suffix = 0 then "" else " (" + string suffix + ")") + "." + d
+            if System.IO.File.Exists filename then
+                getUniqueFileName name (suffix+1) d
+            else
+                filename
+
+        let name = System.DateTime.Now.ToShortDateString()
+
+        System.IO.File.WriteAllText(getUniqueFileName name 0 "txt", sb.ToString())
         System.Console.ReadKey() |> ignore
         0

@@ -6,10 +6,7 @@ open System.Linq
 type CustomPQ<'a>(size: int, comparer) =
     let data: ResizeArray<'a> = new ResizeArray<'a>(size)
     member q.TryFind a =
-        let res = data.FirstOrDefault(fun v -> comparer v a)
-        match box (res) with
-        | null -> None
-        | _ -> Some res
+        Seq.tryFind(comparer a) data
     member q.Append a =
         let append() =
             if data.Count <= size then
