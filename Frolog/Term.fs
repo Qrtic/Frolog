@@ -3,12 +3,6 @@
 open System
 open Frolog.Common
 
-/// Term can be
-/// Simple value
-/// Simple unboundedVariable
-/// linked variable to variables
-/// Bounded variable only to values(or structures?)!
-/// Structure with other terms
 [<StructuredFormatDisplay("{AsString}")>]
 type Term = 
     | Variable of name: string
@@ -54,15 +48,15 @@ type Term =
         let rec getBounded s t =
             match t with
             | BoundedVariable(_, l) -> 
-                if Set.contains l s then
+                if Collection.contains l s then
                     s
                 else
                     getBounded (Set.add l s) l
             | _ -> s
         getBounded Set.empty t
     static member AreBounded t1 t2 =
-            let b1 = Term.GetBounded t1 |> Set.contains t2
-            let b2 = Term.GetBounded t2 |> Set.contains t1
+            let b1 = Term.GetBounded t1 |> Collection.contains t2
+            let b2 = Term.GetBounded t2 |> Collection.contains t1
             b1 || b2
     static member StrongEquals t1 t2 =
         match t1, t2 with
@@ -76,19 +70,19 @@ type Term =
         | _ -> false
     static member GetVariableName t =
         match t with
-        | Variable(name) when isUnderscore name -> None
+        | Variable(name) when name.isUnderscore() -> None
         | Variable(name) -> Some(name)
         | _ -> None
 
 [<AutoOpen>]
 module TermHelper =
-    /// Value - lowerCase word with digits
-    /// Variable - upperCase word with digits
-    /// Structure - lowerCase word with arguments in brackets separated by commas
-    let rec term = function
-        | s when isUnderscore s -> Some(Variable s)
-        | Match "^\s*([a-z0-9\+\-]\w*)\s*$" input -> Some(Value input.Head)
-        | Match "^\s*([A-Z]\w*)\s*$" input -> Some(Variable input.Head)
+    /// Value - lowerCase word with digits.
+    /// Variable - upperCase word with digits.
+    /// Structure - lowerCase word with arguments in brackets separated by commas.
+    let rec term: string -> Term option = function
+        | s when s.isUnderscore() -> Some(Variable s)
+        | Regex.Match "^\s*([a-z0-9\+\-]\w*)\s*$" input -> Some(Value input.Head)
+        | Regex.Match "^\s*([A-Z]\w*)\s*$" input -> Some(Variable input.Head)
         | s ->
             let rec getSeparetedByComma cur sindex brLevel res =
                 if String.length s = sindex then
@@ -140,24 +134,3 @@ module TermHelper =
         match term input with
         | Some(t) -> t
         | None -> failwith ("Cant create term from " + input)
-
-(*
-type TypedTerm<'t> = T of term: Term * filter: (Term -> bool) * converter: (Term -> 't)
-    with
-    static member int (i: int) = T(Term.create (i.ToString()), Term.tryGetValue >> Option.bind System.Int32.TryParse >> fst, Term.GetValue >> System.Int32.Parse)
-    static member str s = T(Term.create s, allways, Term.GetValue)
-    static member AsTerm p =
-        let (T(p, _, _)) = p
-        p
-    static member Get p =
-        let (T(p, _, c)) = p
-        c(p)
-    static member Applyable p v =
-        let (T(p, f, c)) = p
-        Term.Compatible p v && f(v)
-    static member ToTypedTerm typed term =
-        let (T(p, f, c)) = typed
-        if f(term) then
-            Some(T(term, f, c))
-        else
-            None*)
