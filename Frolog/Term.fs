@@ -14,8 +14,7 @@ type Term =
         | Variable(n) -> n
         | Value(v) -> v
         | Structure(f, args) -> 
-            let arguments = (("", args) ||> List.fold(fun s a -> s + a.AsString + ", ")).Trim([|','; ' '|])
-            sprintf "%s(%s)" f arguments
+            sprintf "%s(%s)" f <| (("", args) ||> List.fold (sprintf "%s, %A")).Trim([|','; ' '|])
     static member tryGetValue (t: Term) =
         match t with
         | Value(v) -> Some(v)

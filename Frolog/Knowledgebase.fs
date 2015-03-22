@@ -83,7 +83,7 @@ module Search =
         // Changes all bodies in forward order
         let rec substituteBody def call body =
             match body with
-            | Lexem(Call lexemCall) -> Lexem(Call(internalSubstitute def call lexemCall))
+            | Lexem(Call lexemCall) -> Call(internalSubstitute def call lexemCall)
             | Conjunction(body1, body2) -> Conjunction(substituteBody def call body1, substituteBody def call body2)
             | Or(body1, body2) -> Or(substituteBody def call body1, substituteBody def call body2)
             | Not(body) -> Not(substituteBody def call body)
@@ -110,10 +110,10 @@ module Search =
 
         let rec backSub def defBody resBody =
             match defBody, resBody with
-            | Lexem(True), Lexem(True) -> Some def
-            | Lexem(False), Lexem(False) -> Some def
-            | Lexem(Call(s1)), Lexem(Call(s2)) -> internalSubstitute s1 s2 def |> Some
-            | Lexem(Predicate(_)), Lexem(Call s) -> Some s
+            | True, True -> Some def
+            | False, False -> Some def
+            | Call(s1), Call(s2) -> internalSubstitute s1 s2 def |> Some
+            | Predicate(_), Call s -> Some s
             | Lexem(_), Lexem(_) -> Some def
             | Conjunction(b1, b2), Conjunction(b3, b4) -> 
                 match backSub def b1 b3 with
@@ -141,19 +141,19 @@ module Search =
 
                 let rec procBody = 
                     function
-                    | Lexem(False) -> FalseResult
-                    | Lexem(True) -> SingleResult (Lexem True)
-                    | Lexem(Predicate(p)) -> 
+                    | False -> FalseResult
+                    | True -> SingleResult (True)
+                    | Predicate(p) -> 
                         let cur = internalSubstitute def call signature
                         match p (PredicateInput(Signature.GetArguments cur)) with
                         | Failed -> FalseResult
                         | Success(PredicateOutput(pout)) ->
-                            SingleResult(Lexem(Call(sign name pout)))
-                    | Lexem(Call(c)) -> 
+                            SingleResult(Call(sign name pout))
+                    | Call(c) -> 
                         if Signature.GetName c = "not" then
                             // That is the not option
                             match Signature.GetArguments c with
-                            | [Structure(cname, args)] -> procBody(Not(Lexem(Call(sign cname args))))
+                            | [Structure(cname, args)] -> procBody(Not(Call(sign cname args)))
                             | _ -> failwith "Cant parse not expression."
                         else
                             let cur = internalSubstitute def call c
@@ -163,12 +163,12 @@ module Search =
                                     search searcher knowledgebase cur
                                 else
                                     searcher.Search knowledgebase cur
-                            let binder c = Some(Lexem(Call c))
+                            let binder c = Some(Call c)
                             ManyResults((Seq.map (unifySignatures cur) >> Seq.choose (Option.bind binder)) evCurrent)
-                    | Lexem(Cut) -> 
+                    | Cut -> 
                         // Cut is a message to stop searching for any another facts
                         // ONLY WITHIN ONE RULE
-                        CutResults([Lexem(Cut)])
+                        CutResults([Cut])
                     | Or(b1, b2) ->
                         let p1 = procBody b1
                         match p1 with
@@ -215,7 +215,7 @@ module Search =
                         // Not is only an (Cut, False); True
                         // But this is not a simple substitution
                         // It is like calling new <Not> predicate
-                        let res = procBody(Or(Conjunction(body, Conjunction(Lexem(Cut), Lexem(False))), Lexem(True)))
+                        let res = procBody(Or(Conjunction(body, Conjunction(Cut, False)), True))
                         ManyResults(res.AsSeq)
                 // recursively call internal calls with autosubstitution of next calls
                 // return result signature

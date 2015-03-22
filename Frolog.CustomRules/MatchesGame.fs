@@ -12,7 +12,7 @@ module MatchesGame =
     let winMoves = [move 1; move 2; move 3]
 
     let gMoves = 
-        let call c = Lexem(Call(term c |> Option.bind sign |> Option.get))
+        let call c = Call(term c |> Option.bind sign |> Option.get)
         let not c = Not(call c)
         let def = "good_move(X, M)" |> term |> Option.bind sign |> Option.get 
         let invalidMove = defFact(signf "good_move(-1, _)") |! false

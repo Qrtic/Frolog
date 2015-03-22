@@ -55,7 +55,7 @@ module ControlFlow =
     let ``Test of cut``() = 
         let f1 = defFact(def "f(1)")
         let f2 = defFact(def "f(2)")
-        let cut = defCall (def "cut(X)") (def "f(X)") |> combine (Lexem(Cut))
+        let cut = defCall (def "cut(X)") (def "f(X)") |> combine Cut
         Assert.AreEqual(execute [f1; f2; cut] (def "cut(1)"), ["cut(1)"])
         Assert.AreEqual(execute [f1; f2; cut] (def "cut(X)"), ["cut(1)"])
         let ncut = defCall (def "ncut(X, Y)") (def "f(X)") |> combine (callBody "cut(Y)")
