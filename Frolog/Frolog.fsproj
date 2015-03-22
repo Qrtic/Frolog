@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Frolog</RootNamespace>
     <AssemblyName>Frolog</AssemblyName>
-    <TargetFrameworkVersion>v4.5.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <Name>Frolog</Name>
     <TargetFrameworkProfile />

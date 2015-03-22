@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Frolog.Tests</RootNamespace>
     <AssemblyName>Frolog.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5.3</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <Name>Frolog.Tests</Name>

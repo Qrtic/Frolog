@@ -7,21 +7,18 @@ open Frolog.Common
 type Term = 
     | Variable of name: string
     | Value of value: string
-    | BoundedVariable of name: string * link: Term
     | Structure of functor': string * arguments: Term list
     with
     member t.AsString = 
         match t with
         | Variable(n) -> n
         | Value(v) -> v
-        | BoundedVariable(n, l) -> sprintf "%s[%s]" n l.AsString
         | Structure(f, args) -> 
             let arguments = (("", args) ||> List.fold(fun s a -> s + a.AsString + ", ")).Trim([|','; ' '|])
             sprintf "%s(%s)" f arguments
     static member tryGetValue (t: Term) =
         match t with
         | Value(v) -> Some(v)
-        | BoundedVariable(n, l) -> Term.tryGetValue l
         | _ -> None
     static member tryUnify t1 t2 =
         match t1, t2 with
@@ -44,26 +41,12 @@ type Term =
         | Structure(f1, a1), Structure(f2, a2) when f1 = f2 ->
             List.forall2 Term.Compatible a1 a2
         | _ -> res
-    static member GetBounded t =
-        let rec getBounded s t =
-            match t with
-            | BoundedVariable(_, l) -> 
-                if Collection.contains l s then
-                    s
-                else
-                    getBounded (Set.add l s) l
-            | _ -> s
-        getBounded Set.empty t
-    static member AreBounded t1 t2 =
-            let b1 = Term.GetBounded t1 |> Collection.contains t2
-            let b2 = Term.GetBounded t2 |> Collection.contains t1
-            b1 || b2
     static member StrongEquals t1 t2 =
         match t1, t2 with
         | Variable(v1), Variable(v2) -> v1 = v2
         | Value(v1), Value(v2) -> v1 = v2
         | Structure(f1, args1), Structure(f2, args2) when f1 = f2 -> List.forall2 Term.StrongEquals args1 args2
-        | _ -> Term.AreBounded t1 t2
+        | _ -> false
     static member IsVariableTerm t = 
         match t with
         | Variable(_) -> true
