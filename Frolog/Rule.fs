@@ -1,16 +1,19 @@
 ﻿namespace Frolog
 
-// RuleInput is desctructured argument terms
-type PredicateInput = PredicateInput of Term list
-type PredicateOutput = PredicateOutput of Term list
+module Predicate =
+    type PredicateInput = PredicateInput of Term list
+    type PredicateOutput = PredicateOutput of Term list
+    module RuleInputOutputConvert =
+        let inputToOutput (PredicateInput(input)) = PredicateOutput(input)
+        let outputToInput (PredicateOutput(output)) = PredicateInput(output)
+    type PredicateResult = PredicateOutput option
+    type Predicate = Predicate of (PredicateInput -> PredicateResult)
+        with
+        member p.Evaluate input =
+            let (Predicate(p)) = p
+            p input
 
-module RuleInputOutputConvert =
-    let inputToOutput (PredicateInput(input)) = PredicateOutput(input)
-    let outputToInput (PredicateOutput(output)) = PredicateInput(output)
-
-type PredicateResult = Failed | Success of PredicateOutput
-
-open RuleInputOutputConvert
+open Predicate
 
 type RuleBody = 
     | True
@@ -40,8 +43,6 @@ type Rule = Rule of definition: Signature * body: RuleBody * isInternal: bool
         let (Rule(d, b, isInternal)) = r
         sprintf "%s => %s %s" (d.AsString) (b.ToString()) (if isInternal then "| internal" else "")
     member r.AsString = r.ToString()
-
-type Rule with
     member r.Signature = 
         let (Rule(def, _, _)) = r
         def
@@ -101,7 +102,7 @@ module DefineRule =
                     let convertedArgs = List.map2(fun conv x -> conv(Term.tryGetValue x)) convert arguments
                     predicate convertedArgs
                 else
-                    Failed
+                    None
             Rule(Signature(term), Predicate(fun input -> inputConvert input inputConverter predicate), isInternal)
         let defCut sign body isInternal = Rule(sign, Conjunction(body, Cut), isInternal)
         let defNot sign body isInternal = Rule(sign, Not(body), isInternal)
@@ -132,40 +133,11 @@ module DefineRule =
     [<AutoOpen>]
     module public DefPublicDirectOperators =
         open DefInternal
-        /// Define fact
         let (!) d = defFact (signf d) false
-        /// Define def => call
         let (=>) d c = defCall (signf d) (signf c) false
         let (|!) r b = match b with | false -> r |> combine (Conjunction(Cut, False)) | true -> r |> combine (Conjunction(Cut, (True)))
-        /// Combine rule body with new call (conjunction)
         let (|&) r c = combine (Call(signf c)) r
-        // Combines body or another body
-        // let (|*) b1 b2 = orCombine (Lexem(Call(signf c))) r
 
-//    let internal _defConcatRule term body = Rule(term, body, true)
-//    let defConcatRule term body = Rule(term, body, false)
-
-//    let rec internal _defBody calllist =
-//        match calllist with
-//        | [] -> Lexem(True)
-//        | [h] -> Lexem(Call(h))
-//        | h::t -> Conjunction(Lexem(Call h), _defBody t)
-//    let rec defBody calllist =
-//        match calllist with
-//        | [] -> Lexem(True)
-//        | [h] -> Lexem(Call(h))
-//        | h::t -> Conjunction(Lexem(Call h), _defBody t)
-
-//    let internal _defUnify term =
-//        let unif input =
-//            match input with
-//            | PredicateInput([t]) -> 
-//                match Term.tryUnify term t with
-//                | Some(unified) -> Success(PredicateOutput[unified])
-//                | None -> Failed
-//            | _ -> Failed
-//        Rule(Signature(term), Lexem(Predicate(unif)), true)
-        
     [<AutoOpen>]
     module Converters =
         let convertInt = Option.bind(fun x -> 
@@ -177,38 +149,36 @@ module DefineRule =
 
     let inline success (list: System.Object list) =
         let inline create t = termf (t.ToString())
-        Success(PredicateOutput(List.map create list))
-        
+        Some(PredicateOutput(List.map create list))
+
     module internal StandartPredicates =
         open DefAsInternal
     
         let defEq =
             defPredicate (termf "=(X, Y)") [convertInt; convertInt] (function
-                | [Some(a); Some(b)] -> if a = b then success [a; b] else Failed
+                | [Some(a); Some(b)] -> if a = b then success [a; b] else None
                 | [Some(a); None] -> success [a; a]
                 | [None; Some(b)] -> success [b; b]
-                | _ -> Failed)
+                | _ -> None)
             
         let defGr =
             defPredicate (termf ">(X, Y)") [convertInt; convertInt] (function
-                | [Some(a); Some(b)] -> if a > b then success [a; b] else Failed
-                | _ -> Failed)
+                | [Some(a); Some(b)] -> if a > b then success [a; b] else None
+                | _ -> None)
             
         let defInc =
             defPredicate (termf "++(X, Y)") [convertInt; convertInt] (function
                     | [Some(x);Some(y)] when x + 1 = y -> success [x; y]
                     | [Some(x); None] -> success [x; x+1]
                     | [None; Some(y)] -> success [y-1; y]
-                    | _ -> Failed
-                )
+                    | _ -> None)
         
         let defDec =
             defPredicate (termf "--(X, Y)") [convertInt; convertInt] (function
                     | [Some(x); Some(y)] when x - 1 = y -> success [x; y]
                     | [Some(x); None] -> success [x; x-1]
                     | [None; Some(y)] -> success [y=1; y]
-                    | _ -> Failed
-                )
+                    | _ -> None)
         
         let defSum =
             defPredicate (termf "+(A, B, C)") [convertInt; convertInt; convertInt] (function
@@ -216,8 +186,7 @@ module DefineRule =
                 | [Some(a); Some(b); None] -> success[a; b; a + b]
                 | [Some(a); None; Some(c)] -> success[a; c - a; c]
                 | [None; Some(b); Some(c)] -> success[c - b; b; c]
-                | _ -> Failed
-            )
+                | _ -> None)
         
         let defSub =
             defPredicate (termf "-(A, B, C)") [convertInt; convertInt; convertInt] (function
@@ -225,8 +194,7 @@ module DefineRule =
                 | [Some(a); Some(b); None] -> success[a; b; a - b]
                 | [Some(a); None; Some(c)] -> success[a; c + a; c]
                 | [None; Some(b); Some(c)] -> success[c + b; b; c]
-                | _ -> Failed
-            )
+                | _ -> None)
         
         let defMul =
             defPredicate (termf "*(A, B, C)") [convertInt; convertInt; convertInt] (function
@@ -234,8 +202,7 @@ module DefineRule =
                 | [Some(a); Some(b); None] -> success[a; b; a * b]
                 | [Some(a); None; Some(c)] -> success[a; c / a; c]
                 | [None; Some(b); Some(c)] -> success[c / b; b; c]
-                | _ -> Failed
-            )
+                | _ -> None)
 
         let defDiv =
             defPredicate (termf "/(A, B, C)") [convertInt; convertInt; convertInt] (function
@@ -243,12 +210,11 @@ module DefineRule =
                 | [Some(a); Some(b); None] -> success[a; b; a / b]
                 | [Some(a); None; Some(c)] -> success[a; a / c; c]
                 | [None; Some(b); Some(c)] -> success[c * b; b; c]
-                | _ -> Failed
-            )
+                | _ -> None)
 
         let defDivs =
             defPredicate (termf "divs(A, B)") [convertInt; convertIntList] (function
-                | _ -> Failed)
+                | _ -> None)
 
     open StandartPredicates
     let standartRules = [defInc; defDec; defSum; defSub; defMul; defDiv; defEq; defGr]

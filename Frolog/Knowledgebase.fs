@@ -145,10 +145,9 @@ module Search =
                     | True -> SingleResult (True)
                     | Predicate(p) -> 
                         let cur = internalSubstitute def call signature
-                        match p (PredicateInput(Signature.GetArguments cur)) with
-                        | Failed -> FalseResult
-                        | Success(PredicateOutput(pout)) ->
-                            SingleResult(Call(sign name pout))
+                        match p (Predicate.PredicateInput(Signature.GetArguments cur)) with
+                        | None -> FalseResult
+                        | Some(Predicate.PredicateOutput(pout)) -> SingleResult(Call(sign name pout))
                     | Call(c) -> 
                         if Signature.GetName c = "not" then
                             // That is the not option
